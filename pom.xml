@@ -12,7 +12,8 @@
 
 	<modules>
 		<module>work-order</module>
-	</modules>
+        <module>simulator</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
