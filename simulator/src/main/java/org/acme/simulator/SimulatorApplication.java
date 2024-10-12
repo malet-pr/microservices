@@ -1,13 +1,12 @@
-package org.acme.microservices;
+package org.acme.simulator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroservicesApplication {
+public class SimulatorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroservicesApplication.class, args);
+		SpringApplication.run(SimulatorApplication.class, args);
 	}
-
 }

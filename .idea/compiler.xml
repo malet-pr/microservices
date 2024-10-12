@@ -8,12 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="work-order" />
+        <module name="simulator" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="microservices" options="" />
+      <module name="simulator" options="-parameters" />
       <module name="work-order" options="-parameters" />
     </option>
   </component>

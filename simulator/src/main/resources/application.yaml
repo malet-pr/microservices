@@ -1,0 +1,25 @@
+server:
+    port: 8092
+    shutdown: graceful
+spring:
+    application:
+        name: simulator
+    kafka:
+        bootstrap-servers: localhost:9092
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+    tracing:
+        enabled: false
+        sampling:
+            probability: 0.0
+    metrics:
+        distribution:
+            percentiles-histogram:
+                http:
+                    server:
+                        requests: true
+logging:
+    config: classpath:logback-spring.xml
