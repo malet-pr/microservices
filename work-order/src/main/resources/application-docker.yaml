@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: wo-service
+  datasource:
+    url: "jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=wo"
+    username: "drools"
+    password: "drools"
+  kafka:
+    bootstrap-servers: kafka:9092
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+logging:
+  config: classpath:logback-docker.xml
+
+
+
+

@@ -1,0 +1,46 @@
+server:
+  port: 8091
+  shutdown: graceful
+spring:
+  application:
+    name: work_order
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: none
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5432/drools?currentSchema=wo"
+    username: "drools"
+    password: "drools"
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: wo-group-2
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  tracing:
+    enabled: false
+    sampling:
+      probability: 0.0
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  info:
+    git:
+      mode: full
+logging:
+  config: classpath:logback-spring.xml
+
