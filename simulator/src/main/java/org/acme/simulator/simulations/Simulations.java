@@ -28,7 +28,7 @@ public class Simulations {
 
     public List<WorkOrder> simulateWorkOrders(int quantity){
         List<WorkOrder> woList = new ArrayList<>();
-        log.info("Simulating {} work orders", quantity);
+        log.info("Simulating {} work orders ... ", quantity);
         while(quantity > 0){
             woList.add(simu.simulate());
             quantity--;
