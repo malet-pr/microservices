@@ -5,6 +5,8 @@ services:
     container_name: prometheus
     ports:
       - '9090:9090'
+    networks:
+      - grafana
     volumes:
       - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
     command: "--config.file=/etc/prometheus/prometheus.yaml"
@@ -17,6 +19,8 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
     command: "--config.file=/etc/promtail/docker-config.yaml"
+    networks:
+      - grafana
 
   loki:
     image: grafana/loki:3.0.0
@@ -24,6 +28,8 @@ services:
     command: "-config.file=/etc/loki/local-config.yaml"
     ports:
       - '3100:3100'
+    networks:
+      - grafana
     depends_on:
       - promtail
 
@@ -34,6 +40,8 @@ services:
     ports:
       - '3200:3200'     # Tempo
       - '9411:9411'     # Zipkin
+    networks:
+      - grafana
     volumes:
       - ./tempo/tempo.yaml:/etc/tempo-config.yaml
 
@@ -42,6 +50,8 @@ services:
     container_name: grafana
     ports:
       - '3000:3000'
+    networks:
+      - grafana
     environment:
       - GF_DEFAULT_APP_MODE=development
       - GF_LOG_LEVEL=debug
@@ -54,3 +64,6 @@ services:
 
 volumes:
   grafana_data: {}
+
+networks:
+  grafana:

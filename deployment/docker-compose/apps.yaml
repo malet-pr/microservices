@@ -30,6 +30,7 @@ services:
       - "8081:8081"
     networks:
       - kafka
+      - grafana
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - DB_URL=jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=wo
@@ -54,6 +55,7 @@ services:
       - "8082:8082"
     networks:
       - kafka
+      - grafana
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
@@ -70,3 +72,4 @@ services:
 
 networks:
   kafka:
+  grafana:
