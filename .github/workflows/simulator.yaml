@@ -5,8 +5,7 @@ on:
     paths:
       - simulator/**
     branches:
-      - develop
-      - main
+      - '**'
   pull_request:
     branches: [main]
 jobs:
