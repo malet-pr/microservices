@@ -32,7 +32,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         try {
             entity.getJobs().forEach(j -> j.setWorkOrder(entity));
             woDAO.save(entity);
-            log.info("Saved work order {}", entity);
+            log.info("Successfully saved work order {}", entity);
             return true;
         }catch (Exception e) {
             log.error(e.getMessage());
