@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./simulator
-      DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_HUB_USERNAME }}/simulator
+      DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_HUB_USERNAME }}/micro1-simulator
     defaults:
       run:
         working-directory: ${{ env.working-directory }}

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./work-order
-      DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_HUB_USERNAME }}/work-order
+      DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_HUB_USERNAME }}/micro1-work-order
     defaults:
       run:
         working-directory: ${{ env.working-directory }}
