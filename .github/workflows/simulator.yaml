@@ -1,9 +1,9 @@
-name: Work Order Service
+name: Simulator Service
 run-name: ${{ github.actor }}
 on:
   push:
     paths:
-      - work-order/**
+      - simulator/**
     branches:
       - develop
       - main
@@ -14,8 +14,8 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     env:
-      working-directory: ./work-order
-      DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_HUB_USERNAME }}/work-order
+      working-directory: ./simulator
+      DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_HUB_USERNAME }}/simulator
     defaults:
       run:
         working-directory: ${{ env.working-directory }}

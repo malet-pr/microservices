@@ -1,0 +1,56 @@
+version: '3'
+
+vars:
+  DC_DIR: "deployment/docker-compose"
+  APPS_DC_FILE: "{{.DC_DIR}}/apps.yaml"
+  MONITORING_DC_FILE: "{{.DC_DIR}}/monitoring.yaml"
+
+tasks:
+  default:
+    cmds:
+      - task: test
+  test:
+    cmds:
+      - "mvn clean verify"
+
+  build:
+    cmds:
+      - "mvn -pl work-order spring-boot:build-image -DskipTests"
+      - "mvn -pl simulator spring-boot:build-image -DskipTests"
+
+  start_monitoring:
+    cmds:
+      - "docker compose -f {{.MONITORING_DC_FILE}} up -d"
+
+  stop_monitoring:
+    cmds:
+      - "docker compose -f {{.MONITORING_DC_FILE}} stop"
+      - "docker compose -f {{.MONITORING_DC_FILE}} rm -f"
+
+  restart_monitoring:
+    cmds:
+      - task: stop_monitoring
+      - task: sleep
+      - task: start_monitoring
+
+  start:
+    deps: [build]
+    cmds:
+      - "docker compose -f {{.APPS_DC_FILE}} up -d"
+
+  stop:
+    cmds:
+      - "docker compose -f {{.APPS_DC_FILE}} stop"
+      - "docker compose -f {{.APPS_DC_FILE}} rm -f"
+
+  restart:
+    cmds:
+      - task: stop
+      - task: sleep
+      - task: start
+
+  sleep:
+    vars:
+      DURATION: "{{default 5 .DURATION}}"
+    cmds:
+      - "{{.SLEEP_CMD}} {{.DURATION}}"

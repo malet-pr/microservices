@@ -1,5 +1,5 @@
 server:
-  port: 8091
+  port: 8081
   shutdown: graceful
 spring:
   application:
@@ -13,9 +13,9 @@ spring:
         ddl-auto: none
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/drools?currentSchema=wo"
-    username: "drools"
-    password: "drools"
+    url: "${DB_URL:jdbc:postgresql://localhost:5432/drools?currentSchema=wo}"
+    username: "${DB_USERNAME:drools}"
+    password: "${DB_PASSWORD:drools}"
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -38,9 +38,9 @@ management:
         http:
           server:
             requests: true
+    tags:
+      application: ${spring.application.name}
   info:
     git:
       mode: full
-logging:
-  config: classpath:logback-spring.xml
 
