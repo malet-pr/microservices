@@ -1,0 +1,72 @@
+name: 'microservice-rules-observability'
+services:
+  kafka:
+    image: 'bitnami/kafka:3.3.1'
+    container_name: micro1-kafka
+    volumes:
+      - ./kafka-cluster/kafka/data:/var/lib/kafka/data
+    user: root
+    ports:
+      - "9092:9092"
+    networks:
+      - kafka
+    environment:
+      - KAFKA_ENABLE_KRAFT=yes
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_BROKER_ID=1
+      - KAFKA_KRAFT_CLUSTER_ID=LelM2dIFQkiUFvXCEcqRWA
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    restart: unless-stopped
+
+  wo-service:
+    image: maletq/micro1-work-order:latest
+    container_name: micro1-work-order
+    ports:
+      - "8081:8081"
+    networks:
+      - kafka
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DB_URL=jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=wo
+      - DB_PASSWORD=drools
+      - DB_NAME=drools
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
+      - MANAGEMENT_TRACING_ENABLED=true
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
+    depends_on:
+      - kafka
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    labels:
+      logging: "promtail"
+
+  simulator:
+    image: maletq/micro1-simulator:latest
+    container_name: micro1-simulator
+    ports:
+      - "8082:8082"
+    networks:
+      - kafka
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
+      - MANAGEMENT_TRACING_ENABLED=true
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
+    depends_on:
+      - kafka
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    labels:
+      logging: "promtail"
+
+networks:
+  kafka:

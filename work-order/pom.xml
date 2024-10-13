@@ -9,12 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>acme.example</groupId>
-	<artifactId>wo</artifactId>
+	<artifactId>work-order</artifactId>
 	<version>0.0.1</version>
 	<name>work-order</name>
 	<properties>
 		<java.version>21</java.version>
 		<spring-modulith.version>1.2.4</spring-modulith.version>
+		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -63,9 +64,12 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.github.loki4j</groupId>
-			<artifactId>loki-logback-appender</artifactId>
-			<version>1.6.0-m1</version>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-tracing-bridge-otel</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-exporter-zipkin</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -131,14 +135,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<profiles>
-		<profile>
-			<id>docker</id>
-			<properties>
-				<spring.profiles.active>docker</spring.profiles.active>
-			</properties>
-		</profile>
-	</profiles>
 	<build>
 		<plugins>
 			<plugin>
@@ -151,6 +147,10 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+						<name>${dockerImageName}</name>
+						<builder>dashaun/builder:tiny</builder>
+					</image>
 				</configuration>
 				<executions>
 					<execution>
@@ -184,12 +184,12 @@
 					</includeOnlyProperties>
 				</configuration>
 			</plugin>
-			<plugin>
+<!--			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.0</version>
 				<configuration>
-					<argLine>--enable-preview</argLine>
+					<argLine>&#45;&#45;enable-preview</argLine>
 					<parallel>none</parallel>
 					<runOrder>alphabetical</runOrder>
 				</configuration>
@@ -206,7 +206,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
         </plugins>
 	</build>
 </project>
