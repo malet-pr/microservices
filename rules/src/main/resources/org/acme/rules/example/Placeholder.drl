@@ -1,0 +1,14 @@
+package org.acme.rules.example;
+unit Placeholder;
+
+import org.acme.rules.example.Placeholder;
+
+rule empty ruleflow-group "example"
+    when
+        $p : /placeholder[ value == 'test']
+    then
+        modify($p) {
+            setOtherValue("empty rule")
+        };
+end
+
