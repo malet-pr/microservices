@@ -13,6 +13,7 @@
 	<modules>
 		<module>work-order</module>
         <module>simulator</module>
+        <module>rules</module>
     </modules>
 
 	<properties>
