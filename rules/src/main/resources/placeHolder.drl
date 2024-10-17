@@ -1,0 +1,10 @@
+import org.acme.rules.drools.adapter.OTReglaAdapter;
+
+dialect "mvel"
+
+rule "Empty Rule"
+   when
+      otReglaAdapter : OTReglaAdapter(tareaCodigo == "")
+   then
+      System.out.println(" Empty Rule ");
+end

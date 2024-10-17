@@ -14,30 +14,68 @@
 	<name>rules</name>
 	<description>Rules service for the microservice project</description>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<maven.compiler.source>21</maven.compiler.source>
-		<maven.compiler.target>21</maven.compiler.target>
-		<spring-modulith.version>1.2.4</spring-modulith.version>
+		<spring-modulith.version>1.2.1</spring-modulith.version>
+		<version.org.drools>9.44.0.Final</version.org.drools>
+		<io.grpc.version>1.68.0</io.grpc.version>
+		<com.google.protobuf.version>3.25.3</com.google.protobuf.version>
+		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>3.3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-core</artifactId>
+			<version>${version.org.drools}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+			<version>${version.org.drools}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-persistence-jpa</artifactId>
+			<version>${version.org.drools}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>${version.org.drools}</version>
+		</dependency>
+		<!--					init GRPC						-->
+		<dependency>
+			<groupId>net.devh</groupId>
+			<artifactId>grpc-server-spring-boot-starter</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>${com.google.protobuf.version}</version>
+		</dependency>
+		<!--					end GRPC	 					-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.kie.kogito</groupId>
-			<artifactId>kogito-rules-spring-boot-starter</artifactId>
-			<version>2.44.0.Alpha</version>
-		</dependency>
-		<dependency>
-			<groupId>org.kie.kogito</groupId>
-			<artifactId>kogito-addons-springboot-persistence-mongodb</artifactId>
-			<version>2.44.0.Alpha</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,7 +87,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-starter-mongodb</artifactId>
+			<artifactId>spring-modulith-starter-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -57,19 +105,14 @@
 			<version>2.6.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.kie.kogito</groupId>
-			<artifactId>kogito-addons-springboot-monitoring-prometheus</artifactId>
-			<version>2.44.0.Alpha</version>
 		</dependency>
 		<dependency>
 			<groupId>io.micrometer</groupId>
@@ -78,11 +121,6 @@
 		<dependency>
 			<groupId>io.opentelemetry</groupId>
 			<artifactId>opentelemetry-exporter-zipkin</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.kie.kogito</groupId>
-			<artifactId>kogito-addons-springboot-tracing-decision</artifactId>
-			<version>2.44.0.Alpha</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.modulith</groupId>
@@ -96,12 +134,24 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-testcontainers</artifactId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -110,19 +160,19 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.12.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-testcontainers</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>mongodb</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.kie.kogito</groupId>
-			<artifactId>kogito-scenario-simulation</artifactId>
-			<version>2.44.0.Alpha</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -137,6 +187,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -149,10 +200,10 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-<!--					<image>
+					<image>
 						<name>${dockerImageName}</name>
 						<builder>dashaun/builder:tiny</builder>
-					</image>-->
+					</image>
 				</configuration>
 				<executions>
 					<execution>
@@ -161,6 +212,15 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>21</source>
+					<target>21</target>
+					<compilerArgs>--enable-preview</compilerArgs>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>io.github.git-commit-id</groupId>
@@ -177,29 +237,60 @@
 					</includeOnlyProperties>
 				</configuration>
 			</plugin>
-			<!--			<plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-surefire-plugin</artifactId>
-                            <version>2.22.0</version>
-                            <configuration>
-                                <argLine>&#45;&#45;enable-preview</argLine>
-                                <parallel>none</parallel>
-                                <runOrder>alphabetical</runOrder>
-                            </configuration>
-                        </plugin>
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-failsafe-plugin</artifactId>
-                            <version>3.5.1</version>
-                            <executions>
-                                <execution>
-                                    <goals>
-                                        <goal>integration-test</goal>
-                                        <goal>verify</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
-                        </plugin>-->
+<!--					init GRPC						-->
+			<plugin>
+				<groupId>com.github.os72</groupId>
+				<artifactId>protoc-jar-maven-plugin</artifactId>
+				<version>3.11.4</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<addProtoSources>all</addProtoSources>
+							<includeImports>true</includeImports>
+							<includeStdTypes>true</includeStdTypes>
+							<includeMavenTypes>direct</includeMavenTypes>
+							<outputDirectory>src/main/java/generated</outputDirectory>
+							<inputDirectories>
+								<include>src/main/java/org/acme/rules/grpc</include>
+							</inputDirectories>
+							<outputTargets>
+								<outputTarget>
+									<type>java</type>
+									<outputDirectory>src/main/java/generated</outputDirectory>
+								</outputTarget>
+								<outputTarget>
+									<type>grpc-java</type>
+									<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.62.2</pluginArtifact>
+									<outputDirectory>src/main/java/generated</outputDirectory>
+								</outputTarget>
+							</outputTargets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+<!--					end GRPC 						-->
 		</plugins>
 	</build>
 </project>
