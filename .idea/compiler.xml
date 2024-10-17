@@ -7,14 +7,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="work-order" />
+        <module name="rules" />
         <module name="simulator" />
+        <module name="work-order" />
+        <module name="modulith" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rules" target="21" />
+      <module name="ruleunit-springboot-example" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="microservices" options="" />
+      <module name="modulith" options="-parameters" />
+      <module name="rules" options="-parameters" />
+      <module name="ruleunit-springboot-example" options="" />
       <module name="simulator" options="-parameters" />
       <module name="work-order" options="-parameters" />
     </option>

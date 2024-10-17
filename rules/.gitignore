@@ -18,7 +18,6 @@ target/
 *.iws
 *.iml
 *.ipr
-.idea/*.*
 
 ### NetBeans ###
 /nbproject/private/
@@ -32,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+#### OBSERVABILITY
+fluentd/
+grafana/
+prometheus/
+
