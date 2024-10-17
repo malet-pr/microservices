@@ -18,5 +18,4 @@ class SimulatorApplicationTests {
 		modules.forEach(System.out::println);
 	}
 
-
 }

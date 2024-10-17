@@ -1,6 +1,11 @@
 server:
   port: 8081
   shutdown: graceful
+grpc:
+  client:
+    work-order:
+      address: static://localhost:8090
+      negotiationType: plaintext
 spring:
   application:
     name: work_order
