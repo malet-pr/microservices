@@ -29,7 +29,7 @@ public class WorkOrderJob extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "JOB_ID")
 	private Job job;
-	private Integer quantity;
+	private int quantity;
 	private Character activeStatus;
 	private String appliedRule;
 

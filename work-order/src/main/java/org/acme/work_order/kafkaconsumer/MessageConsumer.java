@@ -34,19 +34,20 @@ public class MessageConsumer {
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
             .create();
 
-    private final static AtomicInteger savedCount = new AtomicInteger();
+    private static AtomicInteger savedCount ;
     public AtomicInteger getSavedCount() { return savedCount;}
 
-    private final static AtomicInteger errorCount = new AtomicInteger();
+    private static AtomicInteger errorCount ;
     public AtomicInteger getErrorCount() { return errorCount;}
 
     static String errorMessage;
 
     @KafkaListener(topics = "new-wo", groupId = "wo-group-2")
     public void listen(@Payload String message) {
+        savedCount = new AtomicInteger(0);
+        errorCount = new AtomicInteger(0);
         try {
-            Type listType = new TypeToken<List<WorkOrderDTO>>() {
-            }.getType();
+            Type listType = new TypeToken<List<WorkOrderDTO>>() {}.getType();
             List<WorkOrderDTO> dtos = gson.fromJson(message, listType);
             dtos.forEach(dto -> {
                 boolean saved = woService.save(dto);
