@@ -31,8 +31,8 @@ public class WorkOrderServiceIntegrationTest extends BaseIntegrationTest {
     @DisplayName("Test if an entity is saved in the database")
     void saveTest() {
         // Arrange
-        WorkOrderJobDTO woJobDTO1 = WorkOrderJobDTO.builder().jobCode("JobCode1").build();
-        WorkOrderJobDTO woJobDTO2 = WorkOrderJobDTO.builder().jobCode("JobCode2").build();
+        WorkOrderJobDTO woJobDTO1 = WorkOrderJobDTO.builder().quantity(1).jobCode("JobCode1").build();
+        WorkOrderJobDTO woJobDTO2 = WorkOrderJobDTO.builder().quantity(1).jobCode("JobCode2").build();
         WorkOrderDTO woDTO = WorkOrderDTO.builder()
                 .woNumber("testNumber")
                 .jobTypeCode("type1")

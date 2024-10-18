@@ -4,18 +4,18 @@
 package org.acme.rules.grpc;
 
 /**
- * Protobuf type {@code WoJobDTO}
+ * Protobuf type {@code WoJob}
  */
-public  final class WoJobDTO extends
+public  final class WoJob extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:WoJobDTO)
-    WoJobDTOOrBuilder {
+    // @@protoc_insertion_point(message_implements:WoJob)
+    WoJobOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use WoJobDTO.newBuilder() to construct.
-  private WoJobDTO(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use WoJob.newBuilder() to construct.
+  private WoJob(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private WoJobDTO() {
+  private WoJob() {
     woNumber_ = "";
     jobCode_ = "";
     activeStatus_ = "";
@@ -26,7 +26,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new WoJobDTO();
+    return new WoJob();
   }
 
   @java.lang.Override
@@ -34,7 +34,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private WoJobDTO(
+  private WoJob(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -102,15 +102,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.acme.rules.grpc.WorkOrderData.internal_static_WoJobDTO_descriptor;
+    return org.acme.rules.grpc.WorkOrderData.internal_static_WoJob_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.acme.rules.grpc.WorkOrderData.internal_static_WoJobDTO_fieldAccessorTable
+    return org.acme.rules.grpc.WorkOrderData.internal_static_WoJob_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            org.acme.rules.grpc.WoJobDTO.class, org.acme.rules.grpc.WoJobDTO.Builder.class);
+            org.acme.rules.grpc.WoJob.class, org.acme.rules.grpc.WoJob.Builder.class);
   }
 
   public static final int WONUMBER_FIELD_NUMBER = 1;
@@ -331,10 +331,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof org.acme.rules.grpc.WoJobDTO)) {
+    if (!(obj instanceof org.acme.rules.grpc.WoJob)) {
       return super.equals(obj);
     }
-    org.acme.rules.grpc.WoJobDTO other = (org.acme.rules.grpc.WoJobDTO) obj;
+    org.acme.rules.grpc.WoJob other = (org.acme.rules.grpc.WoJob) obj;
 
     if (!getWoNumber()
         .equals(other.getWoNumber())) return false;
@@ -372,69 +372,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(byte[] data)
+  public static org.acme.rules.grpc.WoJob parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(java.io.InputStream input)
+  public static org.acme.rules.grpc.WoJob parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseDelimitedFrom(java.io.InputStream input)
+  public static org.acme.rules.grpc.WoJob parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseDelimitedFrom(
+  public static org.acme.rules.grpc.WoJob parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static org.acme.rules.grpc.WoJobDTO parseFrom(
+  public static org.acme.rules.grpc.WoJob parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -447,7 +447,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(org.acme.rules.grpc.WoJobDTO prototype) {
+  public static Builder newBuilder(org.acme.rules.grpc.WoJob prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -463,26 +463,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code WoJobDTO}
+   * Protobuf type {@code WoJob}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:WoJobDTO)
-      org.acme.rules.grpc.WoJobDTOOrBuilder {
+      // @@protoc_insertion_point(builder_implements:WoJob)
+      org.acme.rules.grpc.WoJobOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.acme.rules.grpc.WorkOrderData.internal_static_WoJobDTO_descriptor;
+      return org.acme.rules.grpc.WorkOrderData.internal_static_WoJob_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.acme.rules.grpc.WorkOrderData.internal_static_WoJobDTO_fieldAccessorTable
+      return org.acme.rules.grpc.WorkOrderData.internal_static_WoJob_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              org.acme.rules.grpc.WoJobDTO.class, org.acme.rules.grpc.WoJobDTO.Builder.class);
+              org.acme.rules.grpc.WoJob.class, org.acme.rules.grpc.WoJob.Builder.class);
     }
 
-    // Construct using org.acme.rules.grpc.WoJobDTO.newBuilder()
+    // Construct using org.acme.rules.grpc.WoJob.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -516,17 +516,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.acme.rules.grpc.WorkOrderData.internal_static_WoJobDTO_descriptor;
+      return org.acme.rules.grpc.WorkOrderData.internal_static_WoJob_descriptor;
     }
 
     @java.lang.Override
-    public org.acme.rules.grpc.WoJobDTO getDefaultInstanceForType() {
-      return org.acme.rules.grpc.WoJobDTO.getDefaultInstance();
+    public org.acme.rules.grpc.WoJob getDefaultInstanceForType() {
+      return org.acme.rules.grpc.WoJob.getDefaultInstance();
     }
 
     @java.lang.Override
-    public org.acme.rules.grpc.WoJobDTO build() {
-      org.acme.rules.grpc.WoJobDTO result = buildPartial();
+    public org.acme.rules.grpc.WoJob build() {
+      org.acme.rules.grpc.WoJob result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -534,8 +534,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public org.acme.rules.grpc.WoJobDTO buildPartial() {
-      org.acme.rules.grpc.WoJobDTO result = new org.acme.rules.grpc.WoJobDTO(this);
+    public org.acme.rules.grpc.WoJob buildPartial() {
+      org.acme.rules.grpc.WoJob result = new org.acme.rules.grpc.WoJob(this);
       result.woNumber_ = woNumber_;
       result.jobCode_ = jobCode_;
       result.quantity_ = quantity_;
@@ -579,16 +579,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof org.acme.rules.grpc.WoJobDTO) {
-        return mergeFrom((org.acme.rules.grpc.WoJobDTO)other);
+      if (other instanceof org.acme.rules.grpc.WoJob) {
+        return mergeFrom((org.acme.rules.grpc.WoJob)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(org.acme.rules.grpc.WoJobDTO other) {
-      if (other == org.acme.rules.grpc.WoJobDTO.getDefaultInstance()) return this;
+    public Builder mergeFrom(org.acme.rules.grpc.WoJob other) {
+      if (other == org.acme.rules.grpc.WoJob.getDefaultInstance()) return this;
       if (!other.getWoNumber().isEmpty()) {
         woNumber_ = other.woNumber_;
         onChanged();
@@ -623,11 +623,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      org.acme.rules.grpc.WoJobDTO parsedMessage = null;
+      org.acme.rules.grpc.WoJob parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (org.acme.rules.grpc.WoJobDTO) e.getUnfinishedMessage();
+        parsedMessage = (org.acme.rules.grpc.WoJob) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -983,41 +983,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:WoJobDTO)
+    // @@protoc_insertion_point(builder_scope:WoJob)
   }
 
-  // @@protoc_insertion_point(class_scope:WoJobDTO)
-  private static final org.acme.rules.grpc.WoJobDTO DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:WoJob)
+  private static final org.acme.rules.grpc.WoJob DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new org.acme.rules.grpc.WoJobDTO();
+    DEFAULT_INSTANCE = new org.acme.rules.grpc.WoJob();
   }
 
-  public static org.acme.rules.grpc.WoJobDTO getDefaultInstance() {
+  public static org.acme.rules.grpc.WoJob getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<WoJobDTO>
-      PARSER = new com.google.protobuf.AbstractParser<WoJobDTO>() {
+  private static final com.google.protobuf.Parser<WoJob>
+      PARSER = new com.google.protobuf.AbstractParser<WoJob>() {
     @java.lang.Override
-    public WoJobDTO parsePartialFrom(
+    public WoJob parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new WoJobDTO(input, extensionRegistry);
+      return new WoJob(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<WoJobDTO> parser() {
+  public static com.google.protobuf.Parser<WoJob> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<WoJobDTO> getParserForType() {
+  public com.google.protobuf.Parser<WoJob> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public org.acme.rules.grpc.WoJobDTO getDefaultInstanceForType() {
+  public org.acme.rules.grpc.WoJob getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -4,7 +4,7 @@
 package org.acme.work_order.grpc;
 
 public interface WoJobOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:org.acme.work_order.grpc.WoJob)
+    // @@protoc_insertion_point(interface_extends:WoJob)
     com.google.protobuf.MessageOrBuilder {
 
   /**
