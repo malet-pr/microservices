@@ -3,8 +3,8 @@
 
 package org.acme.rules.grpc;
 
-public interface WoJobDTOOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:WoJobDTO)
+public interface WoJobOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:WoJob)
     com.google.protobuf.MessageOrBuilder {
 
   /**

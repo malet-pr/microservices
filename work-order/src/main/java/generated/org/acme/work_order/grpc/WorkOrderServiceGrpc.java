@@ -12,7 +12,7 @@ public final class WorkOrderServiceGrpc {
 
   private WorkOrderServiceGrpc() {}
 
-  public static final java.lang.String SERVICE_NAME = "org.acme.work_order.grpc.WorkOrderService";
+  public static final java.lang.String SERVICE_NAME = "WorkOrderService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<org.acme.work_order.grpc.WorkOrderRequest,

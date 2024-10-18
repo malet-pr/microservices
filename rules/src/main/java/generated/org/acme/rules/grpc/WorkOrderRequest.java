@@ -17,7 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private WorkOrderRequest() {
     woNumber_ = "";
-    woJobDTOs_ = java.util.Collections.emptyList();
+    woJobs_ = java.util.Collections.emptyList();
     jobTypeCode_ = "";
     address_ = "";
     city_ = "";
@@ -64,11 +64,11 @@ private static final long serialVersionUID = 0L;
           }
           case 18: {
             if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-              woJobDTOs_ = new java.util.ArrayList<org.acme.rules.grpc.WoJobDTO>();
+              woJobs_ = new java.util.ArrayList<org.acme.rules.grpc.WoJob>();
               mutable_bitField0_ |= 0x00000001;
             }
-            woJobDTOs_.add(
-                input.readMessage(org.acme.rules.grpc.WoJobDTO.parser(), extensionRegistry));
+            woJobs_.add(
+                input.readMessage(org.acme.rules.grpc.WoJob.parser(), extensionRegistry));
             break;
           }
           case 26: {
@@ -143,7 +143,7 @@ private static final long serialVersionUID = 0L;
           e).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) != 0)) {
-        woJobDTOs_ = java.util.Collections.unmodifiableList(woJobDTOs_);
+        woJobs_ = java.util.Collections.unmodifiableList(woJobs_);
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
@@ -198,39 +198,39 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int WOJOBDTOS_FIELD_NUMBER = 2;
-  private java.util.List<org.acme.rules.grpc.WoJobDTO> woJobDTOs_;
+  public static final int WOJOBS_FIELD_NUMBER = 2;
+  private java.util.List<org.acme.rules.grpc.WoJob> woJobs_;
   /**
-   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  public java.util.List<org.acme.rules.grpc.WoJobDTO> getWoJobDTOsList() {
-    return woJobDTOs_;
+  public java.util.List<org.acme.rules.grpc.WoJob> getWoJobsList() {
+    return woJobs_;
   }
   /**
-   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  public java.util.List<? extends org.acme.rules.grpc.WoJobDTOOrBuilder> 
-      getWoJobDTOsOrBuilderList() {
-    return woJobDTOs_;
+  public java.util.List<? extends org.acme.rules.grpc.WoJobOrBuilder> 
+      getWoJobsOrBuilderList() {
+    return woJobs_;
   }
   /**
-   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  public int getWoJobDTOsCount() {
-    return woJobDTOs_.size();
+  public int getWoJobsCount() {
+    return woJobs_.size();
   }
   /**
-   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  public org.acme.rules.grpc.WoJobDTO getWoJobDTOs(int index) {
-    return woJobDTOs_.get(index);
+  public org.acme.rules.grpc.WoJob getWoJobs(int index) {
+    return woJobs_.get(index);
   }
   /**
-   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  public org.acme.rules.grpc.WoJobDTOOrBuilder getWoJobDTOsOrBuilder(
+  public org.acme.rules.grpc.WoJobOrBuilder getWoJobsOrBuilder(
       int index) {
-    return woJobDTOs_.get(index);
+    return woJobs_.get(index);
   }
 
   public static final int JOBTYPECODE_FIELD_NUMBER = 3;
@@ -476,8 +476,8 @@ private static final long serialVersionUID = 0L;
     if (!getWoNumberBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, woNumber_);
     }
-    for (int i = 0; i < woJobDTOs_.size(); i++) {
-      output.writeMessage(2, woJobDTOs_.get(i));
+    for (int i = 0; i < woJobs_.size(); i++) {
+      output.writeMessage(2, woJobs_.get(i));
     }
     if (!getJobTypeCodeBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, jobTypeCode_);
@@ -512,9 +512,9 @@ private static final long serialVersionUID = 0L;
     if (!getWoNumberBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, woNumber_);
     }
-    for (int i = 0; i < woJobDTOs_.size(); i++) {
+    for (int i = 0; i < woJobs_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, woJobDTOs_.get(i));
+        .computeMessageSize(2, woJobs_.get(i));
     }
     if (!getJobTypeCodeBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, jobTypeCode_);
@@ -556,8 +556,8 @@ private static final long serialVersionUID = 0L;
 
     if (!getWoNumber()
         .equals(other.getWoNumber())) return false;
-    if (!getWoJobDTOsList()
-        .equals(other.getWoJobDTOsList())) return false;
+    if (!getWoJobsList()
+        .equals(other.getWoJobsList())) return false;
     if (!getJobTypeCode()
         .equals(other.getJobTypeCode())) return false;
     if (!getAddress()
@@ -591,9 +591,9 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + WONUMBER_FIELD_NUMBER;
     hash = (53 * hash) + getWoNumber().hashCode();
-    if (getWoJobDTOsCount() > 0) {
-      hash = (37 * hash) + WOJOBDTOS_FIELD_NUMBER;
-      hash = (53 * hash) + getWoJobDTOsList().hashCode();
+    if (getWoJobsCount() > 0) {
+      hash = (37 * hash) + WOJOBS_FIELD_NUMBER;
+      hash = (53 * hash) + getWoJobsList().hashCode();
     }
     hash = (37 * hash) + JOBTYPECODE_FIELD_NUMBER;
     hash = (53 * hash) + getJobTypeCode().hashCode();
@@ -741,7 +741,7 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getWoJobDTOsFieldBuilder();
+        getWoJobsFieldBuilder();
       }
     }
     @java.lang.Override
@@ -749,11 +749,11 @@ private static final long serialVersionUID = 0L;
       super.clear();
       woNumber_ = "";
 
-      if (woJobDTOsBuilder_ == null) {
-        woJobDTOs_ = java.util.Collections.emptyList();
+      if (woJobsBuilder_ == null) {
+        woJobs_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
       } else {
-        woJobDTOsBuilder_.clear();
+        woJobsBuilder_.clear();
       }
       jobTypeCode_ = "";
 
@@ -805,14 +805,14 @@ private static final long serialVersionUID = 0L;
       org.acme.rules.grpc.WorkOrderRequest result = new org.acme.rules.grpc.WorkOrderRequest(this);
       int from_bitField0_ = bitField0_;
       result.woNumber_ = woNumber_;
-      if (woJobDTOsBuilder_ == null) {
+      if (woJobsBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0)) {
-          woJobDTOs_ = java.util.Collections.unmodifiableList(woJobDTOs_);
+          woJobs_ = java.util.Collections.unmodifiableList(woJobs_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
-        result.woJobDTOs_ = woJobDTOs_;
+        result.woJobs_ = woJobs_;
       } else {
-        result.woJobDTOs_ = woJobDTOsBuilder_.build();
+        result.woJobs_ = woJobsBuilder_.build();
       }
       result.jobTypeCode_ = jobTypeCode_;
       result.address_ = address_;
@@ -881,29 +881,29 @@ private static final long serialVersionUID = 0L;
         woNumber_ = other.woNumber_;
         onChanged();
       }
-      if (woJobDTOsBuilder_ == null) {
-        if (!other.woJobDTOs_.isEmpty()) {
-          if (woJobDTOs_.isEmpty()) {
-            woJobDTOs_ = other.woJobDTOs_;
+      if (woJobsBuilder_ == null) {
+        if (!other.woJobs_.isEmpty()) {
+          if (woJobs_.isEmpty()) {
+            woJobs_ = other.woJobs_;
             bitField0_ = (bitField0_ & ~0x00000001);
           } else {
-            ensureWoJobDTOsIsMutable();
-            woJobDTOs_.addAll(other.woJobDTOs_);
+            ensureWoJobsIsMutable();
+            woJobs_.addAll(other.woJobs_);
           }
           onChanged();
         }
       } else {
-        if (!other.woJobDTOs_.isEmpty()) {
-          if (woJobDTOsBuilder_.isEmpty()) {
-            woJobDTOsBuilder_.dispose();
-            woJobDTOsBuilder_ = null;
-            woJobDTOs_ = other.woJobDTOs_;
+        if (!other.woJobs_.isEmpty()) {
+          if (woJobsBuilder_.isEmpty()) {
+            woJobsBuilder_.dispose();
+            woJobsBuilder_ = null;
+            woJobs_ = other.woJobs_;
             bitField0_ = (bitField0_ & ~0x00000001);
-            woJobDTOsBuilder_ = 
+            woJobsBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                 getWoJobDTOsFieldBuilder() : null;
+                 getWoJobsFieldBuilder() : null;
           } else {
-            woJobDTOsBuilder_.addAllMessages(other.woJobDTOs_);
+            woJobsBuilder_.addAllMessages(other.woJobs_);
           }
         }
       }
@@ -1039,244 +1039,244 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<org.acme.rules.grpc.WoJobDTO> woJobDTOs_ =
+    private java.util.List<org.acme.rules.grpc.WoJob> woJobs_ =
       java.util.Collections.emptyList();
-    private void ensureWoJobDTOsIsMutable() {
+    private void ensureWoJobsIsMutable() {
       if (!((bitField0_ & 0x00000001) != 0)) {
-        woJobDTOs_ = new java.util.ArrayList<org.acme.rules.grpc.WoJobDTO>(woJobDTOs_);
+        woJobs_ = new java.util.ArrayList<org.acme.rules.grpc.WoJob>(woJobs_);
         bitField0_ |= 0x00000001;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.acme.rules.grpc.WoJobDTO, org.acme.rules.grpc.WoJobDTO.Builder, org.acme.rules.grpc.WoJobDTOOrBuilder> woJobDTOsBuilder_;
+        org.acme.rules.grpc.WoJob, org.acme.rules.grpc.WoJob.Builder, org.acme.rules.grpc.WoJobOrBuilder> woJobsBuilder_;
 
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public java.util.List<org.acme.rules.grpc.WoJobDTO> getWoJobDTOsList() {
-      if (woJobDTOsBuilder_ == null) {
-        return java.util.Collections.unmodifiableList(woJobDTOs_);
+    public java.util.List<org.acme.rules.grpc.WoJob> getWoJobsList() {
+      if (woJobsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(woJobs_);
       } else {
-        return woJobDTOsBuilder_.getMessageList();
+        return woJobsBuilder_.getMessageList();
       }
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public int getWoJobDTOsCount() {
-      if (woJobDTOsBuilder_ == null) {
-        return woJobDTOs_.size();
+    public int getWoJobsCount() {
+      if (woJobsBuilder_ == null) {
+        return woJobs_.size();
       } else {
-        return woJobDTOsBuilder_.getCount();
+        return woJobsBuilder_.getCount();
       }
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public org.acme.rules.grpc.WoJobDTO getWoJobDTOs(int index) {
-      if (woJobDTOsBuilder_ == null) {
-        return woJobDTOs_.get(index);
+    public org.acme.rules.grpc.WoJob getWoJobs(int index) {
+      if (woJobsBuilder_ == null) {
+        return woJobs_.get(index);
       } else {
-        return woJobDTOsBuilder_.getMessage(index);
+        return woJobsBuilder_.getMessage(index);
       }
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder setWoJobDTOs(
-        int index, org.acme.rules.grpc.WoJobDTO value) {
-      if (woJobDTOsBuilder_ == null) {
+    public Builder setWoJobs(
+        int index, org.acme.rules.grpc.WoJob value) {
+      if (woJobsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureWoJobDTOsIsMutable();
-        woJobDTOs_.set(index, value);
+        ensureWoJobsIsMutable();
+        woJobs_.set(index, value);
         onChanged();
       } else {
-        woJobDTOsBuilder_.setMessage(index, value);
+        woJobsBuilder_.setMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder setWoJobDTOs(
-        int index, org.acme.rules.grpc.WoJobDTO.Builder builderForValue) {
-      if (woJobDTOsBuilder_ == null) {
-        ensureWoJobDTOsIsMutable();
-        woJobDTOs_.set(index, builderForValue.build());
+    public Builder setWoJobs(
+        int index, org.acme.rules.grpc.WoJob.Builder builderForValue) {
+      if (woJobsBuilder_ == null) {
+        ensureWoJobsIsMutable();
+        woJobs_.set(index, builderForValue.build());
         onChanged();
       } else {
-        woJobDTOsBuilder_.setMessage(index, builderForValue.build());
+        woJobsBuilder_.setMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder addWoJobDTOs(org.acme.rules.grpc.WoJobDTO value) {
-      if (woJobDTOsBuilder_ == null) {
+    public Builder addWoJobs(org.acme.rules.grpc.WoJob value) {
+      if (woJobsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureWoJobDTOsIsMutable();
-        woJobDTOs_.add(value);
+        ensureWoJobsIsMutable();
+        woJobs_.add(value);
         onChanged();
       } else {
-        woJobDTOsBuilder_.addMessage(value);
+        woJobsBuilder_.addMessage(value);
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder addWoJobDTOs(
-        int index, org.acme.rules.grpc.WoJobDTO value) {
-      if (woJobDTOsBuilder_ == null) {
+    public Builder addWoJobs(
+        int index, org.acme.rules.grpc.WoJob value) {
+      if (woJobsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        ensureWoJobDTOsIsMutable();
-        woJobDTOs_.add(index, value);
+        ensureWoJobsIsMutable();
+        woJobs_.add(index, value);
         onChanged();
       } else {
-        woJobDTOsBuilder_.addMessage(index, value);
+        woJobsBuilder_.addMessage(index, value);
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder addWoJobDTOs(
-        org.acme.rules.grpc.WoJobDTO.Builder builderForValue) {
-      if (woJobDTOsBuilder_ == null) {
-        ensureWoJobDTOsIsMutable();
-        woJobDTOs_.add(builderForValue.build());
+    public Builder addWoJobs(
+        org.acme.rules.grpc.WoJob.Builder builderForValue) {
+      if (woJobsBuilder_ == null) {
+        ensureWoJobsIsMutable();
+        woJobs_.add(builderForValue.build());
         onChanged();
       } else {
-        woJobDTOsBuilder_.addMessage(builderForValue.build());
+        woJobsBuilder_.addMessage(builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder addWoJobDTOs(
-        int index, org.acme.rules.grpc.WoJobDTO.Builder builderForValue) {
-      if (woJobDTOsBuilder_ == null) {
-        ensureWoJobDTOsIsMutable();
-        woJobDTOs_.add(index, builderForValue.build());
+    public Builder addWoJobs(
+        int index, org.acme.rules.grpc.WoJob.Builder builderForValue) {
+      if (woJobsBuilder_ == null) {
+        ensureWoJobsIsMutable();
+        woJobs_.add(index, builderForValue.build());
         onChanged();
       } else {
-        woJobDTOsBuilder_.addMessage(index, builderForValue.build());
+        woJobsBuilder_.addMessage(index, builderForValue.build());
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder addAllWoJobDTOs(
-        java.lang.Iterable<? extends org.acme.rules.grpc.WoJobDTO> values) {
-      if (woJobDTOsBuilder_ == null) {
-        ensureWoJobDTOsIsMutable();
+    public Builder addAllWoJobs(
+        java.lang.Iterable<? extends org.acme.rules.grpc.WoJob> values) {
+      if (woJobsBuilder_ == null) {
+        ensureWoJobsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, woJobDTOs_);
+            values, woJobs_);
         onChanged();
       } else {
-        woJobDTOsBuilder_.addAllMessages(values);
+        woJobsBuilder_.addAllMessages(values);
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder clearWoJobDTOs() {
-      if (woJobDTOsBuilder_ == null) {
-        woJobDTOs_ = java.util.Collections.emptyList();
+    public Builder clearWoJobs() {
+      if (woJobsBuilder_ == null) {
+        woJobs_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
       } else {
-        woJobDTOsBuilder_.clear();
+        woJobsBuilder_.clear();
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public Builder removeWoJobDTOs(int index) {
-      if (woJobDTOsBuilder_ == null) {
-        ensureWoJobDTOsIsMutable();
-        woJobDTOs_.remove(index);
+    public Builder removeWoJobs(int index) {
+      if (woJobsBuilder_ == null) {
+        ensureWoJobsIsMutable();
+        woJobs_.remove(index);
         onChanged();
       } else {
-        woJobDTOsBuilder_.remove(index);
+        woJobsBuilder_.remove(index);
       }
       return this;
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public org.acme.rules.grpc.WoJobDTO.Builder getWoJobDTOsBuilder(
+    public org.acme.rules.grpc.WoJob.Builder getWoJobsBuilder(
         int index) {
-      return getWoJobDTOsFieldBuilder().getBuilder(index);
+      return getWoJobsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public org.acme.rules.grpc.WoJobDTOOrBuilder getWoJobDTOsOrBuilder(
+    public org.acme.rules.grpc.WoJobOrBuilder getWoJobsOrBuilder(
         int index) {
-      if (woJobDTOsBuilder_ == null) {
-        return woJobDTOs_.get(index);  } else {
-        return woJobDTOsBuilder_.getMessageOrBuilder(index);
+      if (woJobsBuilder_ == null) {
+        return woJobs_.get(index);  } else {
+        return woJobsBuilder_.getMessageOrBuilder(index);
       }
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public java.util.List<? extends org.acme.rules.grpc.WoJobDTOOrBuilder> 
-         getWoJobDTOsOrBuilderList() {
-      if (woJobDTOsBuilder_ != null) {
-        return woJobDTOsBuilder_.getMessageOrBuilderList();
+    public java.util.List<? extends org.acme.rules.grpc.WoJobOrBuilder> 
+         getWoJobsOrBuilderList() {
+      if (woJobsBuilder_ != null) {
+        return woJobsBuilder_.getMessageOrBuilderList();
       } else {
-        return java.util.Collections.unmodifiableList(woJobDTOs_);
+        return java.util.Collections.unmodifiableList(woJobs_);
       }
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public org.acme.rules.grpc.WoJobDTO.Builder addWoJobDTOsBuilder() {
-      return getWoJobDTOsFieldBuilder().addBuilder(
-          org.acme.rules.grpc.WoJobDTO.getDefaultInstance());
+    public org.acme.rules.grpc.WoJob.Builder addWoJobsBuilder() {
+      return getWoJobsFieldBuilder().addBuilder(
+          org.acme.rules.grpc.WoJob.getDefaultInstance());
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public org.acme.rules.grpc.WoJobDTO.Builder addWoJobDTOsBuilder(
+    public org.acme.rules.grpc.WoJob.Builder addWoJobsBuilder(
         int index) {
-      return getWoJobDTOsFieldBuilder().addBuilder(
-          index, org.acme.rules.grpc.WoJobDTO.getDefaultInstance());
+      return getWoJobsFieldBuilder().addBuilder(
+          index, org.acme.rules.grpc.WoJob.getDefaultInstance());
     }
     /**
-     * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
+     * <code>repeated .WoJob woJobs = 2;</code>
      */
-    public java.util.List<org.acme.rules.grpc.WoJobDTO.Builder> 
-         getWoJobDTOsBuilderList() {
-      return getWoJobDTOsFieldBuilder().getBuilderList();
+    public java.util.List<org.acme.rules.grpc.WoJob.Builder> 
+         getWoJobsBuilderList() {
+      return getWoJobsFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        org.acme.rules.grpc.WoJobDTO, org.acme.rules.grpc.WoJobDTO.Builder, org.acme.rules.grpc.WoJobDTOOrBuilder> 
-        getWoJobDTOsFieldBuilder() {
-      if (woJobDTOsBuilder_ == null) {
-        woJobDTOsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            org.acme.rules.grpc.WoJobDTO, org.acme.rules.grpc.WoJobDTO.Builder, org.acme.rules.grpc.WoJobDTOOrBuilder>(
-                woJobDTOs_,
+        org.acme.rules.grpc.WoJob, org.acme.rules.grpc.WoJob.Builder, org.acme.rules.grpc.WoJobOrBuilder> 
+        getWoJobsFieldBuilder() {
+      if (woJobsBuilder_ == null) {
+        woJobsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            org.acme.rules.grpc.WoJob, org.acme.rules.grpc.WoJob.Builder, org.acme.rules.grpc.WoJobOrBuilder>(
+                woJobs_,
                 ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
-        woJobDTOs_ = null;
+        woJobs_ = null;
       }
-      return woJobDTOsBuilder_;
+      return woJobsBuilder_;
     }
 
     private java.lang.Object jobTypeCode_ = "";

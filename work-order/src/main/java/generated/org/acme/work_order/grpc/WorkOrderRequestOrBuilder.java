@@ -4,7 +4,7 @@
 package org.acme.work_order.grpc;
 
 public interface WorkOrderRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:org.acme.work_order.grpc.WorkOrderRequest)
+    // @@protoc_insertion_point(interface_extends:WorkOrderRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -20,27 +20,27 @@ public interface WorkOrderRequestOrBuilder extends
       getWoNumberBytes();
 
   /**
-   * <code>repeated .org.acme.work_order.grpc.WoJob woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
   java.util.List<org.acme.work_order.grpc.WoJob> 
-      getWoJobDTOsList();
+      getWoJobsList();
   /**
-   * <code>repeated .org.acme.work_order.grpc.WoJob woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  org.acme.work_order.grpc.WoJob getWoJobDTOs(int index);
+  org.acme.work_order.grpc.WoJob getWoJobs(int index);
   /**
-   * <code>repeated .org.acme.work_order.grpc.WoJob woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  int getWoJobDTOsCount();
+  int getWoJobsCount();
   /**
-   * <code>repeated .org.acme.work_order.grpc.WoJob woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
   java.util.List<? extends org.acme.work_order.grpc.WoJobOrBuilder> 
-      getWoJobDTOsOrBuilderList();
+      getWoJobsOrBuilderList();
   /**
-   * <code>repeated .org.acme.work_order.grpc.WoJob woJobDTOs = 2;</code>
+   * <code>repeated .WoJob woJobs = 2;</code>
    */
-  org.acme.work_order.grpc.WoJobOrBuilder getWoJobDTOsOrBuilder(
+  org.acme.work_order.grpc.WoJobOrBuilder getWoJobsOrBuilder(
       int index);
 
   /**

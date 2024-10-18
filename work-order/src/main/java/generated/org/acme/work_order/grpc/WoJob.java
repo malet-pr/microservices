@@ -4,11 +4,11 @@
 package org.acme.work_order.grpc;
 
 /**
- * Protobuf type {@code org.acme.work_order.grpc.WoJob}
+ * Protobuf type {@code WoJob}
  */
 public  final class WoJob extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:org.acme.work_order.grpc.WoJob)
+    // @@protoc_insertion_point(message_implements:WoJob)
     WoJobOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use WoJob.newBuilder() to construct.
@@ -102,13 +102,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WoJob_descriptor;
+    return org.acme.work_order.grpc.WorkOrderData.internal_static_WoJob_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WoJob_fieldAccessorTable
+    return org.acme.work_order.grpc.WorkOrderData.internal_static_WoJob_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             org.acme.work_order.grpc.WoJob.class, org.acme.work_order.grpc.WoJob.Builder.class);
   }
@@ -463,21 +463,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code org.acme.work_order.grpc.WoJob}
+   * Protobuf type {@code WoJob}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:org.acme.work_order.grpc.WoJob)
+      // @@protoc_insertion_point(builder_implements:WoJob)
       org.acme.work_order.grpc.WoJobOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WoJob_descriptor;
+      return org.acme.work_order.grpc.WorkOrderData.internal_static_WoJob_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WoJob_fieldAccessorTable
+      return org.acme.work_order.grpc.WorkOrderData.internal_static_WoJob_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.acme.work_order.grpc.WoJob.class, org.acme.work_order.grpc.WoJob.Builder.class);
     }
@@ -516,7 +516,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WoJob_descriptor;
+      return org.acme.work_order.grpc.WorkOrderData.internal_static_WoJob_descriptor;
     }
 
     @java.lang.Override
@@ -983,10 +983,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:org.acme.work_order.grpc.WoJob)
+    // @@protoc_insertion_point(builder_scope:WoJob)
   }
 
-  // @@protoc_insertion_point(class_scope:org.acme.work_order.grpc.WoJob)
+  // @@protoc_insertion_point(class_scope:WoJob)
   private static final org.acme.work_order.grpc.WoJob DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new org.acme.work_order.grpc.WoJob();

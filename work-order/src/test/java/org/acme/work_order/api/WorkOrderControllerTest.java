@@ -1,19 +1,27 @@
 package org.acme.work_order.api;
 
 import org.acme.work_order.common.LocalDateTimeTypeAdapter;
+import org.acme.work_order.grpc.WorkOrderResponse;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorder.internal.WorkOrder;
 import org.acme.work_order.workorder.internal.WorkOrderDAO;
+import org.acme.work_order.workorder.internal.WorkOrderServiceImpl;
 import org.acme.work_order.workorderjob.WorkOrderJobDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import java.time.LocalDateTime;
@@ -29,6 +37,10 @@ public class WorkOrderControllerTest extends BaseApiTest{
 
     @Autowired
     private WorkOrderDAO woDAO;
+
+    @Autowired
+    private WorkOrderServiceImpl woService;
+
 
     Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
@@ -67,6 +79,7 @@ public class WorkOrderControllerTest extends BaseApiTest{
                 .state("state1")
                 .clientId("client1")
                 .build();
+        //Mockito.doNothing().when(woService.runRules(woDTO));
         String json = gson.toJson(woDTO);
         // Act
         mockMvc.perform(post("/workorders")
