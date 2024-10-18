@@ -32,7 +32,7 @@ public class WoDtoToGrpcWorkOrder {
                 .setWoCreationDate(convertToTimestamp(dto.getWoCreationDate()))
                 .setWoCompletionDate(convertToTimestamp(dto.getWoCompletionDate()))
                 .setClientId(dto.getClientId())
-                .setAppliedRule(dto.getAppliedRule()!=null ? dto.getAppliedRule() : "")
+                .setAppliedRule(dto.getAppliedRule())
                 .build();
         log.info("Converted DTO for WO {} succeeded: {}", dto.getWoNumber(), wor != null ? true : false);
         return wor;

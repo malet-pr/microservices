@@ -14,7 +14,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="rules" target="21" />
       <module name="ruleunit-springboot-example" target="1.8" />
     </bytecodeTargetLevel>
   </component>
