@@ -3,11 +3,9 @@ server:
   shutdown: graceful
 grpc:
   client:
-    rules-service:
-      address: 'static://localhost:8090'
+    work-order:
+      address: static://localhost:8090
       negotiationType: plaintext
-      enable-keep-alive: true
-      keepAliveWithoutCalls: true
 spring:
   application:
     name: work_order

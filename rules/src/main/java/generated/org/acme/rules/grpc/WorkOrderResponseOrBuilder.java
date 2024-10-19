@@ -20,27 +20,27 @@ public interface WorkOrderResponseOrBuilder extends
       getWoNumberBytes();
 
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
    */
-  java.util.List<org.acme.rules.grpc.WoJob> 
-      getWoJobsList();
+  java.util.List<org.acme.rules.grpc.WoJobDTO> 
+      getWoJobDTOsList();
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
    */
-  org.acme.rules.grpc.WoJob getWoJobs(int index);
+  org.acme.rules.grpc.WoJobDTO getWoJobDTOs(int index);
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
    */
-  int getWoJobsCount();
+  int getWoJobDTOsCount();
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
    */
-  java.util.List<? extends org.acme.rules.grpc.WoJobOrBuilder> 
-      getWoJobsOrBuilderList();
+  java.util.List<? extends org.acme.rules.grpc.WoJobDTOOrBuilder> 
+      getWoJobDTOsOrBuilderList();
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .WoJobDTO woJobDTOs = 2;</code>
    */
-  org.acme.rules.grpc.WoJobOrBuilder getWoJobsOrBuilder(
+  org.acme.rules.grpc.WoJobDTOOrBuilder getWoJobDTOsOrBuilder(
       int index);
 
   /**

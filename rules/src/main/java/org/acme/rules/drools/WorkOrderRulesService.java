@@ -11,7 +11,7 @@ public class WorkOrderRulesService {
     public WorkOrderResponse processWorkOrder(WorkOrderRequest request) {
         WorkOrderResponse resp = WorkOrderResponse.newBuilder()
                 .setWoNumber(request.getWoNumber())
-                .addAllWoJobs(request.getWoJobsList())
+                .addAllWoJobDTOs(request.getWoJobDTOsList())
                 .setJobTypeCode(request.getJobTypeCode())
                 .setAddress(request.getAddress())
                 .setCity(request.getCity())

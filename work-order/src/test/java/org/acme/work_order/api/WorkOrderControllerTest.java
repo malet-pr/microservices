@@ -1,11 +1,9 @@
 package org.acme.work_order.api;
 
 import org.acme.work_order.common.LocalDateTimeTypeAdapter;
-import org.acme.work_order.grpc.WorkOrderResponse;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorder.internal.WorkOrder;
 import org.acme.work_order.workorder.internal.WorkOrderDAO;
-import org.acme.work_order.workorder.internal.WorkOrderServiceImpl;
 import org.acme.work_order.workorderjob.WorkOrderJobDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

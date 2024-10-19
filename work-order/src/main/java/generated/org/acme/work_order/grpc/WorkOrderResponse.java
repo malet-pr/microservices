@@ -4,11 +4,11 @@
 package org.acme.work_order.grpc;
 
 /**
- * Protobuf type {@code WorkOrderResponse}
+ * Protobuf type {@code org.acme.work_order.grpc.WorkOrderResponse}
  */
 public  final class WorkOrderResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:WorkOrderResponse)
+    // @@protoc_insertion_point(message_implements:org.acme.work_order.grpc.WorkOrderResponse)
     WorkOrderResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use WorkOrderResponse.newBuilder() to construct.
@@ -151,13 +151,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return org.acme.work_order.grpc.WorkOrderData.internal_static_WorkOrderResponse_descriptor;
+    return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WorkOrderResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return org.acme.work_order.grpc.WorkOrderData.internal_static_WorkOrderResponse_fieldAccessorTable
+    return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WorkOrderResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             org.acme.work_order.grpc.WorkOrderResponse.class, org.acme.work_order.grpc.WorkOrderResponse.Builder.class);
   }
@@ -201,32 +201,32 @@ private static final long serialVersionUID = 0L;
   public static final int WOJOBS_FIELD_NUMBER = 2;
   private java.util.List<org.acme.work_order.grpc.WoJob> woJobs_;
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
    */
   public java.util.List<org.acme.work_order.grpc.WoJob> getWoJobsList() {
     return woJobs_;
   }
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
    */
   public java.util.List<? extends org.acme.work_order.grpc.WoJobOrBuilder> 
       getWoJobsOrBuilderList() {
     return woJobs_;
   }
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
    */
   public int getWoJobsCount() {
     return woJobs_.size();
   }
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
    */
   public org.acme.work_order.grpc.WoJob getWoJobs(int index) {
     return woJobs_.get(index);
   }
   /**
-   * <code>repeated .WoJob woJobs = 2;</code>
+   * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
    */
   public org.acme.work_order.grpc.WoJobOrBuilder getWoJobsOrBuilder(
       int index) {
@@ -709,21 +709,21 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code WorkOrderResponse}
+   * Protobuf type {@code org.acme.work_order.grpc.WorkOrderResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:WorkOrderResponse)
+      // @@protoc_insertion_point(builder_implements:org.acme.work_order.grpc.WorkOrderResponse)
       org.acme.work_order.grpc.WorkOrderResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.acme.work_order.grpc.WorkOrderData.internal_static_WorkOrderResponse_descriptor;
+      return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WorkOrderResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.acme.work_order.grpc.WorkOrderData.internal_static_WorkOrderResponse_fieldAccessorTable
+      return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WorkOrderResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.acme.work_order.grpc.WorkOrderResponse.class, org.acme.work_order.grpc.WorkOrderResponse.Builder.class);
     }
@@ -783,7 +783,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return org.acme.work_order.grpc.WorkOrderData.internal_static_WorkOrderResponse_descriptor;
+      return org.acme.work_order.grpc.WorkOrderData.internal_static_org_acme_work_order_grpc_WorkOrderResponse_descriptor;
     }
 
     @java.lang.Override
@@ -1052,7 +1052,7 @@ private static final long serialVersionUID = 0L;
         org.acme.work_order.grpc.WoJob, org.acme.work_order.grpc.WoJob.Builder, org.acme.work_order.grpc.WoJobOrBuilder> woJobsBuilder_;
 
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public java.util.List<org.acme.work_order.grpc.WoJob> getWoJobsList() {
       if (woJobsBuilder_ == null) {
@@ -1062,7 +1062,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public int getWoJobsCount() {
       if (woJobsBuilder_ == null) {
@@ -1072,7 +1072,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public org.acme.work_order.grpc.WoJob getWoJobs(int index) {
       if (woJobsBuilder_ == null) {
@@ -1082,7 +1082,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder setWoJobs(
         int index, org.acme.work_order.grpc.WoJob value) {
@@ -1099,7 +1099,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder setWoJobs(
         int index, org.acme.work_order.grpc.WoJob.Builder builderForValue) {
@@ -1113,7 +1113,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder addWoJobs(org.acme.work_order.grpc.WoJob value) {
       if (woJobsBuilder_ == null) {
@@ -1129,7 +1129,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder addWoJobs(
         int index, org.acme.work_order.grpc.WoJob value) {
@@ -1146,7 +1146,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder addWoJobs(
         org.acme.work_order.grpc.WoJob.Builder builderForValue) {
@@ -1160,7 +1160,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder addWoJobs(
         int index, org.acme.work_order.grpc.WoJob.Builder builderForValue) {
@@ -1174,7 +1174,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder addAllWoJobs(
         java.lang.Iterable<? extends org.acme.work_order.grpc.WoJob> values) {
@@ -1189,7 +1189,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder clearWoJobs() {
       if (woJobsBuilder_ == null) {
@@ -1202,7 +1202,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public Builder removeWoJobs(int index) {
       if (woJobsBuilder_ == null) {
@@ -1215,14 +1215,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public org.acme.work_order.grpc.WoJob.Builder getWoJobsBuilder(
         int index) {
       return getWoJobsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public org.acme.work_order.grpc.WoJobOrBuilder getWoJobsOrBuilder(
         int index) {
@@ -1232,7 +1232,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public java.util.List<? extends org.acme.work_order.grpc.WoJobOrBuilder> 
          getWoJobsOrBuilderList() {
@@ -1243,14 +1243,14 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public org.acme.work_order.grpc.WoJob.Builder addWoJobsBuilder() {
       return getWoJobsFieldBuilder().addBuilder(
           org.acme.work_order.grpc.WoJob.getDefaultInstance());
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public org.acme.work_order.grpc.WoJob.Builder addWoJobsBuilder(
         int index) {
@@ -1258,7 +1258,7 @@ private static final long serialVersionUID = 0L;
           index, org.acme.work_order.grpc.WoJob.getDefaultInstance());
     }
     /**
-     * <code>repeated .WoJob woJobs = 2;</code>
+     * <code>repeated .org.acme.work_order.grpc.WoJob woJobs = 2;</code>
      */
     public java.util.List<org.acme.work_order.grpc.WoJob.Builder> 
          getWoJobsBuilderList() {
@@ -1909,10 +1909,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:WorkOrderResponse)
+    // @@protoc_insertion_point(builder_scope:org.acme.work_order.grpc.WorkOrderResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:WorkOrderResponse)
+  // @@protoc_insertion_point(class_scope:org.acme.work_order.grpc.WorkOrderResponse)
   private static final org.acme.work_order.grpc.WorkOrderResponse DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new org.acme.work_order.grpc.WorkOrderResponse();

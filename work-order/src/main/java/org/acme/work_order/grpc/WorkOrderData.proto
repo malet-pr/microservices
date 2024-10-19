@@ -1,6 +1,7 @@
 syntax = "proto3";
 
-option java_package = "org.acme.work_order.grpc";
+package org.acme.work_order.grpc;
+
 option java_outer_classname = "WorkOrderData";
 option java_multiple_files = true;
 
@@ -10,7 +11,7 @@ import "google/protobuf/timestamp.proto"; //for dates
 
 message WorkOrderRequest {
   string woNumber = 1;
-  repeated WoJob woJobs = 2;
+  repeated WoJob woJobDTOs = 2;
   string jobTypeCode = 3;
   string address = 4;
   string city = 5;

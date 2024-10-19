@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class WorkOrderJobDTO {
 	private String woNumber;
 	private String jobCode;
-	private int quantity;
+	private Integer quantity;
 	private Character activeStatus;
 	private String appliedRule;
 }
