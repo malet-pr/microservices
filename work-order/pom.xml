@@ -219,6 +219,7 @@
 				<version>3.11.4</version>
 				<executions>
 					<execution>
+						<id>generate-proto-sources</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>run</goal>
