@@ -36,7 +36,7 @@ public class WoJobDtoToGrpcWoJob {
                 .setJobCode(dto.getJobCode())
                 .setQuantity(dto.getQuantity())
                 .setActiveStatus(String.valueOf(dto.getActiveStatus()))
-                .setAppliedRule(dto.getAppliedRule())
+                .setAppliedRule(dto.getAppliedRule() != null ? dto.getAppliedRule().toUpperCase() : "")
                 .build();
         return wo;
     }

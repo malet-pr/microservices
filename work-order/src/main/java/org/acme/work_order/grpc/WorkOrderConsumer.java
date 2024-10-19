@@ -1,6 +1,5 @@
 package org.acme.work_order.grpc;
 
-import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.slf4j.Logger;
@@ -36,8 +35,8 @@ public class WorkOrderConsumer extends org.acme.work_order.grpc.WorkOrderService
 
     public WorkOrderDTO callRules(WorkOrderDTO dto) {
         log.info("Sending WO {} to rules service", dto.getWoNumber());
-        //WorkOrderRequest request = convertDtoToRequest(dto);
-        WorkOrderRequest request = this.forTesting();
+        WorkOrderRequest request = convertDtoToRequest(dto);
+        //WorkOrderRequest request = this.forTesting();
         WorkOrderResponse response = synchronousClient.runRulesToWO(request);
         return convertResponseToDto(response);
     }
