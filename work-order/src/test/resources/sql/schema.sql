@@ -1,7 +1,9 @@
-CREATE SEQUENCE IF NOT EXISTS job_seq;
+CREATE SCHEMA IF NOT EXISTS wo;
 
-CREATE TABLE IF NOT EXISTS job (
-      id int8 DEFAULT nextval('job_seq'),
+CREATE SEQUENCE IF NOT EXISTS wo.job_seq;
+
+CREATE TABLE IF NOT EXISTS wo.job (
+      id int8 DEFAULT nextval('wo.job_seq'),
       creation_date timestamp(6) NULL,
       code varchar(255) NOT NULL UNIQUE ,
       "name" varchar(255) NULL,
@@ -9,10 +11,10 @@ CREATE TABLE IF NOT EXISTS job (
       CONSTRAINT job_pkey PRIMARY KEY (id)
 );
 
-CREATE SEQUENCE IF NOT EXISTS job_type_seq;
+CREATE SEQUENCE IF NOT EXISTS wo.job_type_seq;
 
-CREATE TABLE IF NOT EXISTS job_type (
-       id int8 DEFAULT nextval('job_type_seq'),
+CREATE TABLE IF NOT EXISTS wo.job_type (
+       id int8 DEFAULT nextval('wo.job_type_seq'),
        creation_date timestamp(6) NULL,
        code varchar(255) NOT NULL UNIQUE ,
        "name" varchar(255) NULL,
@@ -21,10 +23,10 @@ CREATE TABLE IF NOT EXISTS job_type (
        CONSTRAINT job_type_pkey PRIMARY KEY (id)
 );
 
-CREATE SEQUENCE IF NOT EXISTS work_order_seq;
+CREATE SEQUENCE IF NOT EXISTS wo.work_order_seq;
 
-CREATE TABLE IF NOT EXISTS  work_order (
-      id int8 DEFAULT nextval('work_order_seq'),
+CREATE TABLE IF NOT EXISTS  wo.work_order (
+      id int8 DEFAULT nextval('wo.work_order_seq'),
       creation_date timestamp(6) NULL,
       wo_number varchar(255) NOT NULL UNIQUE ,
       jobtype_id int8 NULL,
@@ -36,13 +38,13 @@ CREATE TABLE IF NOT EXISTS  work_order (
       wo_completion_date timestamp(6) NULL,
       applied_rule varchar(255) NULL,
       CONSTRAINT work_order_pkey PRIMARY KEY (id),
-      CONSTRAINT fk9f2v1fgvk791qgg7gy6owq5by FOREIGN KEY (jobtype_id) REFERENCES job_type(id)
+      CONSTRAINT fk9f2v1fgvk791qgg7gy6owq5by FOREIGN KEY (jobtype_id) REFERENCES wo.job_type(id)
 );
 
-CREATE SEQUENCE IF NOT EXISTS work_order_job_seq;
+CREATE SEQUENCE IF NOT EXISTS wo.work_order_job_seq;
 
-CREATE TABLE IF NOT EXISTS wo_job (
-     id int8 DEFAULT nextval('work_order_job_seq'),
+CREATE TABLE IF NOT EXISTS wo.wo_job (
+     id int8 DEFAULT nextval('wo.work_order_job_seq'),
      creation_date timestamp(6) NULL,
      work_order_id int8 NULL,
      job_id int8 NULL,
@@ -50,10 +52,10 @@ CREATE TABLE IF NOT EXISTS wo_job (
      active_status bpchar(1) NULL,
      applied_rule varchar(255) NULL,
      CONSTRAINT wo_job_pkey PRIMARY KEY (id),
-     CONSTRAINT fk81bc8pni97yqwurkfgdyfqlw0 FOREIGN KEY (work_order_id) REFERENCES work_order(id)
+     CONSTRAINT fk81bc8pni97yqwurkfgdyfqlw0 FOREIGN KEY (work_order_id) REFERENCES wo.work_order(id)
 );
 
-alter sequence job_seq restart;
-alter sequence job_type_seq restart;
-alter sequence work_order_seq restart;
-alter sequence work_order_job_seq restart;
+alter sequence wo.job_seq restart;
+alter sequence wo.job_type_seq restart;
+alter sequence wo.work_order_seq restart;
+alter sequence wo.work_order_job_seq restart;

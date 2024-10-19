@@ -14,6 +14,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.function.Supplier;
+
 
 @SpringBootTest(classes = WorkOrderApplication.class, properties = "spring.profiles.active=test")
 @Testcontainers
@@ -36,11 +38,13 @@ public class BaseIntegrationKafka {
             .withUsername("testuser")
             .withPassword("testpass")
             .withInitScript("sql/schema.sql")
+            .withCommand("postgres", "-c", "search_path=wo")
             .withReuse(true);
 
     @DynamicPropertySource
     static void configureDataSource(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", container::getJdbcUrl);
+        Supplier<Object> url = () ->  container.getJdbcUrl() + "?currentSchema=wo";
+        registry.add("spring.datasource.url", url);
         registry.add("spring.datasource.username", container::getUsername);
         registry.add("spring.datasource.password", container::getPassword);
     }

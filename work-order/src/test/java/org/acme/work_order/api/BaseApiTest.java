@@ -13,6 +13,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.util.function.Supplier;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = WorkOrderApplication.class, properties = "spring.profiles.active=test")
@@ -26,11 +28,13 @@ public abstract class BaseApiTest {
             .withUsername("testuser")
             .withPassword("testpass")
             .withInitScript("sql/schema.sql")
+            .withCommand("postgres", "-c", "search_path=wo")
             .withReuse(true);
 
     @DynamicPropertySource
     static void configureDataSource(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", container::getJdbcUrl);
+        Supplier<Object> url = () ->  container.getJdbcUrl() + "?currentSchema=wo";
+        registry.add("spring.datasource.url", url);
         registry.add("spring.datasource.username", container::getUsername);
         registry.add("spring.datasource.password", container::getPassword);
     }
