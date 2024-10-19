@@ -65,6 +65,12 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public Long findIdByCode(String code) {
+        Job job = jobDAO.findByCode(code);
+        return job.getId();
+    }
+
+    @Override
     public JobDTO findByCodeAndActiveStatus(String code, Character activeStatus) {
         Job entity = jobDAO.findByCodeAndActiveStatus(code,activeStatus);
         return jobMapper.convertToDto(entity);

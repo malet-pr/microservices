@@ -12,4 +12,5 @@ public interface JobService {
     public JobDTO findByCodeAndActiveStatus(String code, Character activeStatus);
     public List<JobDTO> findByCodesAndActiveStatus(List<String> codes, Character activeStatus);
     public List<JobDTO> findByCodes(List<String> codes);
+    public Long findIdByCode(String code);
 }
