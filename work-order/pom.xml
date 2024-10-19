@@ -16,7 +16,7 @@
 		<java.version>21</java.version>
 		<io.grpc.version>1.68.0</io.grpc.version>
 		<com.google.protobuf.version>3.25.3</com.google.protobuf.version>
-		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>
+<!--		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>-->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -170,10 +170,10 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<image>
+<!--					<image>
 						<name>${dockerImageName}</name>
 						<builder>dashaun/builder:tiny</builder>
-					</image>
+					</image>-->
 				</configuration>
 				<executions>
 					<execution>
