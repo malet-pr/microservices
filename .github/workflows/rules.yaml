@@ -1,4 +1,4 @@
-name: Work Order Service
+name: Rules Service
 run-name: ${{ github.actor }}
 on:
   push:
