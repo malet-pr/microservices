@@ -34,7 +34,7 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
         run: |
           echo "Building the Docker image..."
-          docker build -no-cache -t ${{ secrets.DOCKER_HUB_USERNAME }}/micro1-work-order .
+          docker build --no-cache -t ${{ secrets.DOCKER_HUB_USERNAME }}/micro1-work-order .
       - if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
         name: Login to Docker Hub
         uses: docker/login-action@v3
