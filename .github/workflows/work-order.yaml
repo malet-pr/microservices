@@ -45,6 +45,6 @@ jobs:
       - if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
         name: Build and Publish Docker Image
         run: |
-          mvn spring-boot:build-image -DskipTests
+          mvn spring-boot:build-image -DskipTests -DskipProtoc
           echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
           docker push $DOCKER_IMAGE_NAME
