@@ -10,8 +10,8 @@ import java.util.List;
 public interface JobDAO extends JpaRepository<Job, Long> {
     Job findByCode(String job);
     Job findByCodeAndActiveStatus(String job, Character activeStatus);
-    @Query(value="select * from JOB where code in ?1",nativeQuery = true)
+    @Query(value="select * from wo.JOB where code in ?1",nativeQuery = true)
     List<Job> findByCodes(List<String> codes);
-    @Query(value="select * from JOB where code in ?1 and active_status = ?2",nativeQuery = true)
+    @Query(value="select * from wo.JOB where code in ?1 and active_status = ?2",nativeQuery = true)
     List<Job> findByCodesAndActiveStatus(List<String> codes, Character activeStatus);
 }

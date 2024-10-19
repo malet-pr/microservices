@@ -1,16 +1,11 @@
 package org.acme.work_order.workorder.internal;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaUpdate;
-import jakarta.persistence.criteria.Root;
 import org.acme.work_order.grpc.*;
 import org.acme.work_order.grpc.TestBack;
 import org.acme.work_order.grpc.TestGo;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorder.WorkOrderService;
-import org.acme.work_order.workorderjob.internal.WorkOrderJob;
+import org.acme.work_order.workorderjob.UpdatesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +24,9 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     private WorkOrderConsumer consumer;
     @Autowired
     private TestConnectionConsumer testConsumer;
+    @Autowired
+    private UpdatesService updService;
 
-    @PersistenceContext
-    public EntityManager em;
 
     @Override
     public Boolean save(WorkOrderDTO dto) {
@@ -60,32 +55,15 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         try{
             WorkOrderDTO newDto = consumer.callRules(dto);
             log.info("Successfully run rules for {}", newDto);
-            boolean res = updateAfterRules(newDto);
-            if(res){
-                log.info("Successfully updated after applied rules for {}", newDto.getWoNumber());
+            WorkOrder wo = woDAO.findByWoNumber(newDto.getWoNumber());
+            if(wo == null) {
+                log.info("Cannot updated WO {} because it doesn't exist", newDto.getWoNumber());
+            }else{
+                boolean upd = updService.updateAfterRules(newDto,wo);
+                log.info("WO {} updated after applied rules: {}", newDto.getWoNumber(), upd);
             }
         }catch (Exception e) {
-            log.error("Failed to run rules - " + e.getMessage());
-        }
-    }
-
-    private Boolean updateAfterRules(WorkOrderDTO dto) {
-        try{
-            WorkOrderDTO old = this.findByWoNumber(dto.getWoNumber());
-            if(old == null) {return false;}
-            String updateQuery = "UPDATE wo.wo_job SET quantity=:quantity,active_status=:activeStatus WHERE work_order_id=:id";
-            em.createNativeQuery(updateQuery);
-
-            // TODO:
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaUpdate<WorkOrderJob> update = cb.createCriteriaUpdate(WorkOrderJob.class);
-
-
-            return true;
-        } catch (Exception e){
-            log.error("Failed to update after applied rules for {}", dto.getWoNumber());
-            log.error("Cause: {}",e.getMessage());
-            return false;
+            log.error("Failed to update WO after running rules - " + e.getMessage());
         }
     }
 

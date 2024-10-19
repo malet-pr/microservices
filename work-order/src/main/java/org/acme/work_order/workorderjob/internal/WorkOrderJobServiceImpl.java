@@ -4,12 +4,16 @@ import org.acme.work_order.workorder.internal.WorkOrder;
 import org.acme.work_order.workorder.internal.WorkOrderDAO;
 import org.acme.work_order.workorderjob.WorkOrderJobService;
 import org.acme.work_order.workorderjob.WorkOrderJobDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class WorkOrderJobServiceImpl implements WorkOrderJobService {
+
+    private static final Logger log = LoggerFactory.getLogger(WorkOrderJobServiceImpl.class);
 
     @Autowired
     WorkOrderJobDAO woJobDAO;
@@ -37,6 +41,18 @@ public class WorkOrderJobServiceImpl implements WorkOrderJobService {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    // IMPLEMENT THIS
+    @Override
+    public int saveAll(List<WorkOrderJobDTO> woJobs) {
+        try{
+            woJobs.forEach(this::save);
+            return woJobs.size();
+        } catch(Exception e){
+            log.error(e.getMessage());
+        }
+        return 0;
     }
 
     @Override
