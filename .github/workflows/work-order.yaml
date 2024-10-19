@@ -5,8 +5,7 @@ on:
     paths:
       - work-order/**
     branches:
-      - develop
-      - main
+      - '**'
   pull_request:
     branches: [main]
 jobs:
