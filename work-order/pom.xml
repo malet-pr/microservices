@@ -48,11 +48,6 @@
 			<artifactId>protobuf-java</artifactId>
 			<version>${com.google.protobuf.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.github.os72</groupId>
-			<artifactId>protoc-jar</artifactId>
-			<version>3.11.4</version>
-		</dependency>
 <!--					end GRPC	 					-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
