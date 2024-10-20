@@ -20,6 +20,7 @@ ENTRYPOINT java -javaagent:/opt/opentelemetry-agent.jar \
     -Dotel.resource.attributes=service.instance.id=$HOSTNAME \
     -jar /target/rules-0.0.1.jar
 
-EXPOSE 8083, 8090
+EXPOSE 8083
+EXPOSE 8090
 
 
