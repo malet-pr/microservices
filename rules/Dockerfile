@@ -22,3 +22,4 @@ ENTRYPOINT java -javaagent:/opt/opentelemetry-agent.jar \
 
 EXPOSE 8083, 8090
 
+
