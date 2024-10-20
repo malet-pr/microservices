@@ -31,12 +31,20 @@ services:
     networks:
       - kafka
       - grafana
+    links:
+      - micro1-rules
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - DB_URL=jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=wo
       - DB_PASSWORD=drools
       - DB_NAME=drools
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
+      - RULES_SERVICE_HOST=rules
+      - ECHO_SERVICE_PORT=8090
+      - GRPC_CLIENT_RULES-SERVICE_ADDRESS=static://micro1-rules:8090
+      - GRPC_CLIENT_RULES-SERVICE_NEGOTIATION_TYPE=plaintext
+      - GRPC_CLIENT_RULES-SERVICE_ENABLE_KEEP_ALIVE=true
+      - GRPC_CLIENT_RULES-SERVICE_KEEP_ALIVE_WITHOUT_CALLS=true
       - MANAGEMENT_TRACING_ENABLED=true
       - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
     depends_on:
@@ -63,6 +71,26 @@ services:
       - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
     depends_on:
       - kafka
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    labels:
+      logging: "promtail"
+
+  rules:
+    image: maletq/micro1-rules:latest
+    container_name: micro1-rules
+    ports:
+      - "8083:8083"
+      - "8090:8090"
+    networks:
+      - grafana
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - GRPC_SERVER_PORT=8090
+      - MANAGEMENT_TRACING_ENABLED=true
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
     deploy:
       resources:
         limits:
