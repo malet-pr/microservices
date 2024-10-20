@@ -1,3 +1,4 @@
+version: '3.8'
 name: 'microservice-rules-observability'
 services:
   prometheus:

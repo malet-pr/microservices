@@ -1,0 +1,46 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  batch:
+  attributes/metrics:
+    actions:
+      - action: insert
+        key: deployment.environment
+        value: "${DEPLOY_ENV}"
+      - key: "process_command_args"
+        action: "delete"
+  attributes/logs:
+    actions:
+      - action: insert
+        key: loki.attribute.labels
+        value: container
+      - action: insert
+        key: loki.format
+        value: raw
+
+exporters:
+  otlp:
+    endpoint: http://tempo:3200
+  prometheusremotewrite:
+    endpoint: http://prometheus:9090
+  loki:
+    endpoint: http://loki:3100
+
+service:
+  pipelines:
+    traces:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ otlp ]
+    metrics:
+      receivers: [ otlp ]
+      processors: [ batch,attributes/metrics ]
+      exporters: [ prometheusremotewrite ]
+    logs:
+      receivers: [ otlp ]
+      processors: [ batch,attributes/logs ]
+      exporters: [ loki ]
