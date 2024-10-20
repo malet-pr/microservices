@@ -19,7 +19,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class UpdatesServiceImpl implements UpdatesService {
 
     private static final Logger log = LoggerFactory.getLogger(UpdatesServiceImpl.class);

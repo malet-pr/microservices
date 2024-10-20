@@ -28,6 +28,7 @@ services:
     build:
       context: ./open-telemetry
       dockerfile: Dockerfile
+    image: otel/opentelemetry-collector
     container_name: micro1-otel
     ports:
       - "4317:4317"
@@ -37,7 +38,10 @@ services:
       - grafana
 
   wo-service:
-    image: maletq/micro1-work-order:latest
+    #image: maletq/micro1-work-order:latest
+    build:
+      context: ../../work-order
+      dockerfile: Dockerfile
     container_name: micro1-work-order
     ports:
       - "8081:8081"
@@ -52,9 +56,7 @@ services:
       - DB_PASSWORD=drools
       - DB_NAME=drools
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
-      #- RULES_SERVICE_HOST=micro1-rules
-      #- ECHO_SERVICE_PORT=8090
-      - GRPC_CLIENT_RULES-SERVICE_ADDRESS=://micro1-rules:8090
+      - GRPC_CLIENT_RULES-SERVICE_ADDRESS=static://rules:8090
       - GRPC_CLIENT_RULES-SERVICE_NEGOTIATION_TYPE=plaintext
       - GRPC_CLIENT_RULES-SERVICE_ENABLE_KEEP_ALIVE=true
       - GRPC_CLIENT_RULES-SERVICE_KEEP_ALIVE_WITHOUT_CALLS=true
@@ -70,6 +72,7 @@ services:
       - OTEL_PROPAGATORS=tracecontext,baggage,
     depends_on:
       - kafka
+      - rules
     deploy:
       resources:
         limits:
@@ -78,7 +81,10 @@ services:
       logging: "promtail"
 
   simulator:
-    image: maletq/micro1-simulator:latest
+    #image: maletq/micro1-simulator:latest
+    build:
+      context: ../../simulator
+      dockerfile: Dockerfile
     container_name: micro1-simulator
     ports:
       - "8082:8082"
@@ -108,7 +114,10 @@ services:
       logging: "promtail"
 
   rules:
-    image: maletq/micro1-rules:latest
+    #image: maletq/micro1-rules:latest
+    build:
+      context: ../../rules
+      dockerfile: Dockerfile
     container_name: micro1-rules
     ports:
       - "8083:8083"
