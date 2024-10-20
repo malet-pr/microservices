@@ -1,35 +1,17 @@
 FROM eclipse-temurin:21-jdk
 
+RUN apt-get update && \
+    apt-get install -y maven wget unzip && \
+    wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-linux-x86_64.zip && \
+    unzip protoc-3.11.4-linux-x86_64.zip -d /usr/local && \
+    chmod +x /usr/local/bin/protoc && \
+    rm protoc-3.11.4-linux-x86_64.zip
+
 WORKDIR /app
+COPY . .
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-COPY work-order/pom.xml work-order/
-COPY work-order/src work-order/src
-
-RUN cd work-order && mvn clean package -DskipTests
-
-COPY ./target/wo-0.0.1.jar .
+RUN protoc --version && \
+    which protoc && \
+    mvn clean package -DskipTests
 
 ENTRYPOINT ["java", "-jar", "wo-0.0.1.jar"]
-
-=======
-COPY ./work-order/pom.xml ./work-order/
-COPY ./work-order/src ./work-order/src
-=======
-COPY work-order/pom.xml work-order/
-COPY work-order/src work-order/src
->>>>>>> 78517d7 (more changes to fix the workflow)
-
-RUN cd work-order && mvn clean package -DskipTests
-
-COPY ./target/wo-0.0.1.jar .
-
-ENTRYPOINT ["java", "-jar", "wo-0.0.1.jar"]
-
-
-<<<<<<< HEAD
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
->>>>>>> 91304b2 (changes to try to get the workflow to deploy image to dockerhub)
-=======
->>>>>>> 78517d7 (more changes to fix the workflow)

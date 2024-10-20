@@ -19,7 +19,7 @@
 		<version.org.drools>9.44.0.Final</version.org.drools>
 		<io.grpc.version>1.68.0</io.grpc.version>
 		<com.google.protobuf.version>3.25.3</com.google.protobuf.version>
-		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>
+<!--		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>-->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -66,6 +66,11 @@
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
+			<version>${com.google.protobuf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java-util</artifactId>
 			<version>${com.google.protobuf.version}</version>
 		</dependency>
 		<!--					end GRPC	 					-->
@@ -200,10 +205,10 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<image>
+<!--					<image>
 						<name>${dockerImageName}</name>
 						<builder>dashaun/builder:tiny</builder>
-					</image>
+					</image>-->
 				</configuration>
 				<executions>
 					<execution>
