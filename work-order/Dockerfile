@@ -14,4 +14,10 @@ RUN protoc --version && \
     which protoc && \
     mvn clean package -DskipTests
 
-ENTRYPOINT ["java", "-jar", "wo-0.0.1.jar"]
+ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.30.0/opentelemetry-javaagent.jar /opt/opentelemetry-agent.jar
+
+ENTRYPOINT java -javaagent:/opt/opentelemetry-agent.jar \
+    -Dotel.resource.attributes=service.instance.id=$HOSTNAME \
+    -jar /target/work-order-0.0.1.jar
+
+EXPOSE 8081

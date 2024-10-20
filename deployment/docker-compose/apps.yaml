@@ -1,3 +1,4 @@
+version: '3.8'
 name: 'microservice-rules-observability'
 services:
   kafka:
@@ -23,6 +24,18 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     restart: unless-stopped
 
+  ot-collector:
+    build:
+      context: ./open-telemetry
+      dockerfile: Dockerfile
+    container_name: micro1-otel
+    ports:
+      - "4317:4317"
+    environment:
+      DEPLOY_ENV: local
+    networks:
+      - grafana
+
   wo-service:
     image: maletq/micro1-work-order:latest
     container_name: micro1-work-order
@@ -39,14 +52,22 @@ services:
       - DB_PASSWORD=drools
       - DB_NAME=drools
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
-      - RULES_SERVICE_HOST=rules
-      - ECHO_SERVICE_PORT=8090
-      - GRPC_CLIENT_RULES-SERVICE_ADDRESS=static://micro1-rules:8090
+      #- RULES_SERVICE_HOST=micro1-rules
+      #- ECHO_SERVICE_PORT=8090
+      - GRPC_CLIENT_RULES-SERVICE_ADDRESS=://micro1-rules:8090
       - GRPC_CLIENT_RULES-SERVICE_NEGOTIATION_TYPE=plaintext
       - GRPC_CLIENT_RULES-SERVICE_ENABLE_KEEP_ALIVE=true
       - GRPC_CLIENT_RULES-SERVICE_KEEP_ALIVE_WITHOUT_CALLS=true
       - MANAGEMENT_TRACING_ENABLED=true
       - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
+      - OTEL_TRACES_SAMPLER=always_on
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_SERVICE_NAME=ot-collector
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://ot-collector:4317
+      - OTEL_PROPAGATORS=tracecontext,baggage,
     depends_on:
       - kafka
     deploy:
@@ -69,6 +90,14 @@ services:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
       - MANAGEMENT_TRACING_ENABLED=true
       - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
+      - OTEL_TRACES_SAMPLER=always_on
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_SERVICE_NAME=ot-collector
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://ot-collector:4317
+      - OTEL_PROPAGATORS=tracecontext,baggage,
     depends_on:
       - kafka
     deploy:
@@ -91,6 +120,14 @@ services:
       - GRPC_SERVER_PORT=8090
       - MANAGEMENT_TRACING_ENABLED=true
       - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
+      - OTEL_TRACES_SAMPLER=always_on
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_SERVICE_NAME=ot-collector
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://ot-collector:4317
+      - OTEL_PROPAGATORS=tracecontext,baggage,
     deploy:
       resources:
         limits:
