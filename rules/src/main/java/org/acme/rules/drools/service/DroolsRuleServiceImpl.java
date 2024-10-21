@@ -29,6 +29,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+// TODO: this is the part that should be adapted to the use of more modern rules
+// 1- figure out how to read rules from database and/or from mongo
+// 2- find out how to fire rules in the current version of ruleUnit
+// 3- refactor accordingly
 
 @Service
 public class DroolsRuleServiceImpl implements DroolsRuleService{
@@ -45,8 +49,6 @@ public class DroolsRuleServiceImpl implements DroolsRuleService{
     @Autowired
     private WoErrorsServiceImpl errorOtsService;
 
-//    private static JobService jobService;
-//    private static WorkOrderService woService;
     static KieServices kieServices = KieServices.Factory.get();
     static KieContainer kContainer  = kieServices.newKieClasspathContainer();
 

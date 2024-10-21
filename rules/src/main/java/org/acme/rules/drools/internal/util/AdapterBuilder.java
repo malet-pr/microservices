@@ -9,15 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.*;
 
+// TODO: use more appropriate name, move to an utils folder
+
 @Component
 public class AdapterBuilder {
 
     @Autowired
     WorkOrderUtils workOrderUtils;
 
-    //private static JobService jobService;
-    //private static WorkOrderService workOrderService;
-    //private static WorkOrderJobService otActividadService;
     private static WoRuleMapper woRuleMapper;
 
     public static RuleTypeAdapter ruleTypeAdapterBuilder(RuleType type, WorkOrderDTO dto) {
@@ -32,14 +31,15 @@ public class AdapterBuilder {
         List<String> codes = dto.getWoJobDTOs().stream().map(WorkOrderJobDTO::getJobCode).toList();
         List<String> jobCodeList = Collections.singletonList(jobService.findByCodesAndActiveStatus(codes, Constants.YES)
                 .stream().map(JobDTO::getCode).collect(Collectors.joining(", ")));
+        */
+        List<String> jobCodeList = new ArrayList<>(); // TODO: this part will be covered by methods created in AsynncService
         adapter.setJobCodeList(jobCodeList);
-        adapter.setState(dto.getState());
+        adapter.setState(dto.getState());  // TODO: figure out what this is
         if (dto.getWoCreationDate()!= null) {
             adapter.setWoCreationDate(dto.getWoCreationDate().toLocalDate());
         }
         adapter.setWoCompletionDate(dto.getWoCompletionDate().toLocalDate());
         adapter.setWoNumber(dto.getWoNumber());
-         */
         return adapter;
     }
 

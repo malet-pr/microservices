@@ -4,6 +4,10 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
+
+// TODO: think if this is at all needed, other than logs
+// TODO: check for possible circular reference with RuleTypeAdapter
+
 @Getter
 @Setter
 @Builder

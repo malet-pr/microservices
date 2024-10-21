@@ -32,9 +32,6 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
     private WoErrorsService woErrorService;
 
     public static Logger log = LoggerFactory.getLogger(DroolsActionsServiceImpl.class);
-    //private static JobService jobService;
-    //private static WorkOrderJobService woJobService;
-    //private static WorkOrderService woService;
 
     // ARREGLAR
     private void updateJobListInWoRule(WoRuleAdapter adapter) {
