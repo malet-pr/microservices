@@ -13,8 +13,6 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/p
 ENV PATH="/usr/local/bin:${PATH}"
 RUN protoc --version && which protoc
 
-RUN apt-get update && apt-get install -y maven protobuf-compiler
-
 WORKDIR /app
 COPY . .
 

@@ -45,6 +45,7 @@ services:
     container_name: micro1-work-order
     ports:
       - "8081:8081"
+      - "8090:8090"
     networks:
       - kafka
       - grafana
@@ -121,7 +122,6 @@ services:
     container_name: micro1-rules
     ports:
       - "8083:8083"
-      - "8090:8090"
     networks:
       - grafana
     environment:
