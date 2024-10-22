@@ -1,8 +1,6 @@
 package org.acme.work_order.workorder.internal;
 
 import org.acme.work_order.grpc.*;
-import org.acme.work_order.grpc.TestBack;
-import org.acme.work_order.grpc.TestGo;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorder.WorkOrderService;
 import org.acme.work_order.workorderjob.UpdatesService;
@@ -21,10 +19,6 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     @Autowired
     private WorkOrderDAO woDAO;
     @Autowired
-    private WorkOrderConsumer consumer;
-    @Autowired
-    private TestConnectionConsumer testConsumer;
-    @Autowired
     private UpdatesService updService;
 
 
@@ -42,8 +36,6 @@ public class WorkOrderServiceImpl implements WorkOrderService {
             woDAO.save(entity);
             log.info("Successfully saved work order {}", entity);
             result = true;
-            runRules(dto);
-            // runTestConnection();
         }catch (Exception e) {
             log.error(e.getMessage());
             return false;
@@ -51,27 +43,19 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         return result;
     }
 
-    private void runRules(WorkOrderDTO dto) {
+    @Override
+    public void updateAfterRules(WorkOrderDTO dto) {
         try{
-            WorkOrderDTO newDto = consumer.callRules(dto);
-            log.info("Successfully run rules for {}", newDto);
-            WorkOrder wo = woDAO.findByWoNumber(newDto.getWoNumber());
+            WorkOrder wo = woDAO.findByWoNumber(dto.getWoNumber());
             if(wo == null) {
-                log.info("Cannot updated WO {} because it doesn't exist", newDto.getWoNumber());
+                log.info("Cannot updated WO {} because it doesn't exist", dto.getWoNumber());
             }else{
-                boolean upd = updService.updateAfterRules(newDto,wo);
-                log.info("WO {} updated after applied rules: {}", newDto.getWoNumber(), upd);
+                boolean upd = updService.updateAfterRules(dto,wo);
+                log.info("WO {} updated after applied rules: {}", dto.getWoNumber(), upd);
             }
         }catch (Exception e) {
-            log.error("Failed to update WO after running rules - " + e.getMessage());
+            log.error("Failed to update WO after running rules \n" + e.getMessage());
         }
-    }
-
-    private void runTestConnection() {
-        TestGo go = TestGo.newBuilder().setMsgOut("hello from work-order").build();
-        TestBack resp = testConsumer.testConnection(go);
-        log.info("Successfully run test connection to work-order");
-        log.info("Result: {}", resp);
     }
 
     @Override

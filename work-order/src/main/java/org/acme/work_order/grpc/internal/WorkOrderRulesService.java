@@ -1,7 +1,7 @@
-package org.acme.rules.drools;
+package org.acme.work_order.grpc.internal;
 
-import org.acme.rules.grpc.WorkOrderRequest;
-import org.acme.rules.grpc.WorkOrderResponse;
+import org.acme.work_order.grpc.WorkOrderRequest;
+import org.acme.work_order.grpc.WorkOrderResponse;
 import org.springframework.stereotype.Service;
 
 

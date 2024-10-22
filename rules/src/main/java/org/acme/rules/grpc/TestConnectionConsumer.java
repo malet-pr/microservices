@@ -1,11 +1,11 @@
-package org.acme.work_order.grpc;
+package org.acme.rules.grpc;
 
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
-import org.acme.work_order.grpc.TestServiceGrpc;
-import org.acme.work_order.grpc.TestServiceGrpc.TestServiceBlockingStub;
-import org.acme.work_order.grpc.TestGo;
-import org.acme.work_order.grpc.TestBack;
+import org.acme.rules.grpc.TestServiceGrpc;
+import org.acme.rules.grpc.TestServiceGrpc.TestServiceBlockingStub;
+import org.acme.rules.grpc.TestGo;
+import org.acme.rules.grpc.TestBack;
 import io.grpc.stub.StreamObserver;
 
 @Service

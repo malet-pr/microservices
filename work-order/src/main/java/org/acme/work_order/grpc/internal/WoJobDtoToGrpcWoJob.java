@@ -1,4 +1,4 @@
-package org.acme.work_order.grpc;
+package org.acme.work_order.grpc.internal;
 
 import org.acme.work_order.workorderjob.WorkOrderJobDTO;
 import org.acme.work_order.grpc.WoJob;

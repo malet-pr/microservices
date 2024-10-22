@@ -2,8 +2,12 @@ server:
   port: 8083
   shutdown: graceful
 grpc:
-  server:
-    port: 8090
+  client:
+    rules-service:
+      address: 'static://localhost:8090'
+      negotiationType: plaintext
+      enable-keep-alive: true
+      keepAliveWithoutCalls: true
 spring:
   application:
     name: rules

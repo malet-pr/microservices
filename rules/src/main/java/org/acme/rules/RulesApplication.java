@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"org.acme.rules.drools.internal.repository",
-        "org.acme.rules.workorder.internal.repository"})
 @Configuration
 public class RulesApplication {
 	public static void main(String[] args) {
