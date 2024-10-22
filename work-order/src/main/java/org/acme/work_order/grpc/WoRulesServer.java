@@ -1,14 +1,11 @@
-package org.acme.rules.drools;
+package org.acme.work_order.grpc;
 
-import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
+import org.acme.work_order.grpc.internal.WorkOrderRulesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.acme.rules.grpc.WorkOrderServiceGrpc;
-import org.acme.rules.grpc.WorkOrderRequest;
-import org.acme.rules.grpc.WorkOrderResponse;
 
 @GrpcService
 public class WoRulesServer extends WorkOrderServiceGrpc.WorkOrderServiceImplBase {

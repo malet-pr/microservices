@@ -1,8 +1,7 @@
-package org.acme.work_order.grpc;
+package org.acme.rules.grpc.woserviceconnect;
 
-import org.acme.work_order.workorder.WorkOrderDTO;
-import org.acme.work_order.grpc.WorkOrderRequest;
-import org.acme.work_order.grpc.WorkOrderResponse;
+import org.acme.rules.grpc.WorkOrderRequest;
+import org.acme.rules.grpc.WorkOrderResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class WoDtoToGrpcWorkOrder {
                 .setClientId(dto.getClientId())
                 .setAppliedRule(dto.getAppliedRule()!=null ? dto.getAppliedRule() : "")
                 .build();
-        log.info("Converted DTO for WO {} succeeded: {}", dto.getWoNumber(), wor != null ? true : false);
+        log.info("Converted DTO for WO {} succeeded: {}", dto.getWoNumber(), wor != null);
         return wor;
     }
     public WorkOrderDTO grpcToDto(WorkOrderResponse grpc) {

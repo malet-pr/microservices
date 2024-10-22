@@ -1,17 +1,18 @@
-package org.acme.work_order.grpc;
+package org.acme.rules.grpc;
 
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.acme.work_order.workorder.WorkOrderDTO;
+import org.acme.rules.grpc.woserviceconnect.WoDtoToGrpcWorkOrder;
+import org.acme.rules.grpc.woserviceconnect.WorkOrderDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.acme.work_order.grpc.WorkOrderRequest;
-import org.acme.work_order.grpc.WorkOrderResponse;
-
+import org.acme.rules.grpc.WorkOrderRequest;
+import org.acme.rules.grpc.WorkOrderResponse;
+import org.acme.rules.grpc.WorkOrderServiceGrpc;
 
 @Service
-public class WorkOrderConsumer extends org.acme.work_order.grpc.WorkOrderServiceGrpc.WorkOrderServiceImplBase {
+public class WorkOrderConsumer extends WorkOrderServiceGrpc.WorkOrderServiceImplBase {
 
     private static final Logger log = LoggerFactory.getLogger(WorkOrderConsumer.class);
 
@@ -19,7 +20,7 @@ public class WorkOrderConsumer extends org.acme.work_order.grpc.WorkOrderService
     private WoDtoToGrpcWorkOrder mapper;
 
     @GrpcClient("rules-service")
-    org.acme.work_order.grpc.WorkOrderServiceGrpc.WorkOrderServiceBlockingStub synchronousClient;
+    WorkOrderServiceGrpc.WorkOrderServiceBlockingStub synchronousClient;
 
     public WorkOrderRequest convertDtoToRequest(WorkOrderDTO dto) {
         WorkOrderRequest request = mapper.dtoToGrpc(dto);
@@ -33,7 +34,7 @@ public class WorkOrderConsumer extends org.acme.work_order.grpc.WorkOrderService
         return dto;
     }
 
-    public WorkOrderDTO callRules(WorkOrderDTO dto) {
+    public WorkOrderDTO callWorkOrder(WorkOrderDTO dto) {
         log.info("Sending WO {} to rules service", dto.getWoNumber());
         WorkOrderRequest request = convertDtoToRequest(dto);
         //WorkOrderRequest request = this.forTesting();

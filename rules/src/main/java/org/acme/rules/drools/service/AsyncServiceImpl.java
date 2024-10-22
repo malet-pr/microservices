@@ -7,10 +7,8 @@ import java.util.*;
 import org.acme.rules.drools.internal.adapter.RuleAdapter;
 import org.acme.rules.drools.internal.adapter.RuleTypeAdapter;
 import org.acme.rules.drools.internal.model.RuleType;
-import org.acme.rules.drools.internal.adapter.WoRuleAdapter;
 import org.acme.rules.drools.internal.repository.RuleTypeDAO;
 import org.acme.rules.drools.internal.util.AdapterBuilder;
-import org.acme.rules.drools.internal.util.Constants;
 import org.acme.rules.grpc.woserviceconnect.WorkOrderDTO;
 import org.acme.rules.grpc.woserviceconnect.WorkOrderJobDTO;
 import org.slf4j.Logger;
@@ -45,6 +43,10 @@ public class AsyncServiceImpl implements AsyncService {
 
 	 */
 
+	// NOT NEEDED, THE DTO ALREADY BRINGS A LIST OF CODES
+	// TODO: build a common method to convert the list in a concatenated String
+	// TODO: move that method to an utils folderr
+	/*
     private void woJobs(List<WoRuleAdapter> woList) {
         int i = 0;
         StringBuilder sb = new StringBuilder("\r\n");
@@ -56,14 +58,10 @@ public class AsyncServiceImpl implements AsyncService {
         }
         log.info(sb.toString());
     }
+    */
 
-    protected Date computeSearchDates(int minute) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.MINUTE, minute);
-        return calendar.getTime();
-    }
-
+	// NOT NEEDED, AT LEAST FOR NOW THAT RULES ARE RUN INDIVIDUALLY
+	// TODO: remove for now
     @Override
     public HashMap<String,List<String>> runRules(List<WorkOrderDTO> woList, String ruleType) {
 		HashMap<String,List<String>> result = new HashMap<>();
@@ -92,6 +90,7 @@ public class AsyncServiceImpl implements AsyncService {
 		return result;
     }
 
+	// TODO: check if this is at all needed. It seams the only added value over te main method is the map (the rest is logs)
 	@Override
 	public Boolean runRule(WorkOrderDTO wo, String ruleType) {
 		LocalDateTime iniDateTime = LocalDateTime.now();
@@ -107,20 +106,9 @@ public class AsyncServiceImpl implements AsyncService {
 		return saved;
 	}
 
-    private HashMap<RuleType, RuleAdapter> getRulesRefresh(boolean refresh) {
-    	if(this.rules == null || refresh) {
-    		HashMap<RuleType, RuleAdapter> rules = new HashMap<RuleType, RuleAdapter>();
-    		List<RuleType> typeList = ruleTypeDAO.findByGroupingOrderByPriorityAsc(Constants.A);
-    		for (RuleType type : typeList) {
-    			log.debug("Loading rule: " + type.getName());
-    			RuleAdapter rule = droolsService.getRuleAdapter(type);
-    			rules.put(type, rule);
-    		}
-    	    this.rules = rules;
-    	}
-    	return this.rules;
-    }
-
+	// TODO: in work-order, filter by activeStatus before sending the dto
+	// use method created before to concatenate list of Strings
+	// with all these, it is possible that this method becomes dead code
 	private String getJobsStr(WorkOrderDTO wo) {
 		ArrayList<String> acts = new ArrayList<String>();
 		List<WorkOrderJobDTO> woJobDTOs = wo.getWoJobDTOs();
@@ -132,6 +120,8 @@ public class AsyncServiceImpl implements AsyncService {
 		return "";
 	}
 
+	// THIS IS THE ACTUAL POINT OF ENTRY TO THE RULES
+	// TODO: logs of time not needed having traces. Return void
 	private Boolean runRules(List<RuleType> ruleTypeList, WorkOrderDTO wo, HashMap<RuleType, RuleAdapter> rules) {
         log.debug("start - {} - {}", wo.getWoNumber(), LocalDateTime.now());
 		for (RuleType ruleT : ruleTypeList) {
@@ -145,8 +135,10 @@ public class AsyncServiceImpl implements AsyncService {
 		Boolean saved = false;
 		try {
 //            saved = workOrderService.save(wo);
+			// TODO: send the result back to work-order to be saved
 		} catch (Exception e) {
             log.error("Error trying to save WO: {}", e.getMessage());
+			// TODO: handle error in both services
 		}
         log.debug("end - {} - {}", wo.getWoNumber(), LocalDateTime.now());
 		return saved;

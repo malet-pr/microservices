@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.*;
 
+// TODO: use one kind of date for each creation and completion, handle variants as needed
+
 @Getter
 @Setter
 @Builder

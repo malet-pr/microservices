@@ -6,6 +6,9 @@ import java.util.List;
 import lombok.Data;
 import org.acme.rules.drools.internal.model.RuleType;
 
+// TODO: think if adapter is the right call
+// TODO: if needed, use more appropriate name and move to utils folder
+// TODO: check for possible circular reference with ActionAdapter
 @Data
 public class RuleTypeAdapter {
 
