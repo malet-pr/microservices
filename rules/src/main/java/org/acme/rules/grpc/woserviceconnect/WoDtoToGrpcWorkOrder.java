@@ -47,7 +47,6 @@ public class WoDtoToGrpcWorkOrder {
                 .woCompletionDate(convertToLocalDateTime(grpc.getWoCompletionDate()))
                 .clientId(grpc.getClientId())
                 .hasRules(grpc.getHasRules())
-                .build();
     }
 
     private Timestamp convertToTimestamp(LocalDateTime ldt) {

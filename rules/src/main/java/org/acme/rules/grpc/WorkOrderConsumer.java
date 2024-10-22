@@ -47,6 +47,4 @@ public class WorkOrderConsumer extends WorkOrderServiceGrpc.WorkOrderServiceImpl
                 .setHasRules(false)
                 .build();
     }
-
-
 }
