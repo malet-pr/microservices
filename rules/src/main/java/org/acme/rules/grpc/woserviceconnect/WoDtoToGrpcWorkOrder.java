@@ -31,7 +31,7 @@ public class WoDtoToGrpcWorkOrder {
                 .setWoCreationDate(convertToTimestamp(dto.getWoCreationDate()))
                 .setWoCompletionDate(convertToTimestamp(dto.getWoCompletionDate()))
                 .setClientId(dto.getClientId())
-                .setAppliedRule(dto.getAppliedRule()!=null ? dto.getAppliedRule() : "")
+                .setHasRules(dto.getHasRules()!=null ? dto.getHasRules() : Boolean.FALSE)
                 .build();
         log.info("Converted DTO for WO {} succeeded: {}", dto.getWoNumber(), wor != null);
         return wor;
@@ -46,7 +46,7 @@ public class WoDtoToGrpcWorkOrder {
                 .woCreationDate(convertToLocalDateTime(grpc.getWoCreationDate()))
                 .woCompletionDate(convertToLocalDateTime(grpc.getWoCompletionDate()))
                 .clientId(grpc.getClientId())
-                .appliedRule(grpc.getAppliedRule())
+                .hasRules(grpc.getHasRules())
                 .build();
     }
 

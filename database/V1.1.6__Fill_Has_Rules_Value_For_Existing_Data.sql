@@ -1,0 +1,1 @@
+UPDATE wo.work_order SET had_rules = false;

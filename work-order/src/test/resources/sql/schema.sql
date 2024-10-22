@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS  wo.work_order (
       state varchar(255) NULL,
       wo_creation_date timestamp(6) NULL,
       wo_completion_date timestamp(6) NULL,
-      applied_rule varchar(255) NULL,
+      has_rules boolean DEFAULT false,
       CONSTRAINT work_order_pkey PRIMARY KEY (id),
       CONSTRAINT fk9f2v1fgvk791qgg7gy6owq5by FOREIGN KEY (jobtype_id) REFERENCES wo.job_type(id)
 );

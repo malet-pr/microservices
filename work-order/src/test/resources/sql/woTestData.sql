@@ -19,11 +19,11 @@ values
     (3,NOW(),'N','corporate','type3','job type name 3');
 
 insert into wo.work_order
-(id,creation_date,jobtype_id,wo_completion_date,wo_creation_date,address,city,state,client_id,wo_number,applied_rule)
+(id,creation_date,jobtype_id,wo_completion_date,wo_creation_date,address,city,state,client_id,wo_number)
 values
-    (1,NOW(),1,CURRENT_DATE-1,CURRENT_DATE-3,'addres1','city1','state1','client1','ABC123','A1'),
-    (2,NOW(),2,CURRENT_DATE-2,CURRENT_DATE-4,'addres2','city2','state2','client2','ABC456','A2'),
-    (3,NOW(),2,CURRENT_DATE-1,CURRENT_DATE-4,'addres3','city3','state3','client3','ZZZ999','');;
+    (1,NOW(),1,CURRENT_DATE-1,CURRENT_DATE-3,'addres1','city1','state1','client1','ABC123'),
+    (2,NOW(),2,CURRENT_DATE-2,CURRENT_DATE-4,'addres2','city2','state2','client2','ABC456'),
+    (3,NOW(),2,CURRENT_DATE-1,CURRENT_DATE-4,'addres3','city3','state3','client3','ZZZ999');;
 
 insert into wo.wo_job (id,creation_date,active_status,quantity,job_id,work_order_id,applied_rule)
 values

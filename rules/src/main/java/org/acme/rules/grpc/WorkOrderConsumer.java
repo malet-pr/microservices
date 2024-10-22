@@ -44,8 +44,9 @@ public class WorkOrderConsumer extends WorkOrderServiceGrpc.WorkOrderServiceImpl
 
     private WorkOrderRequest forTesting(){
         return WorkOrderRequest.newBuilder()
-                .setAppliedRule("Hello from work-order service")
+                .setHasRules(false)
                 .build();
     }
+
 
 }

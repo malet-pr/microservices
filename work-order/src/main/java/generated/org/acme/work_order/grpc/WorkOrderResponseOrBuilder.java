@@ -122,14 +122,8 @@ public interface WorkOrderResponseOrBuilder extends
       getClientIdBytes();
 
   /**
-   * <code>string appliedRule = 9;</code>
-   * @return The appliedRule.
+   * <code>bool hasRules = 9;</code>
+   * @return The hasRules.
    */
-  java.lang.String getAppliedRule();
-  /**
-   * <code>string appliedRule = 9;</code>
-   * @return The bytes for appliedRule.
-   */
-  com.google.protobuf.ByteString
-      getAppliedRuleBytes();
+  boolean getHasRules();
 }
