@@ -49,7 +49,7 @@ public class WorkOrderMapper {
                 .woCreationDate(wo.getWoCreationDate())
                 .woCompletionDate(wo.getWoCompletionDate())
                 .clientId(wo.getClientId())
-                .appliedRule(wo.getAppliedRule())
+                .hasRules(wo.getHasRules())
                 .build();
     }
 
@@ -89,7 +89,7 @@ public class WorkOrderMapper {
                 .woCreationDate(dto.getWoCreationDate())
                 .woCompletionDate(dto.getWoCompletionDate())
                 .clientId(dto.getClientId())
-                .appliedRule(dto.getAppliedRule())
+                .hasRules(dto.getHasRules())
                 .build();
     }
 }

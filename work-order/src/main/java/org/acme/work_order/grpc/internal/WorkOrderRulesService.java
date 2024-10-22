@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class WorkOrderRulesService {
 
     public WorkOrderResponse processWorkOrder(WorkOrderRequest request) {
-        WorkOrderResponse resp = WorkOrderResponse.newBuilder()
+        return WorkOrderResponse.newBuilder()
                 .setWoNumber(request.getWoNumber())
                 .addAllWoJobs(request.getWoJobsList())
                 .setJobTypeCode(request.getJobTypeCode())
@@ -18,9 +18,8 @@ public class WorkOrderRulesService {
                 .setWoCreationDate(request.getWoCreationDate())
                 .setWoCompletionDate(request.getWoCompletionDate())
                 .setClientId(request.getClientId())
-                .setAppliedRule("response from rules service")
+                .setHasRules(Boolean.TRUE)
                 .build();
-        return resp;
     }
 
 }

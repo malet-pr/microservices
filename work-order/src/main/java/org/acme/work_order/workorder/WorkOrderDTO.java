@@ -24,6 +24,7 @@ public class WorkOrderDTO implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy HH:mm:ss")
     private LocalDateTime woCompletionDate;
     private String clientId;
-    private String appliedRule;
-    
+    private Boolean hasRules;
+
+
 }

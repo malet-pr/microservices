@@ -22,7 +22,6 @@ private static final long serialVersionUID = 0L;
     address_ = "";
     city_ = "";
     clientId_ = "";
-    appliedRule_ = "";
   }
 
   @java.lang.Override
@@ -121,10 +120,9 @@ private static final long serialVersionUID = 0L;
             clientId_ = s;
             break;
           }
-          case 74: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 72: {
 
-            appliedRule_ = s;
+            hasRules_ = input.readBool();
             break;
           }
           default: {
@@ -423,40 +421,14 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int APPLIEDRULE_FIELD_NUMBER = 9;
-  private volatile java.lang.Object appliedRule_;
+  public static final int HASRULES_FIELD_NUMBER = 9;
+  private boolean hasRules_;
   /**
-   * <code>string appliedRule = 9;</code>
-   * @return The appliedRule.
+   * <code>bool hasRules = 9;</code>
+   * @return The hasRules.
    */
-  public java.lang.String getAppliedRule() {
-    java.lang.Object ref = appliedRule_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      appliedRule_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string appliedRule = 9;</code>
-   * @return The bytes for appliedRule.
-   */
-  public com.google.protobuf.ByteString
-      getAppliedRuleBytes() {
-    java.lang.Object ref = appliedRule_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      appliedRule_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public boolean getHasRules() {
+    return hasRules_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -497,8 +469,8 @@ private static final long serialVersionUID = 0L;
     if (!getClientIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 8, clientId_);
     }
-    if (!getAppliedRuleBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, appliedRule_);
+    if (hasRules_ != false) {
+      output.writeBool(9, hasRules_);
     }
     unknownFields.writeTo(output);
   }
@@ -536,8 +508,9 @@ private static final long serialVersionUID = 0L;
     if (!getClientIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, clientId_);
     }
-    if (!getAppliedRuleBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, appliedRule_);
+    if (hasRules_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(9, hasRules_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -576,8 +549,8 @@ private static final long serialVersionUID = 0L;
     }
     if (!getClientId()
         .equals(other.getClientId())) return false;
-    if (!getAppliedRule()
-        .equals(other.getAppliedRule())) return false;
+    if (getHasRules()
+        != other.getHasRules()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -611,8 +584,9 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
     hash = (53 * hash) + getClientId().hashCode();
-    hash = (37 * hash) + APPLIEDRULE_FIELD_NUMBER;
-    hash = (53 * hash) + getAppliedRule().hashCode();
+    hash = (37 * hash) + HASRULES_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getHasRules());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -775,7 +749,7 @@ private static final long serialVersionUID = 0L;
       }
       clientId_ = "";
 
-      appliedRule_ = "";
+      hasRules_ = false;
 
       return this;
     }
@@ -828,7 +802,7 @@ private static final long serialVersionUID = 0L;
         result.woCompletionDate_ = woCompletionDateBuilder_.build();
       }
       result.clientId_ = clientId_;
-      result.appliedRule_ = appliedRule_;
+      result.hasRules_ = hasRules_;
       onBuilt();
       return result;
     }
@@ -929,9 +903,8 @@ private static final long serialVersionUID = 0L;
         clientId_ = other.clientId_;
         onChanged();
       }
-      if (!other.getAppliedRule().isEmpty()) {
-        appliedRule_ = other.appliedRule_;
-        onChanged();
+      if (other.getHasRules() != false) {
+        setHasRules(other.getHasRules());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -1821,78 +1794,32 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object appliedRule_ = "";
+    private boolean hasRules_ ;
     /**
-     * <code>string appliedRule = 9;</code>
-     * @return The appliedRule.
+     * <code>bool hasRules = 9;</code>
+     * @return The hasRules.
      */
-    public java.lang.String getAppliedRule() {
-      java.lang.Object ref = appliedRule_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        appliedRule_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public boolean getHasRules() {
+      return hasRules_;
     }
     /**
-     * <code>string appliedRule = 9;</code>
-     * @return The bytes for appliedRule.
-     */
-    public com.google.protobuf.ByteString
-        getAppliedRuleBytes() {
-      java.lang.Object ref = appliedRule_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        appliedRule_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string appliedRule = 9;</code>
-     * @param value The appliedRule to set.
+     * <code>bool hasRules = 9;</code>
+     * @param value The hasRules to set.
      * @return This builder for chaining.
      */
-    public Builder setAppliedRule(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      appliedRule_ = value;
+    public Builder setHasRules(boolean value) {
+      
+      hasRules_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string appliedRule = 9;</code>
+     * <code>bool hasRules = 9;</code>
      * @return This builder for chaining.
      */
-    public Builder clearAppliedRule() {
+    public Builder clearHasRules() {
       
-      appliedRule_ = getDefaultInstance().getAppliedRule();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string appliedRule = 9;</code>
-     * @param value The bytes for appliedRule to set.
-     * @return This builder for chaining.
-     */
-    public Builder setAppliedRuleBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      appliedRule_ = value;
+      hasRules_ = false;
       onChanged();
       return this;
     }

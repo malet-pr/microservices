@@ -58,18 +58,9 @@ public class UpdatesServiceImpl implements UpdatesService {
                 .collect(Collectors.toMap(WorkOrderJobDTO::getJobCode, Function.identity()));
         int qInsert = woJobService.saveAll(map2.values().stream().toList());
 
-        // collect all rules applied and add them to the WO
-        StringBuilder rulesBuilder = new StringBuilder();
-        if(oldWO.getAppliedRule() != null && !oldWO.getAppliedRule().isBlank())
-            rulesBuilder.append(oldWO.getAppliedRule()).append(",");
-        dtos.forEach(d -> {
-            if(!d.getAppliedRule().isBlank()) rulesBuilder.append(d.getAppliedRule()).append(",");
-        });
-        if(!rulesBuilder.isEmpty()) rulesBuilder.deleteCharAt(rulesBuilder.length()-1);
-        int updateWO = woDAO.updateAppliedRule(rulesBuilder.toString(),woNumber);
-
-        if(qUpdate.get()+qInsert == dtos.size() && updateWO == 1) updated = true;
+        if(qUpdate.get()+qInsert == dtos.size()) updated = true;
         return updated;
+
     }
 
 }
