@@ -24,6 +24,18 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     restart: unless-stopped
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: micro1-rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./rabbitmq/data/:/var/lib/rabbitmq/
+      - ./rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq
+
   ot-collector:
     build:
       context: ./open-telemetry
@@ -49,6 +61,7 @@ services:
     networks:
       - kafka
       - grafana
+      - rabbitmq
     links:
       - micro1-rules
     environment:
@@ -124,6 +137,7 @@ services:
       - "8083:8083"
     networks:
       - grafana
+      - rabbitmq
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - GRPC_SERVER_PORT=8090
@@ -147,3 +161,4 @@ services:
 networks:
   kafka:
   grafana:
+  rabbitmq:

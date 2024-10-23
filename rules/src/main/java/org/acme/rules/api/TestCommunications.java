@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/test-grpc")
-public class TestGrpc {
+@RequestMapping("/test-communications")
+public class TestCommunications {
 
     @Autowired
     TestConnectionConsumer testConsumer;
 
-    @GetMapping()
-    public ResponseEntity<String> test(@RequestParam String message) {
+    @GetMapping("/grpc")
+    public ResponseEntity<String> testGrpc(@RequestParam String message) {
         TestGo go = TestGo.newBuilder().setMsgOut(message).build();
         TestBack back = testConsumer.testConnection(go);
         return ResponseEntity.ok(back.getMsgIn());

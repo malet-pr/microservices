@@ -23,6 +23,11 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
 management:
   endpoints:
     web:

@@ -1,6 +1,10 @@
 package org.acme.work_order.workorder.internal;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.acme.work_order.common.LocalDateTimeTypeAdapter;
 import org.acme.work_order.grpc.*;
+import org.acme.work_order.rabbitmq.TestMessageSender;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorder.WorkOrderService;
 import org.acme.work_order.workorderjob.UpdatesService;
@@ -8,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class WorkOrderServiceImpl implements WorkOrderService {
@@ -20,7 +26,12 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     private WorkOrderDAO woDAO;
     @Autowired
     private UpdatesService updService;
+    @Autowired
+    private TestMessageSender msgSender;
 
+    Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
+            .create();
 
     @Override
     public Boolean save(WorkOrderDTO dto) {
@@ -34,6 +45,8 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         try {
             entity.getJobs().forEach(j -> j.setWorkOrder(entity));
             woDAO.save(entity);
+            String json = gson.toJson(dto);
+            msgSender.sendWorkOrder("work-order-queue",json);
             log.info("Successfully saved work order {}", entity);
             result = true;
         }catch (Exception e) {

@@ -45,7 +45,7 @@ public class WorkOrderSimulator {
         LocalDateTime woCreationDate = LocalDateTime.parse(strDate, formatter);
         LocalDateTime woCompletionDate = woCreationDate.plusDays(random.nextLong(1,4));
         String clientId = faker.expression("#{numerify '########'}");
-        return new WorkOrder(woNum,wjList,jobTypeCode,address,city,state,woCreationDate,woCompletionDate,clientId,null);
+        return new WorkOrder(woNum,wjList,jobTypeCode,address,city,state,woCreationDate,woCompletionDate,clientId,false);
     }
 
 }
