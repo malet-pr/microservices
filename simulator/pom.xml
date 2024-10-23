@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-modulith.version>1.2.4</spring-modulith.version>
-		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>
+<!--		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>-->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -128,10 +128,10 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<image>
+<!--					<image>
 						<name>${dockerImageName}</name>
 						<builder>dashaun/builder:tiny</builder>
-					</image>
+					</image>-->
 				</configuration>
 				<executions>
 					<execution>

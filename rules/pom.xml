@@ -18,7 +18,7 @@
 		<spring-modulith.version>1.2.1</spring-modulith.version>
 		<version.org.drools>9.44.0.Final</version.org.drools>
 		<io.grpc.version>1.68.0</io.grpc.version>
-		<com.google.protobuf.version>3.25.3</com.google.protobuf.version>
+		<com.google.protobuf.version>3.25.5</com.google.protobuf.version>
 <!--		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>-->
 	</properties>
 	<dependencies>
