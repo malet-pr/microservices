@@ -19,7 +19,6 @@ import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.shaded.org.awaitility.Awaitility;
-
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,10 +28,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Sql(scripts = "/sql/woTestData.sql")
-@TestInstance(TestInstance.Lifecycle.PER_METHOD)
-public class KafkaConsumerTest extends BaseIntegrationKafka{
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+//@TestInstance(TestInstance.Lifecycle.PER_METHOD)
+public class KafkaConsumerTest extends BaseKafkaTest{
 
     @Autowired
     public KafkaTemplate<String, String> template;
@@ -53,7 +52,7 @@ public class KafkaConsumerTest extends BaseIntegrationKafka{
     private final Gson gson = new GsonBuilder()
                         .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
                         .create();
-    Type listType = new TypeToken<List<WorkOrderDTO>>(){}.getType();
+    //Type listType = new TypeToken<List<WorkOrderDTO>>(){}.getType();
 
     @Test
     @DisplayName("Tests that a message is received and deserialized correctly")
@@ -93,26 +92,6 @@ public class KafkaConsumerTest extends BaseIntegrationKafka{
         Assertions.assertEquals("JobCode1",wo.getJobs().getFirst().getJob().getCode(),"The job does not match");
     }
 
-    /*
-    @Test
-    @DisplayName("Test that after receiving a message with an existing WO number, no new entity is saved")
-    public void messageConsumerSaveTest_failed() throws Exception {
-        // Arrange
-        String message = gson.toJson(List.of(DTOs.dto2));
-        template.send(TOPIC, message);
-        // Act
-        msgConsumer.listen(message);
-        Awaitility.await()
-                .atMost(10, TimeUnit.SECONDS)
-                .until(() -> msgConsumer.getErrorCount().get() > 0);
-        // Assert
-        // Assertions.assertTrue(thrown.getMessage().contains("duplicate key value violates unique constraint"));
-        Assertions.assertThrows(Exception.class,
-                () -> message.contains("ABC123"), "This should throw an exception"
-        );
-    }
-     */
-
     @Test
     @DisplayName("Simulate parsing message error")
     public void testParsingMessageError() throws Exception {
@@ -123,6 +102,5 @@ public class KafkaConsumerTest extends BaseIntegrationKafka{
         Assertions.assertThrows(RuntimeException.class, () -> {mockTemplate.send(TOPIC, message);
         });
     }
-
 
 }

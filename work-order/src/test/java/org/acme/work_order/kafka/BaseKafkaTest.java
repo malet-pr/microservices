@@ -1,31 +1,37 @@
 package org.acme.work_order.kafka;
 
-
 import org.acme.work_order.WorkOrderApplication;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.deser.std.StringDeserializer;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.Random;
 import java.util.function.Supplier;
 
 
 @SpringBootTest(classes = WorkOrderApplication.class, properties = "spring.profiles.active=test")
+@ExtendWith(SpringExtension.class)
 @Testcontainers
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @EmbeddedKafka
-public class BaseIntegrationKafka {
+public class BaseKafkaTest {
 
     @Container
     static final KafkaContainer kafka = new KafkaContainer(
             DockerImageName.parse("confluentinc/cp-kafka:7.6.1")
-    );
+    ).withKraft();
 
     @DynamicPropertySource
     static void overrideProperties(DynamicPropertyRegistry registry) {
@@ -33,7 +39,7 @@ public class BaseIntegrationKafka {
     }
 
     @Container
-    static PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres")
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres")
             .withDatabaseName("testdb")
             .withUsername("testuser")
             .withPassword("testpass")
@@ -43,21 +49,21 @@ public class BaseIntegrationKafka {
 
     @DynamicPropertySource
     static void configureDataSource(DynamicPropertyRegistry registry) {
-        Supplier<Object> url = () ->  container.getJdbcUrl() + "?currentSchema=wo";
+        Supplier<Object> url = () ->  postgres.getJdbcUrl() + "?currentSchema=wo";
         registry.add("spring.datasource.url", url);
-        registry.add("spring.datasource.username", container::getUsername);
-        registry.add("spring.datasource.password", container::getPassword);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
     }
 
     @BeforeAll
     public static void setUp() {
-        container.start();
+        postgres.start();
         kafka.start();
     }
 
     @AfterAll
     public static void tearDown() {
-        container.stop();
+        postgres.stop();
         kafka.stop();
     }
 
