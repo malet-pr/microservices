@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.junit.jupiter.api.*;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -44,6 +45,9 @@ public class KafkaConsumerTest extends BaseIntegrationKafka{
 
     @Autowired
     private WorkOrderDAO woDAO;
+
+    @MockBean
+    private RabbitTemplate rabbitTemplate;
 
     private static final String TOPIC = "wo-new";
     private final Gson gson = new GsonBuilder()

@@ -8,9 +8,11 @@ import org.acme.work_order.workorder.internal.WorkOrderServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.transaction.Transactional;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -25,6 +27,9 @@ public class WorkOrderServiceIntegrationTest extends BaseIntegrationTest {
 
     @Autowired
     private WorkOrderDAO woDAO;
+
+    @MockBean
+    private RabbitTemplate rabbitTemplate;
 
 
     @Test
