@@ -1,11 +1,11 @@
 package org.acme.rules.api;
 
-import org.acme.rules.drools.dto.RuleDTO;
-import org.acme.rules.drools.dto.UpdateRuleDTO;
-import org.acme.rules.drools.service.RuleCRUD;
+
+import org.acme.rules.drools.RuleCRUD;
+import org.acme.rules.drools.internal.dto.RuleDTO;
+import org.acme.rules.drools.internal.dto.UpdateRuleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -15,40 +15,34 @@ public class RulesCRUDE {
     @Autowired
     private RuleCRUD ruleCRUD;
 
-    @PostMapping("/rule")
+    /*
+
+    @GetMapping("/rule")
+    public void getRuleByName(@RequestParam String name) {
+        ruleCRUD.delete(name);
+    }
+
+    @GetMapping()
+    public List<Rule> getAllRules() {
+        return ruleCRUD.findAll();
+    }
+
+    @PostMapping()
     public void createRule(@RequestBody RuleDTO rule) {
         ruleCRUD.create(rule);
     }
 
-    @PatchMapping("/rule")
+    @PatchMapping()
     public void updateRule(@RequestBody UpdateRuleDTO rule) {
         ruleCRUD.update(rule);
     }
 
-    @DeleteMapping("/rule/{name}")
-    public void deleteRule(@PathVariable String name) {
+    @DeleteMapping("/rule")
+    public void deleteRule(@RequestParam String name) {
         ruleCRUD.delete(name);
     }
 
-    @PatchMapping("/rule/{name}")
-    public void recover(@PathVariable String name) {
-        ruleCRUD.recover(name);
-    }
-
-    @GetMapping("/all-rules")
-    public List<RuleDTO> getAllRules() {
-        return ruleCRUD.findAll();
-    }
-
-    @GetMapping("/rule-by-name")
-    public RuleDTO getRule(@RequestParam("name") String name) {
-        return ruleCRUD.findByName(name);
-    }
-
-    @GetMapping("/rules-by-group")
-    List<RuleDTO> findByGrouping(@RequestParam("group") String group) {
-        return ruleCRUD.findByGrouping(group);
-    }
+*/
 
 }
 

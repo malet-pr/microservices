@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@SequenceGenerator(name = "default_generator", sequenceName = "rule_seq", allocationSize = 1)
 @Table(name = "RULE")
 public class Rule extends BaseEntity{
 	@NotNull

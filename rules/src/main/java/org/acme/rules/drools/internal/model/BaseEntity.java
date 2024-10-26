@@ -10,7 +10,7 @@ import java.util.Date;
 @MappedSuperclass
 public class BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "default_generator")
     private Long id;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

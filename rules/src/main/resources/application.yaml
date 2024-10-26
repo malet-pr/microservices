@@ -14,20 +14,29 @@ spring:
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
-  h2:
-    console.enabled: true
-  datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+    show-sql: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "${DB_URL:jdbc:postgresql://localhost:5432/drools?currentSchema=ru}"
+    username: "${DB_USERNAME:ruleuser}"
+    password: "${DB_PASSWORD:ruleuser}"
   rabbitmq:
     host: localhost
     port: 5672
     username: test
     password: test
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6379
+#      username: default
+#      password: redis-pass
+#      database: 0
 management:
   endpoints:
     web:

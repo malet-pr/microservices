@@ -1,20 +1,20 @@
-package org.acme.work_order.workorder;
+package org.acme.rules.grpc.woserviceconnect;
 
-import org.acme.work_order.workorderjob.WorkOrderJobDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class WorkOrderDTO implements Serializable {
+public class Wo {
     private String woNumber;
-    private List<WorkOrderJobDTO> woJobDTOs;
+    private List<WoJob> woJobs;
     private String jobTypeCode;
     private String address;
     private String city;
@@ -25,5 +25,4 @@ public class WorkOrderDTO implements Serializable {
     private LocalDateTime woCompletionDate;
     private String clientId;
     private Boolean hasRules;
-
 }

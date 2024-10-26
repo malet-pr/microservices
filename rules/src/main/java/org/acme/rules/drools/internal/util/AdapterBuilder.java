@@ -1,15 +1,14 @@
 package org.acme.rules.drools.internal.util;
 
-import org.acme.rules.drools.internal.adapter.RuleTypeAdapter;
-import org.acme.rules.drools.internal.adapter.WoRuleAdapter;
+import org.acme.rules.grpc.woserviceconnect.WoJob;
+import org.acme.rules.drools.WorkOrderData;
+import org.acme.rules.drools.internal.dto.WoRuleAdapter;
 import org.acme.rules.drools.internal.model.RuleType;
 import org.acme.rules.grpc.woserviceconnect.WORuleDTO;
-import org.acme.rules.grpc.woserviceconnect.WorkOrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.*;
 
-// TODO: use more appropriate name, move to an utils folder
 
 @Component
 public class AdapterBuilder {
@@ -19,26 +18,26 @@ public class AdapterBuilder {
 
     private static WoRuleMapper woRuleMapper;
 
-    public static RuleTypeAdapter ruleTypeAdapterBuilder(RuleType type, WorkOrderDTO dto) {
+    // ARREGLAR ESTE MÈTODO
+    public static RuleTypeAdapter ruleTypeAdapterBuilder(RuleType type, WorkOrderData dataAdapter) {
         RuleTypeAdapter adapter = new RuleTypeAdapter();
-        adapter.setWoInProcess(woRuleMapper.convertToAdapter(dto));
+        adapter.setWoInProcess(dataAdapter);
         return adapter;
     }
 
-    public static WoRuleAdapter buildOTReglaAdapter(WorkOrderDTO dto) {
+    public static List<String> getListOfCodes(WorkOrderData wo){
+        return wo.getWoJobs().stream()
+                .filter(j -> j.getActiveStatus().equals('Y'))
+                .map(WoJob::getJobCode)
+                .toList();
+    }
+
+    public static WoRuleAdapter buildOTReglaAdapter(WorkOrderData dto) {
         WoRuleAdapter adapter = new WoRuleAdapter();
-        /*
-        List<String> codes = dto.getWoJobDTOs().stream().map(WorkOrderJobDTO::getJobCode).toList();
-        List<String> jobCodeList = Collections.singletonList(jobService.findByCodesAndActiveStatus(codes, Constants.YES)
-                .stream().map(JobDTO::getCode).collect(Collectors.joining(", ")));
-        */
-        List<String> jobCodeList = new ArrayList<>(); // TODO: this part will be covered by methods created in AsynncService
-        adapter.setJobCodeList(jobCodeList);
+        adapter.setJobCodeList(getListOfCodes(dto));
         adapter.setState(dto.getState());  // TODO: figure out what this is
-        if (dto.getWoCreationDate()!= null) {
-            adapter.setWoCreationDate(dto.getWoCreationDate().toLocalDate());
-        }
-        adapter.setWoCompletionDate(dto.getWoCompletionDate().toLocalDate());
+        adapter.setWoCreationDateTime(dto.getWoCreationDate());
+        adapter.setWoCompletionDateTime(dto.getWoCompletionDate());
         adapter.setWoNumber(dto.getWoNumber());
         return adapter;
     }
@@ -52,13 +51,13 @@ public class AdapterBuilder {
         adapter.setCity(dto.getCity());
         adapter.setAddress(dto.getAddress());
         if (dto.getWoCreationDate() != null) {
-            adapter.setWoCreationDate(dto.getWoCreationDate().toLocalDate());
+//            adapter.setWoCreationDate(dto.getWoCreationDate().toLocalDate());
             adapter.setWoCreationDateTime(dto.getWoCreationDate());
         } else {
             System.out.println("WO creation date is missing: " + dto.getWoNumber());
         }
         if (dto.getWoCompletionDate() != null) {
-            adapter.setWoCompletionDate(dto.getWoCompletionDate().toLocalDate());
+//            adapter.setWoCompletionDate(dto.getWoCompletionDate().toLocalDate());
             adapter.setWoCompletionDateTime(dto.getWoCompletionDate());
         } else {
             System.out.println("WO completion date is missing: " + dto.getWoNumber());

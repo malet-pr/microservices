@@ -7,12 +7,6 @@ import java.util.List;
 @Component
 public class WorkOrderUtils {
 
-    /*
-    private static JobService jobService;
-    private static WorkOrderService workOrderService;
-    private static WorkOrderJobService woJobService;
-     */
-
     public List<String> getCodeWoJobs(List<Long> ids){
         /*
         List<WorkOrderJobDTO> woJobs = woJobService.findByIds(ids);

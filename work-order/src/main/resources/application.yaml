@@ -17,8 +17,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: "${DB_URL:jdbc:postgresql://localhost:5432/drools?currentSchema=wo}"
-    username: "${DB_USERNAME:drools}"
-    password: "${DB_PASSWORD:drools}"
+    username: "${DB_USERNAME:wouser}"
+    password: "${DB_PASSWORD:wouser}"
   kafka:
     bootstrap-servers: localhost:9092
     consumer:

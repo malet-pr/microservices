@@ -1,51 +1,42 @@
 package org.acme.rules.grpc;
 
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.acme.rules.grpc.woserviceconnect.WoDtoToGrpcWorkOrder;
-import org.acme.rules.grpc.woserviceconnect.WorkOrderDTO;
+import org.acme.rules.drools.WorkOrderData;
+import org.acme.rules.grpc.woserviceconnect.WoDataToGrpcWorkOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.acme.rules.grpc.WorkOrderRequest;
-import org.acme.rules.grpc.WorkOrderResponse;
-import org.acme.rules.grpc.WorkOrderServiceGrpc;
 
 @Service
-public class WorkOrderConsumer extends WorkOrderServiceGrpc.WorkOrderServiceImplBase {
+public class WorkOrderConsumer extends org.acme.rules.grpc.WorkOrderServiceGrpc.WorkOrderServiceImplBase {
 
     private static final Logger log = LoggerFactory.getLogger(WorkOrderConsumer.class);
 
     @Autowired
-    private WoDtoToGrpcWorkOrder mapper;
+    private WoDataToGrpcWorkOrder mapper;
 
     @GrpcClient("rules-service")
-    WorkOrderServiceGrpc.WorkOrderServiceBlockingStub synchronousClient;
+    org.acme.rules.grpc.WorkOrderServiceGrpc.WorkOrderServiceBlockingStub synchronousClient;
 
-    public WorkOrderRequest convertDtoToRequest(WorkOrderDTO dto) {
-        WorkOrderRequest request = mapper.dtoToGrpc(dto);
+    public org.acme.rules.grpc.WorkOrderRequest convertDtoToRequest(WorkOrderData dto) {
+        org.acme.rules.grpc.WorkOrderRequest request = mapper.dtoToGrpc(dto);
         log.info("Mapped WO {} to request", dto.getWoNumber());
         return request;
     }
 
-    public WorkOrderDTO convertResponseToDto(WorkOrderResponse response) {
-        WorkOrderDTO dto = mapper.grpcToDto(response);
+    public WorkOrderData convertResponseToData(org.acme.rules.grpc.WorkOrderResponse response) {
+        WorkOrderData dto = mapper.grpcToDto(response);
         log.info("Mapped WO {} to response", response.getWoNumber());
         return dto;
     }
 
-    public WorkOrderDTO callWorkOrder(WorkOrderDTO dto) {
+    public Boolean callWorkOrder(WorkOrderData dto) {
         log.info("Sending WO {} to rules service", dto.getWoNumber());
-        WorkOrderRequest request = convertDtoToRequest(dto);
-        //WorkOrderRequest request = this.forTesting();
-        WorkOrderResponse response = synchronousClient.runRulesToWO(request);
-        return convertResponseToDto(response);
+        org.acme.rules.grpc.WorkOrderRequest request = convertDtoToRequest(dto);
+        org.acme.rules.grpc.WorkOrderResponse response = synchronousClient.runRulesToWO(request);
+        return response != null;
     }
 
-    private WorkOrderRequest forTesting(){
-        return WorkOrderRequest.newBuilder()
-                .setHasRules(false)
-                .build();
-    }
 
 }

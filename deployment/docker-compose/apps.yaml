@@ -67,8 +67,8 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - DB_URL=jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=wo
-      - DB_PASSWORD=drools
-      - DB_NAME=drools
+      - DB_PASSWORD=wouser
+      - DB_NAME=wouser
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=micro1-kafka:9092
       - GRPC_CLIENT_RULES-SERVICE_ADDRESS=static://rules:8090
       - GRPC_CLIENT_RULES-SERVICE_NEGOTIATION_TYPE=plaintext
@@ -140,6 +140,9 @@ services:
       - rabbitmq
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - DB_URL=jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=ru
+      - DB_PASSWORD=ruleuser
+      - DB_NAME=ruleuser
       - GRPC_SERVER_PORT=8090
       - MANAGEMENT_TRACING_ENABLED=true
       - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://tempo:9411
