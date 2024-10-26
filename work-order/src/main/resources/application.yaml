@@ -23,8 +23,8 @@ spring:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: wo-group-2
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.messaging.common.serialization.StringDeserializer
+      value-deserializer: org.apache.messaging.common.serialization.StringDeserializer
       auto-offset-reset: earliest
   rabbitmq:
     host: localhost
