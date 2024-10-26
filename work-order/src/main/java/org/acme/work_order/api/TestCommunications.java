@@ -1,6 +1,6 @@
 package org.acme.work_order.api;
 
-import org.acme.work_order.rabbitmq.TestMessageSender;
+import org.acme.work_order.rabbitmq.RabbitMessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestCommunications {
 
     @Autowired
-    private TestMessageSender msgSender;
+    private RabbitMessageSender msgSender;
 
     @PostMapping("/rabbitmq")
     public String sendMsg(@RequestParam String message) {

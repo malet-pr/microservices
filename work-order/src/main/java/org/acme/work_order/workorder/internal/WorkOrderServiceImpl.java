@@ -3,8 +3,7 @@ package org.acme.work_order.workorder.internal;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.acme.work_order.common.LocalDateTimeTypeAdapter;
-import org.acme.work_order.grpc.*;
-import org.acme.work_order.rabbitmq.TestMessageSender;
+import org.acme.work_order.rabbitmq.RabbitMessageSender;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorder.WorkOrderService;
 import org.acme.work_order.workorderjob.UpdatesService;
@@ -27,7 +26,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     @Autowired
     private UpdatesService updService;
     @Autowired
-    private TestMessageSender msgSender;
+    private RabbitMessageSender msgSender;
 
     Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())

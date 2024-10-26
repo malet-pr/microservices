@@ -1,4 +1,4 @@
-package org.acme.work_order.kafka;
+package org.acme.work_order.messaging;
 
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorderjob.WorkOrderJobDTO;

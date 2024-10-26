@@ -1,4 +1,4 @@
-package org.acme.work_order.kafka;
+package org.acme.work_order.messaging;
 
 import org.acme.work_order.WorkOrderApplication;
 import org.junit.jupiter.api.AfterAll;
@@ -14,10 +14,8 @@ import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.deser.std.StringDeserializer;
 import org.testcontainers.utility.DockerImageName;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 
