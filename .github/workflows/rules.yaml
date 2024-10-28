@@ -29,7 +29,7 @@ jobs:
       - name: Install protoc
         run: sudo apt-get install -y protobuf-compiler
       - name: Build With Maven
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn --batch-mode --update-snapshots verify -DforkCount=1 -DreuseForks=false
       - name: Build Docker Image
         if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
         run: |
