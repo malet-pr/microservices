@@ -253,7 +253,7 @@
 								</outputTarget>
 								<outputTarget>
 									<type>grpc-java</type>
-									<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.62.2</pluginArtifact>
+									<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.68.0</pluginArtifact>
 								</outputTarget>
 							</outputTargets>
 						</configuration>
