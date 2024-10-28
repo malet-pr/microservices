@@ -21,6 +21,7 @@ private static final long serialVersionUID = 0L;
     jobTypeCode_ = "";
     address_ = "";
     city_ = "";
+    state_ = "";
     clientId_ = "";
   }
 
@@ -89,6 +90,12 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 50: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            state_ = s;
+            break;
+          }
+          case 58: {
             com.google.protobuf.Timestamp.Builder subBuilder = null;
             if (woCreationDate_ != null) {
               subBuilder = woCreationDate_.toBuilder();
@@ -101,7 +108,7 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
-          case 58: {
+          case 66: {
             com.google.protobuf.Timestamp.Builder subBuilder = null;
             if (woCompletionDate_ != null) {
               subBuilder = woCompletionDate_.toBuilder();
@@ -114,13 +121,13 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
-          case 66: {
+          case 74: {
             java.lang.String s = input.readStringRequireUtf8();
 
             clientId_ = s;
             break;
           }
-          case 72: {
+          case 80: {
 
             hasRules_ = input.readBool();
             break;
@@ -339,56 +346,92 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int WOCREATIONDATE_FIELD_NUMBER = 6;
+  public static final int STATE_FIELD_NUMBER = 6;
+  private volatile java.lang.Object state_;
+  /**
+   * <code>string state = 6;</code>
+   * @return The state.
+   */
+  public java.lang.String getState() {
+    java.lang.Object ref = state_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      state_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string state = 6;</code>
+   * @return The bytes for state.
+   */
+  public com.google.protobuf.ByteString
+      getStateBytes() {
+    java.lang.Object ref = state_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      state_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int WOCREATIONDATE_FIELD_NUMBER = 7;
   private com.google.protobuf.Timestamp woCreationDate_;
   /**
-   * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+   * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
    * @return Whether the woCreationDate field is set.
    */
   public boolean hasWoCreationDate() {
     return woCreationDate_ != null;
   }
   /**
-   * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+   * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
    * @return The woCreationDate.
    */
   public com.google.protobuf.Timestamp getWoCreationDate() {
     return woCreationDate_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : woCreationDate_;
   }
   /**
-   * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+   * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
    */
   public com.google.protobuf.TimestampOrBuilder getWoCreationDateOrBuilder() {
     return getWoCreationDate();
   }
 
-  public static final int WOCOMPLETIONDATE_FIELD_NUMBER = 7;
+  public static final int WOCOMPLETIONDATE_FIELD_NUMBER = 8;
   private com.google.protobuf.Timestamp woCompletionDate_;
   /**
-   * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+   * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
    * @return Whether the woCompletionDate field is set.
    */
   public boolean hasWoCompletionDate() {
     return woCompletionDate_ != null;
   }
   /**
-   * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+   * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
    * @return The woCompletionDate.
    */
   public com.google.protobuf.Timestamp getWoCompletionDate() {
     return woCompletionDate_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : woCompletionDate_;
   }
   /**
-   * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+   * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
    */
   public com.google.protobuf.TimestampOrBuilder getWoCompletionDateOrBuilder() {
     return getWoCompletionDate();
   }
 
-  public static final int CLIENTID_FIELD_NUMBER = 8;
+  public static final int CLIENTID_FIELD_NUMBER = 9;
   private volatile java.lang.Object clientId_;
   /**
-   * <code>string clientId = 8;</code>
+   * <code>string clientId = 9;</code>
    * @return The clientId.
    */
   public java.lang.String getClientId() {
@@ -404,7 +447,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string clientId = 8;</code>
+   * <code>string clientId = 9;</code>
    * @return The bytes for clientId.
    */
   public com.google.protobuf.ByteString
@@ -421,10 +464,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int HASRULES_FIELD_NUMBER = 9;
+  public static final int HASRULES_FIELD_NUMBER = 10;
   private boolean hasRules_;
   /**
-   * <code>bool hasRules = 9;</code>
+   * <code>bool hasRules = 10;</code>
    * @return The hasRules.
    */
   public boolean getHasRules() {
@@ -460,17 +503,20 @@ private static final long serialVersionUID = 0L;
     if (!getCityBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 5, city_);
     }
+    if (!getStateBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, state_);
+    }
     if (woCreationDate_ != null) {
-      output.writeMessage(6, getWoCreationDate());
+      output.writeMessage(7, getWoCreationDate());
     }
     if (woCompletionDate_ != null) {
-      output.writeMessage(7, getWoCompletionDate());
+      output.writeMessage(8, getWoCompletionDate());
     }
     if (!getClientIdBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 8, clientId_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 9, clientId_);
     }
     if (hasRules_ != false) {
-      output.writeBool(9, hasRules_);
+      output.writeBool(10, hasRules_);
     }
     unknownFields.writeTo(output);
   }
@@ -497,20 +543,23 @@ private static final long serialVersionUID = 0L;
     if (!getCityBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, city_);
     }
+    if (!getStateBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, state_);
+    }
     if (woCreationDate_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, getWoCreationDate());
+        .computeMessageSize(7, getWoCreationDate());
     }
     if (woCompletionDate_ != null) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(7, getWoCompletionDate());
+        .computeMessageSize(8, getWoCompletionDate());
     }
     if (!getClientIdBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, clientId_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, clientId_);
     }
     if (hasRules_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(9, hasRules_);
+        .computeBoolSize(10, hasRules_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -537,6 +586,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getAddress())) return false;
     if (!getCity()
         .equals(other.getCity())) return false;
+    if (!getState()
+        .equals(other.getState())) return false;
     if (hasWoCreationDate() != other.hasWoCreationDate()) return false;
     if (hasWoCreationDate()) {
       if (!getWoCreationDate()
@@ -574,6 +625,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getAddress().hashCode();
     hash = (37 * hash) + CITY_FIELD_NUMBER;
     hash = (53 * hash) + getCity().hashCode();
+    hash = (37 * hash) + STATE_FIELD_NUMBER;
+    hash = (53 * hash) + getState().hashCode();
     if (hasWoCreationDate()) {
       hash = (37 * hash) + WOCREATIONDATE_FIELD_NUMBER;
       hash = (53 * hash) + getWoCreationDate().hashCode();
@@ -735,6 +788,8 @@ private static final long serialVersionUID = 0L;
 
       city_ = "";
 
+      state_ = "";
+
       if (woCreationDateBuilder_ == null) {
         woCreationDate_ = null;
       } else {
@@ -791,6 +846,7 @@ private static final long serialVersionUID = 0L;
       result.jobTypeCode_ = jobTypeCode_;
       result.address_ = address_;
       result.city_ = city_;
+      result.state_ = state_;
       if (woCreationDateBuilder_ == null) {
         result.woCreationDate_ = woCreationDate_;
       } else {
@@ -891,6 +947,10 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getCity().isEmpty()) {
         city_ = other.city_;
+        onChanged();
+      }
+      if (!other.getState().isEmpty()) {
+        state_ = other.state_;
         onChanged();
       }
       if (other.hasWoCreationDate()) {
@@ -1480,18 +1540,94 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object state_ = "";
+    /**
+     * <code>string state = 6;</code>
+     * @return The state.
+     */
+    public java.lang.String getState() {
+      java.lang.Object ref = state_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        state_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string state = 6;</code>
+     * @return The bytes for state.
+     */
+    public com.google.protobuf.ByteString
+        getStateBytes() {
+      java.lang.Object ref = state_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        state_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string state = 6;</code>
+     * @param value The state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setState(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      state_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string state = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearState() {
+      
+      state_ = getDefaultInstance().getState();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string state = 6;</code>
+     * @param value The bytes for state to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStateBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      state_ = value;
+      onChanged();
+      return this;
+    }
+
     private com.google.protobuf.Timestamp woCreationDate_;
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> woCreationDateBuilder_;
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      * @return Whether the woCreationDate field is set.
      */
     public boolean hasWoCreationDate() {
       return woCreationDateBuilder_ != null || woCreationDate_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      * @return The woCreationDate.
      */
     public com.google.protobuf.Timestamp getWoCreationDate() {
@@ -1502,7 +1638,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      */
     public Builder setWoCreationDate(com.google.protobuf.Timestamp value) {
       if (woCreationDateBuilder_ == null) {
@@ -1518,7 +1654,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      */
     public Builder setWoCreationDate(
         com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -1532,7 +1668,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      */
     public Builder mergeWoCreationDate(com.google.protobuf.Timestamp value) {
       if (woCreationDateBuilder_ == null) {
@@ -1550,7 +1686,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      */
     public Builder clearWoCreationDate() {
       if (woCreationDateBuilder_ == null) {
@@ -1564,7 +1700,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      */
     public com.google.protobuf.Timestamp.Builder getWoCreationDateBuilder() {
       
@@ -1572,7 +1708,7 @@ private static final long serialVersionUID = 0L;
       return getWoCreationDateFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      */
     public com.google.protobuf.TimestampOrBuilder getWoCreationDateOrBuilder() {
       if (woCreationDateBuilder_ != null) {
@@ -1583,7 +1719,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+     * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
@@ -1603,14 +1739,14 @@ private static final long serialVersionUID = 0L;
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> woCompletionDateBuilder_;
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      * @return Whether the woCompletionDate field is set.
      */
     public boolean hasWoCompletionDate() {
       return woCompletionDateBuilder_ != null || woCompletionDate_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      * @return The woCompletionDate.
      */
     public com.google.protobuf.Timestamp getWoCompletionDate() {
@@ -1621,7 +1757,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      */
     public Builder setWoCompletionDate(com.google.protobuf.Timestamp value) {
       if (woCompletionDateBuilder_ == null) {
@@ -1637,7 +1773,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      */
     public Builder setWoCompletionDate(
         com.google.protobuf.Timestamp.Builder builderForValue) {
@@ -1651,7 +1787,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      */
     public Builder mergeWoCompletionDate(com.google.protobuf.Timestamp value) {
       if (woCompletionDateBuilder_ == null) {
@@ -1669,7 +1805,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      */
     public Builder clearWoCompletionDate() {
       if (woCompletionDateBuilder_ == null) {
@@ -1683,7 +1819,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      */
     public com.google.protobuf.Timestamp.Builder getWoCompletionDateBuilder() {
       
@@ -1691,7 +1827,7 @@ private static final long serialVersionUID = 0L;
       return getWoCompletionDateFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      */
     public com.google.protobuf.TimestampOrBuilder getWoCompletionDateOrBuilder() {
       if (woCompletionDateBuilder_ != null) {
@@ -1702,7 +1838,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+     * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
@@ -1720,7 +1856,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object clientId_ = "";
     /**
-     * <code>string clientId = 8;</code>
+     * <code>string clientId = 9;</code>
      * @return The clientId.
      */
     public java.lang.String getClientId() {
@@ -1736,7 +1872,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string clientId = 8;</code>
+     * <code>string clientId = 9;</code>
      * @return The bytes for clientId.
      */
     public com.google.protobuf.ByteString
@@ -1753,7 +1889,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string clientId = 8;</code>
+     * <code>string clientId = 9;</code>
      * @param value The clientId to set.
      * @return This builder for chaining.
      */
@@ -1768,7 +1904,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string clientId = 8;</code>
+     * <code>string clientId = 9;</code>
      * @return This builder for chaining.
      */
     public Builder clearClientId() {
@@ -1778,7 +1914,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string clientId = 8;</code>
+     * <code>string clientId = 9;</code>
      * @param value The bytes for clientId to set.
      * @return This builder for chaining.
      */
@@ -1796,14 +1932,14 @@ private static final long serialVersionUID = 0L;
 
     private boolean hasRules_ ;
     /**
-     * <code>bool hasRules = 9;</code>
+     * <code>bool hasRules = 10;</code>
      * @return The hasRules.
      */
     public boolean getHasRules() {
       return hasRules_;
     }
     /**
-     * <code>bool hasRules = 9;</code>
+     * <code>bool hasRules = 10;</code>
      * @param value The hasRules to set.
      * @return This builder for chaining.
      */
@@ -1814,7 +1950,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>bool hasRules = 9;</code>
+     * <code>bool hasRules = 10;</code>
      * @return This builder for chaining.
      */
     public Builder clearHasRules() {

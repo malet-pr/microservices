@@ -59,7 +59,7 @@ public class BaseRabbitTest {
 
             @Bean
             public Queue testQueue() {
-                return new Queue("test", false);
+                return new Queue("test-queue", false);
             }
 
             @Bean
@@ -95,5 +95,6 @@ public class BaseRabbitTest {
         static void teardown(){
             rabbit.stop();
         }
+
 
 }

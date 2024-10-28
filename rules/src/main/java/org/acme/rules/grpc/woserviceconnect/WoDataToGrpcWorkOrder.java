@@ -2,7 +2,6 @@ package org.acme.rules.grpc.woserviceconnect;
 
 import org.acme.rules.drools.WorkOrderData;
 import org.acme.rules.grpc.WorkOrderRequest;
-import org.acme.rules.grpc.WorkOrderResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -22,10 +21,11 @@ public class WoDataToGrpcWorkOrder {
         log.info("Converting DTO for WO: {}", dto.getWoNumber());
         WorkOrderRequest wor = WorkOrderRequest.newBuilder()
                 .setWoNumber(dto.getWoNumber())
-                //.addAllWoJobs(woJob.convertListToGrpc(dto.getWoJobs()))
+                //.addAllWoJobs(convertListToGrpc(dto.getWoJobs()))
                 .setJobTypeCode(dto.getJobTypeCode())
                 .setAddress(dto.getAddress())
                 .setCity(dto.getCity())
+                .setState(dto.getState())
                 .setWoCreationDate(convertToTimestamp(dto.getWoCreationDate()))
                 .setWoCompletionDate(convertToTimestamp(dto.getWoCompletionDate()))
                 .setClientId(dto.getClientId())
@@ -33,19 +33,6 @@ public class WoDataToGrpcWorkOrder {
                 .build();
         log.info("Converted DTO for WO {} succeeded: {}", dto.getWoNumber(), wor != null);
         return wor;
-    }
-    public WorkOrderData grpcToDto(WorkOrderResponse grpc) {
-        return WorkOrderData.builder()
-                .woNumber(grpc.getWoNumber())
-                //.woJobs(grpc.getWoJobsList())
-                .jobTypeCode(grpc.getJobTypeCode())
-                .address(grpc.getAddress())
-                .city(grpc.getCity())
-                .woCreationDate(convertToLocalDateTime(grpc.getWoCreationDate()))
-                .woCompletionDate(convertToLocalDateTime(grpc.getWoCompletionDate()))
-                .clientId(grpc.getClientId())
-                //.hasRules(grpc.getHasRules())
-                .build();
     }
 
     private Timestamp convertToTimestamp(LocalDateTime ldt) {

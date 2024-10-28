@@ -20,11 +20,6 @@ public final class WorkOrderData {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_WorkOrderRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_WorkOrderResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_WorkOrderResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_WoJob_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -39,33 +34,25 @@ public final class WorkOrderData {
   static {
     java.lang.String[] descriptorData = {
       "\n\023WorkOrderData.proto\032\033google/protobuf/e" +
-      "mpty.proto\032\036google/protobuf/wrappers.pro" +
-      "to\032\037google/protobuf/timestamp.proto\"\376\001\n\020" +
-      "WorkOrderRequest\022\020\n\010woNumber\030\001 \001(\t\022\026\n\006wo" +
-      "Jobs\030\002 \003(\0132\006.WoJob\022\023\n\013jobTypeCode\030\003 \001(\t\022" +
-      "\017\n\007address\030\004 \001(\t\022\014\n\004city\030\005 \001(\t\0222\n\016woCrea" +
-      "tionDate\030\006 \001(\0132\032.google.protobuf.Timesta" +
-      "mp\0224\n\020woCompletionDate\030\007 \001(\0132\032.google.pr" +
-      "otobuf.Timestamp\022\020\n\010clientId\030\010 \001(\t\022\020\n\010ha" +
-      "sRules\030\t \001(\010\"\377\001\n\021WorkOrderResponse\022\020\n\010wo" +
-      "Number\030\001 \001(\t\022\026\n\006woJobs\030\002 \003(\0132\006.WoJob\022\023\n\013" +
-      "jobTypeCode\030\003 \001(\t\022\017\n\007address\030\004 \001(\t\022\014\n\004ci" +
-      "ty\030\005 \001(\t\0222\n\016woCreationDate\030\006 \001(\0132\032.googl" +
-      "e.protobuf.Timestamp\0224\n\020woCompletionDate" +
-      "\030\007 \001(\0132\032.google.protobuf.Timestamp\022\020\n\010cl" +
-      "ientId\030\010 \001(\t\022\020\n\010hasRules\030\t \001(\010\"g\n\005WoJob\022" +
-      "\020\n\010woNumber\030\001 \001(\t\022\017\n\007jobCode\030\002 \001(\t\022\020\n\010qu" +
-      "antity\030\003 \001(\005\022\024\n\014activeStatus\030\004 \001(\t\022\023\n\013ap" +
-      "pliedRule\030\005 \001(\t2K\n\020WorkOrderService\0227\n\014r" +
-      "unRulesToWO\022\021.WorkOrderRequest\032\022.WorkOrd" +
-      "erResponse\"\000B&\n\023org.acme.rules.grpcB\rWor" +
-      "kOrderDataP\001b\006proto3"
+      "mpty.proto\032\037google/protobuf/timestamp.pr" +
+      "oto\"\215\002\n\020WorkOrderRequest\022\020\n\010woNumber\030\001 \001" +
+      "(\t\022\026\n\006woJobs\030\002 \003(\0132\006.WoJob\022\023\n\013jobTypeCod" +
+      "e\030\003 \001(\t\022\017\n\007address\030\004 \001(\t\022\014\n\004city\030\005 \001(\t\022\r" +
+      "\n\005state\030\006 \001(\t\0222\n\016woCreationDate\030\007 \001(\0132\032." +
+      "google.protobuf.Timestamp\0224\n\020woCompletio" +
+      "nDate\030\010 \001(\0132\032.google.protobuf.Timestamp\022" +
+      "\020\n\010clientId\030\t \001(\t\022\020\n\010hasRules\030\n \001(\010\"g\n\005W" +
+      "oJob\022\020\n\010woNumber\030\001 \001(\t\022\017\n\007jobCode\030\002 \001(\t\022" +
+      "\020\n\010quantity\030\003 \001(\005\022\024\n\014activeStatus\030\004 \001(\t\022" +
+      "\023\n\013appliedRule\030\005 \001(\t2N\n\020WorkOrderService" +
+      "\022:\n\013woWithRules\022\021.WorkOrderRequest\032\026.goo" +
+      "gle.protobuf.Empty\"\000B&\n\023org.acme.rules.g" +
+      "rpcB\rWorkOrderDataP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.EmptyProto.getDescriptor(),
-          com.google.protobuf.WrappersProto.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
     internal_static_WorkOrderRequest_descriptor =
@@ -73,21 +60,14 @@ public final class WorkOrderData {
     internal_static_WorkOrderRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_WorkOrderRequest_descriptor,
-        new java.lang.String[] { "WoNumber", "WoJobs", "JobTypeCode", "Address", "City", "WoCreationDate", "WoCompletionDate", "ClientId", "HasRules", });
-    internal_static_WorkOrderResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_WorkOrderResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_WorkOrderResponse_descriptor,
-        new java.lang.String[] { "WoNumber", "WoJobs", "JobTypeCode", "Address", "City", "WoCreationDate", "WoCompletionDate", "ClientId", "HasRules", });
+        new java.lang.String[] { "WoNumber", "WoJobs", "JobTypeCode", "Address", "City", "State", "WoCreationDate", "WoCompletionDate", "ClientId", "HasRules", });
     internal_static_WoJob_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_WoJob_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_WoJob_descriptor,
         new java.lang.String[] { "WoNumber", "JobCode", "Quantity", "ActiveStatus", "AppliedRule", });
     com.google.protobuf.EmptyProto.getDescriptor();
-    com.google.protobuf.WrappersProto.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

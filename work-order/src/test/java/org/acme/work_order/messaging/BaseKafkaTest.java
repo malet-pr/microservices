@@ -29,7 +29,7 @@ public class BaseKafkaTest {
     @Container
     static final KafkaContainer kafka = new KafkaContainer(
             DockerImageName.parse("confluentinc/cp-kafka:7.6.1")
-    ).withKraft();
+    );
 
     @DynamicPropertySource
     static void overrideProperties(DynamicPropertyRegistry registry) {

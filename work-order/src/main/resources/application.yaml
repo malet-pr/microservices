@@ -9,6 +9,7 @@ spring:
     name: work_order
   main:
     allow-bean-definition-overriding: true
+    lazy-initialization: true
   jpa:
     properties:
       hibernate:

@@ -80,49 +80,61 @@ public interface WorkOrderRequestOrBuilder extends
       getCityBytes();
 
   /**
-   * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+   * <code>string state = 6;</code>
+   * @return The state.
+   */
+  java.lang.String getState();
+  /**
+   * <code>string state = 6;</code>
+   * @return The bytes for state.
+   */
+  com.google.protobuf.ByteString
+      getStateBytes();
+
+  /**
+   * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
    * @return Whether the woCreationDate field is set.
    */
   boolean hasWoCreationDate();
   /**
-   * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+   * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
    * @return The woCreationDate.
    */
   com.google.protobuf.Timestamp getWoCreationDate();
   /**
-   * <code>.google.protobuf.Timestamp woCreationDate = 6;</code>
+   * <code>.google.protobuf.Timestamp woCreationDate = 7;</code>
    */
   com.google.protobuf.TimestampOrBuilder getWoCreationDateOrBuilder();
 
   /**
-   * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+   * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
    * @return Whether the woCompletionDate field is set.
    */
   boolean hasWoCompletionDate();
   /**
-   * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+   * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
    * @return The woCompletionDate.
    */
   com.google.protobuf.Timestamp getWoCompletionDate();
   /**
-   * <code>.google.protobuf.Timestamp woCompletionDate = 7;</code>
+   * <code>.google.protobuf.Timestamp woCompletionDate = 8;</code>
    */
   com.google.protobuf.TimestampOrBuilder getWoCompletionDateOrBuilder();
 
   /**
-   * <code>string clientId = 8;</code>
+   * <code>string clientId = 9;</code>
    * @return The clientId.
    */
   java.lang.String getClientId();
   /**
-   * <code>string clientId = 8;</code>
+   * <code>string clientId = 9;</code>
    * @return The bytes for clientId.
    */
   com.google.protobuf.ByteString
       getClientIdBytes();
 
   /**
-   * <code>bool hasRules = 9;</code>
+   * <code>bool hasRules = 10;</code>
    * @return The hasRules.
    */
   boolean getHasRules();

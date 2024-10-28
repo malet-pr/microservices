@@ -92,10 +92,10 @@ public class AsyncServiceImpl implements AsyncService {
 			dto = droolsActionsService.impactRules(facts);
 		}
         log.info(" - {} - {}", wo.getWoNumber(), LocalDateTime.now());
-		Boolean sent = false;
+		boolean sent = false;
 		try {
-			sent = consumer.callWorkOrder(dto);
-			int i =0;
+			consumer.callWorkOrder(dto);
+			sent = true;
 		} catch (Exception e) {
             log.error("Error sending WO: {}", e.getMessage());
 		}

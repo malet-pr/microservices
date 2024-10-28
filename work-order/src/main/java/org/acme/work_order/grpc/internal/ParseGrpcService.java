@@ -1,49 +1,48 @@
 package org.acme.work_order.grpc.internal;
 
-import org.acme.work_order.workorder.WorkOrderDTO;
+import com.google.protobuf.Timestamp;
 import org.acme.work_order.grpc.WorkOrderRequest;
-import org.acme.work_order.grpc.WorkOrderResponse;
+import org.acme.work_order.workorder.WorkOrderDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import com.google.protobuf.Timestamp;
+import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 
-@Component
-public class WoDtoToGrpcWorkOrder {
+@Service
+public class ParseGrpcService {
 
-    private static final Logger log = LoggerFactory.getLogger(WoDtoToGrpcWorkOrder.class);
+    private static final Logger log = LoggerFactory.getLogger(ParseGrpcService.class);
 
     @Autowired
     WoJobDtoToGrpcWoJob woJob;
 
-    public WorkOrderRequest dtoToGrpc(WorkOrderDTO dto) {
-        log.info("Converting DTO for WO: {}", dto.getWoNumber());
-        WorkOrderRequest wor = WorkOrderRequest.newBuilder()
-                .setWoNumber(dto.getWoNumber())
-                .addAllWoJobs(woJob.convertListToGrpc(dto.getWoJobDTOs()))
-                .setJobTypeCode(dto.getJobTypeCode())
-                .setAddress(dto.getAddress())
-                .setCity(dto.getCity())
-                .setWoCreationDate(convertToTimestamp(dto.getWoCreationDate()))
-                .setWoCompletionDate(convertToTimestamp(dto.getWoCompletionDate()))
-                .setClientId(dto.getClientId())
-                .setHasRules(dto.getHasRules())
-                .build();
-        log.info("Converted DTO for WO {} succeeded: {}", dto.getWoNumber(), wor != null ? true : false);
-        return wor;
+    // TODO: add more logs
+    public boolean processWorkOrder(WorkOrderRequest request) {
+        boolean success = Boolean.FALSE;
+        try{
+            WorkOrderDTO dto = this.grpcToDto(request);
+            if (dto != null) {success=Boolean.TRUE;}
+
+            // TODO: call method to save changes
+
+        } catch (Exception e){
+            log.error("Error parsing request \n" + e.getMessage());
+        }
+        return success;
     }
-    public WorkOrderDTO grpcToDto(WorkOrderResponse grpc) {
+
+    public WorkOrderDTO grpcToDto(WorkOrderRequest grpc) {
         return WorkOrderDTO.builder()
                 .woNumber(grpc.getWoNumber())
                 .woJobDTOs(woJob.convertListToDto(grpc.getWoJobsList()))
                 .jobTypeCode(grpc.getJobTypeCode())
                 .address(grpc.getAddress())
                 .city(grpc.getCity())
+                .state(grpc.getState())
                 .woCreationDate(convertToLocalDateTime(grpc.getWoCreationDate()))
                 .woCompletionDate(convertToLocalDateTime(grpc.getWoCompletionDate()))
                 .clientId(grpc.getClientId())
@@ -51,6 +50,7 @@ public class WoDtoToGrpcWorkOrder {
                 .build();
     }
 
+    /*
     private Timestamp convertToTimestamp(LocalDateTime ldt) {
         Instant instant = ldt.atZone(ZoneId.systemDefault()).toInstant();
         return Timestamp.newBuilder()
@@ -58,10 +58,12 @@ public class WoDtoToGrpcWorkOrder {
                 .setNanos(instant.getNano())
                 .build();
     }
+    */
 
     private LocalDateTime convertToLocalDateTime(Timestamp ts) {
         Instant instant = Instant.ofEpochSecond(ts.getSeconds(), ts.getNanos());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
+
 
 }
