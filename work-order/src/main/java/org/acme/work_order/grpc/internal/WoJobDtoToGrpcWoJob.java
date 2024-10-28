@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class WoJobDtoToGrpcWoJob {
 
-    private static final Logger log = LoggerFactory.getLogger(WoDtoToGrpcWorkOrder.class);
+    private static final Logger log = LoggerFactory.getLogger(WoJobDtoToGrpcWoJob.class);
 
     public WorkOrderJobDTO convertToDto(WoJob woJob) {
         return WorkOrderJobDTO.builder()

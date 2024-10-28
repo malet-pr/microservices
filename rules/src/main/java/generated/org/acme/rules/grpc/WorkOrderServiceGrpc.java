@@ -16,34 +16,34 @@ public final class WorkOrderServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<org.acme.rules.grpc.WorkOrderRequest,
-      org.acme.rules.grpc.WorkOrderResponse> getRunRulesToWOMethod;
+      com.google.protobuf.Empty> getWoWithRulesMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "runRulesToWO",
+      fullMethodName = SERVICE_NAME + '/' + "woWithRules",
       requestType = org.acme.rules.grpc.WorkOrderRequest.class,
-      responseType = org.acme.rules.grpc.WorkOrderResponse.class,
+      responseType = com.google.protobuf.Empty.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<org.acme.rules.grpc.WorkOrderRequest,
-      org.acme.rules.grpc.WorkOrderResponse> getRunRulesToWOMethod() {
-    io.grpc.MethodDescriptor<org.acme.rules.grpc.WorkOrderRequest, org.acme.rules.grpc.WorkOrderResponse> getRunRulesToWOMethod;
-    if ((getRunRulesToWOMethod = WorkOrderServiceGrpc.getRunRulesToWOMethod) == null) {
+      com.google.protobuf.Empty> getWoWithRulesMethod() {
+    io.grpc.MethodDescriptor<org.acme.rules.grpc.WorkOrderRequest, com.google.protobuf.Empty> getWoWithRulesMethod;
+    if ((getWoWithRulesMethod = WorkOrderServiceGrpc.getWoWithRulesMethod) == null) {
       synchronized (WorkOrderServiceGrpc.class) {
-        if ((getRunRulesToWOMethod = WorkOrderServiceGrpc.getRunRulesToWOMethod) == null) {
-          WorkOrderServiceGrpc.getRunRulesToWOMethod = getRunRulesToWOMethod =
-              io.grpc.MethodDescriptor.<org.acme.rules.grpc.WorkOrderRequest, org.acme.rules.grpc.WorkOrderResponse>newBuilder()
+        if ((getWoWithRulesMethod = WorkOrderServiceGrpc.getWoWithRulesMethod) == null) {
+          WorkOrderServiceGrpc.getWoWithRulesMethod = getWoWithRulesMethod =
+              io.grpc.MethodDescriptor.<org.acme.rules.grpc.WorkOrderRequest, com.google.protobuf.Empty>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "runRulesToWO"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "woWithRules"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   org.acme.rules.grpc.WorkOrderRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.acme.rules.grpc.WorkOrderResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new WorkOrderServiceMethodDescriptorSupplier("runRulesToWO"))
+                  com.google.protobuf.Empty.getDefaultInstance()))
+              .setSchemaDescriptor(new WorkOrderServiceMethodDescriptorSupplier("woWithRules"))
               .build();
         }
       }
     }
-    return getRunRulesToWOMethod;
+    return getWoWithRulesMethod;
   }
 
   /**
@@ -96,9 +96,9 @@ public final class WorkOrderServiceGrpc {
 
     /**
      */
-    default void runRulesToWO(org.acme.rules.grpc.WorkOrderRequest request,
-        io.grpc.stub.StreamObserver<org.acme.rules.grpc.WorkOrderResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getRunRulesToWOMethod(), responseObserver);
+    default void woWithRules(org.acme.rules.grpc.WorkOrderRequest request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getWoWithRulesMethod(), responseObserver);
     }
   }
 
@@ -131,10 +131,10 @@ public final class WorkOrderServiceGrpc {
 
     /**
      */
-    public void runRulesToWO(org.acme.rules.grpc.WorkOrderRequest request,
-        io.grpc.stub.StreamObserver<org.acme.rules.grpc.WorkOrderResponse> responseObserver) {
+    public void woWithRules(org.acme.rules.grpc.WorkOrderRequest request,
+        io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getRunRulesToWOMethod(), getCallOptions()), request, responseObserver);
+          getChannel().newCall(getWoWithRulesMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -156,9 +156,9 @@ public final class WorkOrderServiceGrpc {
 
     /**
      */
-    public org.acme.rules.grpc.WorkOrderResponse runRulesToWO(org.acme.rules.grpc.WorkOrderRequest request) {
+    public com.google.protobuf.Empty woWithRules(org.acme.rules.grpc.WorkOrderRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getRunRulesToWOMethod(), getCallOptions(), request);
+          getChannel(), getWoWithRulesMethod(), getCallOptions(), request);
     }
   }
 
@@ -180,14 +180,14 @@ public final class WorkOrderServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<org.acme.rules.grpc.WorkOrderResponse> runRulesToWO(
+    public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> woWithRules(
         org.acme.rules.grpc.WorkOrderRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getRunRulesToWOMethod(), getCallOptions()), request);
+          getChannel().newCall(getWoWithRulesMethod(), getCallOptions()), request);
     }
   }
 
-  private static final int METHODID_RUN_RULES_TO_WO = 0;
+  private static final int METHODID_WO_WITH_RULES = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -206,9 +206,9 @@ public final class WorkOrderServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_RUN_RULES_TO_WO:
-          serviceImpl.runRulesToWO((org.acme.rules.grpc.WorkOrderRequest) request,
-              (io.grpc.stub.StreamObserver<org.acme.rules.grpc.WorkOrderResponse>) responseObserver);
+        case METHODID_WO_WITH_RULES:
+          serviceImpl.woWithRules((org.acme.rules.grpc.WorkOrderRequest) request,
+              (io.grpc.stub.StreamObserver<com.google.protobuf.Empty>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -229,12 +229,12 @@ public final class WorkOrderServiceGrpc {
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
         .addMethod(
-          getRunRulesToWOMethod(),
+          getWoWithRulesMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
               org.acme.rules.grpc.WorkOrderRequest,
-              org.acme.rules.grpc.WorkOrderResponse>(
-                service, METHODID_RUN_RULES_TO_WO)))
+              com.google.protobuf.Empty>(
+                service, METHODID_WO_WITH_RULES)))
         .build();
   }
 
@@ -283,7 +283,7 @@ public final class WorkOrderServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new WorkOrderServiceFileDescriptorSupplier())
-              .addMethod(getRunRulesToWOMethod())
+              .addMethod(getWoWithRulesMethod())
               .build();
         }
       }

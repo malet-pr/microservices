@@ -25,17 +25,10 @@ public class WorkOrderConsumer extends org.acme.rules.grpc.WorkOrderServiceGrpc.
         return request;
     }
 
-    public WorkOrderData convertResponseToData(org.acme.rules.grpc.WorkOrderResponse response) {
-        WorkOrderData dto = mapper.grpcToDto(response);
-        log.info("Mapped WO {} to response", response.getWoNumber());
-        return dto;
-    }
-
-    public Boolean callWorkOrder(WorkOrderData dto) {
+    public void callWorkOrder(WorkOrderData dto) {
         log.info("Sending WO {} to rules service", dto.getWoNumber());
         org.acme.rules.grpc.WorkOrderRequest request = convertDtoToRequest(dto);
-        org.acme.rules.grpc.WorkOrderResponse response = synchronousClient.runRulesToWO(request);
-        return response != null;
+        synchronousClient.woWithRules(request);
     }
 
 

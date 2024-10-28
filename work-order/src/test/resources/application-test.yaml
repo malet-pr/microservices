@@ -22,11 +22,15 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       auto-offset-reset: earliest
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: guest
+    password: guest
 logging:
   level:
     org.testcontainers: INFO
     org.springframework: INFO
-  config: classpath:logback-test.xml
 management:
   tracing:
     enabled: false

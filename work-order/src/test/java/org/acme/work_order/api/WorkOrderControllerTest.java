@@ -1,7 +1,6 @@
 package org.acme.work_order.api;
 
 import org.acme.work_order.common.LocalDateTimeTypeAdapter;
-import org.acme.work_order.grpc.WorkOrderResponse;
 import org.acme.work_order.workorder.WorkOrderDTO;
 import org.acme.work_order.workorder.internal.WorkOrder;
 import org.acme.work_order.workorder.internal.WorkOrderDAO;
@@ -10,9 +9,6 @@ import org.acme.work_order.workorderjob.WorkOrderJobDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.*;
-import org.mockito.InjectMocks;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,9 +17,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import java.time.LocalDateTime;

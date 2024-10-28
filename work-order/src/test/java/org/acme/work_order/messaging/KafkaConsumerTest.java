@@ -1,4 +1,4 @@
-package org.acme.work_order.kafka;
+package org.acme.work_order.messaging;
 
 import org.acme.work_order.common.LocalDateTimeTypeAdapter;
 import org.acme.work_order.kafkaconsumer.MessageConsumer;
@@ -13,10 +13,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.test.context.EmbeddedKafka;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.shaded.org.awaitility.Awaitility;
 import java.lang.reflect.Type;
