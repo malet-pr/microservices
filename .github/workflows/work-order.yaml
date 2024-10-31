@@ -28,25 +28,8 @@ jobs:
           cache: 'maven'
       - name: Install protoc
         run: sudo apt-get install -y protobuf-compiler
-      - name: Cache SonarQube packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      - name: Build and analyze
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify -DforkCount=1 -DreuseForks=false org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=micro1-rules-observability -Dsonar.projectName='micro1-rules-observability'
-#      - name: Build With Maven
-#        run: mvn --batch-mode --update-snapshots verify -DforkCount=1 -DreuseForks=false
+      - name: Build With Maven
+        run: mvn --batch-mode --update-snapshots verify -DforkCount=1 -DreuseForks=false
       - name: Build Docker Image
         if: github.ref == 'refs/heads/main' || github.base_ref == 'main'
         run: |
