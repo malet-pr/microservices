@@ -28,12 +28,11 @@ import org.testcontainers.utility.DockerImageName;
 @ExtendWith(SpringExtension.class)
 @Testcontainers
 @ContextConfiguration(classes = BaseRabbitTest.RabbitMQTestConfig.class)
-public class BaseRabbitTest {
+class BaseRabbitTest {
 
         @Container
         static final RabbitMQContainer rabbit = new RabbitMQContainer(DockerImageName.parse("rabbitmq:management"))
-                .withExposedPorts(5672, 15672)
-                .withUser("guest", "guest");
+                .withExposedPorts(5672, 15672);
 
         @DynamicPropertySource
         static void rabbitProperties(DynamicPropertyRegistry registry) {

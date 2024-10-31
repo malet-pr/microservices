@@ -9,7 +9,6 @@ import org.acme.work_order.workorder.internal.WorkOrderDAO;
 import org.acme.work_order.workorder.internal.WorkOrderMapper;
 import org.acme.work_order.workorder.internal.WorkOrderServiceImpl;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -22,13 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
-public class RabbitSenderTest extends BaseRabbitTest{
+class RabbitSenderTest extends BaseRabbitTest{
 
     @Autowired
     private RabbitTemplate template;
@@ -68,7 +66,7 @@ public class RabbitSenderTest extends BaseRabbitTest{
 */
     @Test
     @DisplayName("Test that when a WO is saved, a message is sent to the appropriate queue with the serialized WO")
-    public void sendMessageAfterSaveWorkOrderTest_success() throws Exception {
+    void sendMessageAfterSaveWorkOrderTest_success() {
         // Arrange
         String queueName = "work-order-queue";
         String json = gson.toJson(DTOs.dto2);
@@ -92,7 +90,7 @@ public class RabbitSenderTest extends BaseRabbitTest{
 
     @Test
     @DisplayName("Test that saving a Work Order succeeds even when RabbitMQ fails")
-    public void sendMessageAfterSaveWorkOrderTest_rabbitFailure() {
+    void sendMessageAfterSaveWorkOrderTest_rabbitFailure() {
         // Arrange
         String queueName = "work-order-queue";
         String json = gson.toJson(DTOs.dto2);
