@@ -5,9 +5,7 @@ spring:
     application:
         name: simulator
     kafka:
-        bootstrap-servers: localhost:9092
-        enable:
-            idempotence: true
+        bootstrap-servers: http://localhost:9092
 management:
     endpoints:
         web:

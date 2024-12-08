@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f apps.yaml
+    kompose.version: 1.21.0 (992df58d8)
+    logging: promtail
+  creationTimestamp: null
+  labels:
+    io.kompose.service: rules
+  name: rules
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: rules
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f apps.yaml
+        kompose.version: 1.21.0 (992df58d8)
+        logging: promtail
+      creationTimestamp: null
+      labels:
+        io.kompose.network/grafana: "true"
+        io.kompose.network/rabbitmq: "true"
+        io.kompose.service: rules
+    spec:
+      containers:
+      - env:
+        - name: DB_NAME
+          value: ruleuser
+        - name: DB_PASSWORD
+          value: ruleuser
+        - name: DB_URL
+          value: jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=ru
+        - name: GRPC_SERVER_PORT
+          value: "8090"
+        - name: MANAGEMENT_TRACING_ENABLED
+          value: "true"
+        - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+          value: http://tempo:9411
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: http://ot-collector:4317
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: grpc
+        - name: OTEL_LOGS_EXPORTER
+          value: otlp
+        - name: OTEL_METRICS_EXPORTER
+          value: otlp
+        - name: OTEL_PROPAGATORS
+          value: tracecontext,baggage,
+        - name: OTEL_SERVICE_NAME
+          value: ot-collector
+        - name: OTEL_TRACES_EXPORTER
+          value: otlp
+        - name: OTEL_TRACES_SAMPLER
+          value: always_on
+        - name: SPRING_PROFILES_ACTIVE
+          value: docker
+        image: rules
+        imagePullPolicy: ""
+        name: micro1-rules
+        ports:
+        - containerPort: 8083
+        resources:
+          limits:
+            memory: "734003200"
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

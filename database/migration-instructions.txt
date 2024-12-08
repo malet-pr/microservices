@@ -2,8 +2,8 @@
 from any folder:
 cd /home/nuria/Projects/flyway-10.19.0
 
-work-order
-./flyway -configFiles=/home/nuria/Projects/MICROSERVICES/microservices/database/flyway_wo.conf migrate
+orders
+./flyway -configFiles=/home/nuria/Projects/MICROSERVICES/microservices/database/flyway_orders.conf migrate
 
 rules
 ./flyway -configFiles=/home/nuria/Projects/MICROSERVICES/microservices/database/flyway_rules.conf migrate

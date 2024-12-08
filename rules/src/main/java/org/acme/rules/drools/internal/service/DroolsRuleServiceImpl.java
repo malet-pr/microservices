@@ -231,7 +231,7 @@ public class DroolsRuleServiceImpl implements DroolsRuleService{
                 this.fireAllRules(rule, facts);
                 woInProcess = droolsActionsService.impactRules(facts);
             }
-            consumer.callWorkOrder(woInProcess);
+            //consumer.callWorkOrder(woInProcess);
         }
         return true;
     }

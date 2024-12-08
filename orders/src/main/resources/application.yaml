@@ -1,0 +1,59 @@
+server:
+  port: 8081
+  shutdown: graceful
+grpc:
+  server:
+    port: 8090
+spring:
+  application:
+    name: orders
+  main:
+    allow-bean-definition-overriding: true
+    #lazy-initialization: true   # this line, when uncommented, breaks kafka
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: none
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "${DB_URL:jdbc:postgresql://localhost:5432/drools?currentSchema=wo}"
+    username: "${DB_USERNAME:wouser}"
+    password: "${DB_PASSWORD:wouser}"
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: wo-group-2
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: latest
+      enable-auto-commit: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
+logging:
+  level:
+    org.springframework=: INFO
+    org.apache.kafka: INFO
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  tracing:
+    enabled: false
+    sampling:
+      probability: 0.0
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    tags:
+      application: ${spring.application.name}
+  info:
+    git:
+      mode: full

@@ -8,23 +8,30 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="rules" />
+        <module name="orders" />
         <module name="simulator" />
-        <module name="work-order" />
         <module name="modulith" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="kafka-rabbit" target="21" />
+      <module name="ordersold" target="21" />
       <module name="ruleunit-springboot-example" target="1.8" />
+      <module name="work-order" target="21" />
+      <module name="work-order (1)" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="microservices" options="" />
       <module name="modulith" options="-parameters" />
+      <module name="orders" options="-parameters" />
+      <module name="ordersold" options="-parameters" />
       <module name="rules" options="-parameters" />
       <module name="ruleunit-springboot-example" options="" />
       <module name="simulator" options="-parameters" />
       <module name="work-order" options="-parameters" />
+      <module name="work-order (1)" options="-parameters" />
     </option>
   </component>
 </project>

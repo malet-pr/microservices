@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f apps.yaml
+    kompose.version: 1.21.0 (992df58d8)
+    logging: promtail
+  creationTimestamp: null
+  labels:
+    io.kompose.service: wo-service
+  name: wo-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: wo-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f apps.yaml
+        kompose.version: 1.21.0 (992df58d8)
+        logging: promtail
+      creationTimestamp: null
+      labels:
+        io.kompose.network/grafana: "true"
+        io.kompose.network/kafka: "true"
+        io.kompose.network/rabbitmq: "true"
+        io.kompose.service: wo-service
+    spec:
+      containers:
+      - env:
+        - name: DB_NAME
+          value: wouser
+        - name: DB_PASSWORD
+          value: wouser
+        - name: DB_URL
+          value: jdbc:postgresql://host.docker.internal:5432/drools?currentSchema=wo
+        - name: GRPC_CLIENT_RULES-SERVICE_ADDRESS
+          value: static://rules:8090
+        - name: GRPC_CLIENT_RULES-SERVICE_ENABLE_KEEP_ALIVE
+          value: "true"
+        - name: GRPC_CLIENT_RULES-SERVICE_KEEP_ALIVE_WITHOUT_CALLS
+          value: "true"
+        - name: GRPC_CLIENT_RULES-SERVICE_NEGOTIATION_TYPE
+          value: plaintext
+        - name: MANAGEMENT_TRACING_ENABLED
+          value: "true"
+        - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+          value: http://tempo:9411
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: http://ot-collector:4317
+        - name: OTEL_EXPORTER_OTLP_PROTOCOL
+          value: grpc
+        - name: OTEL_LOGS_EXPORTER
+          value: otlp
+        - name: OTEL_METRICS_EXPORTER
+          value: otlp
+        - name: OTEL_PROPAGATORS
+          value: tracecontext,baggage,
+        - name: OTEL_SERVICE_NAME
+          value: ot-collector
+        - name: OTEL_TRACES_EXPORTER
+          value: otlp
+        - name: OTEL_TRACES_SAMPLER
+          value: always_on
+        - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+          value: micro1-messaging:9092
+        - name: SPRING_PROFILES_ACTIVE
+          value: docker
+        image: wo-service
+        imagePullPolicy: ""
+        name: micro1-work-order
+        ports:
+        - containerPort: 8081
+        - containerPort: 8090
+        resources:
+          limits:
+            memory: "734003200"
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

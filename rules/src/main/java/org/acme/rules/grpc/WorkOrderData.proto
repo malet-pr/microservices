@@ -1,14 +1,14 @@
 syntax = "proto3";
 
 option java_package = "org.acme.rules.grpc";
-option java_outer_classname = "WorkOrderData";
+option java_outer_classname = "OrderData";
 option java_multiple_files = true;
 
 import "google/protobuf/empty.proto";
 //import "google/protobuf/wrappers.proto"; //for stringValue
 import "google/protobuf/timestamp.proto"; //for dates
 
-message WorkOrderRequest {
+message OrderRequest {
   string woNumber = 1;
   repeated WoJob woJobs = 2;
   string jobTypeCode = 3;
@@ -29,6 +29,6 @@ message WoJob {
   string appliedRule = 5;
 }
 
-service WorkOrderService {
-  rpc woWithRules(WorkOrderRequest) returns (google.protobuf.Empty) {}
+service OrderService {
+  rpc woWithRules(OrderRequest) returns (google.protobuf.Empty) {}
 }

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f monitoring.yaml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: promtail
+  name: promtail
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: promtail
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f monitoring.yaml
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/grafana: "true"
+        io.kompose.service: promtail
+    spec:
+      containers:
+      - args:
+        - --config.file=/etc/promtail/docker-config.yaml
+        image: grafana/promtail:3.0.0
+        imagePullPolicy: ""
+        name: promtail
+        resources: {}
+        volumeMounts:
+        - mountPath: /etc/promtail/docker-config.yaml
+          name: promtail-claim0
+        - mountPath: /var/lib/docker/containers
+          name: promtail-claim1
+          readOnly: true
+        - mountPath: /var/run/docker.sock
+          name: promtail-claim2
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: promtail-claim0
+        persistentVolumeClaim:
+          claimName: promtail-claim0
+      - name: promtail-claim1
+        persistentVolumeClaim:
+          claimName: promtail-claim1
+          readOnly: true
+      - name: promtail-claim2
+        persistentVolumeClaim:
+          claimName: promtail-claim2
+status: {}

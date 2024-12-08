@@ -1,7 +1,7 @@
 package org.acme.rules.grpc.woserviceconnect;
 
 import org.acme.rules.drools.WorkOrderData;
-import org.acme.rules.grpc.WorkOrderRequest;
+//import org.acme.rules.grpc.WorkOrderRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class WoDataToGrpcWorkOrder {
 
     private static final Logger log = LoggerFactory.getLogger(WoDataToGrpcWorkOrder.class);
 
-
+/*
     public WorkOrderRequest dtoToGrpc(WorkOrderData dto) {
         log.info("Converting DTO for WO: {}", dto.getWoNumber());
         WorkOrderRequest wor = WorkOrderRequest.newBuilder()
@@ -47,5 +47,5 @@ public class WoDataToGrpcWorkOrder {
         Instant instant = Instant.ofEpochSecond(ts.getSeconds(), ts.getNanos());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
-
+*/
 }
