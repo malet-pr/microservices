@@ -5,7 +5,6 @@ import org.acme.orders.order.internal.OrderDAO;
 import org.acme.orders.orderjob.OrderJobDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class OrderJobMapper {
     public OrderJob convertToEntity(OrderJobDTO dto) {
         if(dto == null) {return null;}
         return OrderJob.builder()
-                .order(orderDAO.findByWoNumber(dto.getWoNumber()))
+                .order(orderDAO.findByOrderNumber(dto.getWoNumber()))
                 .job(jobDAO.findByCode(dto.getJobCode()))
                 .activeStatus(dto.getActiveStatus())
                 .quantity(dto.getQuantity())

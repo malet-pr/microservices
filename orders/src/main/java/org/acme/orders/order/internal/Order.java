@@ -7,7 +7,6 @@ import lombok.*;
 import org.acme.orders.common.BaseEntity;
 import org.acme.orders.jobtype.internal.JobType;
 import org.acme.orders.orderjob.internal.OrderJob;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,14 +17,14 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name = "default_generator", sequenceName = "work_order_seq", allocationSize = 1)
-@Table(name = "WORK_ORDER")
+@SequenceGenerator(name = "default_generator", sequenceName = "order_seq", allocationSize = 1)
+@Table(name = "ORDER")
 public class Order extends BaseEntity {
     @NotNull
     @Column(unique=true)
     private String woNumber;
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "WORK_ORDER_ID")
+    @JoinColumn(name = "ORDER_ID")
     private List<OrderJob> jobs;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "JOBTYPE_ID")

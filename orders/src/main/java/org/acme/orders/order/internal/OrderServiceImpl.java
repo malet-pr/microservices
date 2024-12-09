@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
         boolean result = Boolean.FALSE;
         Order entity = woMapper.convertToEntity(dto);
         if(entity == null) {return false;}
-        if(Boolean.TRUE.equals(woDAO.existsByWoNumber(entity.getWoNumber()))) {
+        if(Boolean.TRUE.equals(woDAO.existsByOrderNumber(entity.getWoNumber()))) {
             log.error("A work order with number {} already exists", entity.getWoNumber());
             return result;
         }
@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
     public Boolean updateAfterRules(OrderDTO dto) {
         boolean result = Boolean.FALSE;
         try{
-            Order wo = woDAO.findByWoNumber(dto.getWoNumber());
+            Order wo = woDAO.findByOrderNumber(dto.getWoNumber());
             if(wo == null) {
                 log.info("Cannot updated WO {} because it doesn't exist", dto.getWoNumber());
                 return result;
@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO findByWoNumber(String woNumber) {
-        return woMapper.convertToDTO(woDAO.findByWoNumber(woNumber));
+        return woMapper.convertToDTO(woDAO.findByOrderNumber(woNumber));
     }
 
 }

@@ -46,13 +46,13 @@ CREATE SEQUENCE IF NOT EXISTS wo.order_job_seq;
 CREATE TABLE IF NOT EXISTS wo.wo_job (
      id int8 DEFAULT nextval('wo.order_job_seq'),
      creation_date timestamp(6) NULL,
-     work_order_id int8 NULL,
+     order_id int8 NULL,
      job_id int8 NULL,
      quantity int4 NULL,
      active_status bpchar(1) NULL,
      applied_rule varchar(255) NULL,
      CONSTRAINT wo_job_pkey PRIMARY KEY (id),
-     CONSTRAINT fk81bc8pni97yqwurkfgdyfqlw0 FOREIGN KEY (work_order_id) REFERENCES wo.order(id)
+     CONSTRAINT fk81bc8pni97yqwurkfgdyfqlw0 FOREIGN KEY (order_id) REFERENCES wo.order(id)
 );
 
 alter sequence wo.job_seq restart;

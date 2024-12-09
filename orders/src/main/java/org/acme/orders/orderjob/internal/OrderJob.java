@@ -17,11 +17,11 @@ import org.acme.orders.order.internal.Order;
 @AllArgsConstructor
 @Builder
 @Entity
-@SequenceGenerator(name = "default_generator", sequenceName = "work_order_job_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_generator", sequenceName = "order_job_seq", allocationSize = 1)
 @Table(name = "WO_JOB")
 public class OrderJob extends BaseEntity {
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "WORK_ORDER_ID")
+	@JoinColumn(name = "ORDER_ID")
 	@JsonBackReference
 	@GsonExclude
 	@JsonIgnore
