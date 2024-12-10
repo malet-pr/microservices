@@ -68,7 +68,7 @@ public class OrderMapperTest {
                 .build();
         dto1 =  OrderDTO.builder()
                 .woNumber("woNumber1")
-                .jobTypeCode(wo1.getJobType().getCode())
+                .jobType(wo1.getJobType().getCode())
                 .woJobDTOs(List.of(woJobDTO1,woJobDTO2))
                 .address("address").city("city").state("state")
                 .woCreationDate(date1)
@@ -101,7 +101,7 @@ public class OrderMapperTest {
     @DisplayName("Test the conversion from dto to entity")
     public void convertToEntityTest() {
         // Arrange
-        when(typeMock.findByCode(dto1.getJobTypeCode())).thenReturn(type1);
+        when(typeMock.findByCode(dto1.getJobType())).thenReturn(type1);
         when(jobMock.findByCodes(anyList())).thenReturn(jobs);
         // Act
         Order wo = woMapper.convertToEntity(dto1);

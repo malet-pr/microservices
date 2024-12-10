@@ -44,7 +44,7 @@ public class ParseGrpcService {
         return OrderDTO.builder()
                 .woNumber(grpc.getWoNumber())
                 .woJobDTOs(woJob.convertListToDto(grpc.getWoJobsList()))
-                .jobTypeCode(grpc.getJobTypeCode())
+                .jobType(grpc.getJobTypeCode())
                 .address(grpc.getAddress())
                 .city(grpc.getCity())
                 .state(grpc.getState())

@@ -47,6 +47,7 @@ public class MessageConsumer {
 
     @KafkaListener(topics = "new-wo", groupId = "wo-group-2")
     public void listen(@Payload String message) {
+        log.info(message);
         savedCount = new AtomicInteger(0);
         errorCount = new AtomicInteger(0);
         try {
