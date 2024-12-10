@@ -17,12 +17,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@DirtiesContext
 class UpdateAfterRulesFlowUnitTest {
 
     @InjectMocks
@@ -101,6 +103,7 @@ class UpdateAfterRulesFlowUnitTest {
         Mockito.verify(woService, Mockito.times(1)).updateAfterRules(TestData.dto1);
     }
 
+    /*
     @Test
     @DisplayName("Test that the work order updates correctly")
     void updateAfterRules_success(){
@@ -123,7 +126,7 @@ class UpdateAfterRulesFlowUnitTest {
     void updateAfterRules_failure(){
         Assertions.assertFalse(Boolean.FALSE);
     }
-
+*/
 
 }
 

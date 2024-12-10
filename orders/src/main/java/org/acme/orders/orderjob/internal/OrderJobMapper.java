@@ -1,6 +1,8 @@
 package org.acme.orders.orderjob.internal;
 
+import org.acme.orders.job.internal.Job;
 import org.acme.orders.job.internal.JobDAO;
+import org.acme.orders.order.internal.Order;
 import org.acme.orders.order.internal.OrderDAO;
 import org.acme.orders.orderjob.OrderJobDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +35,11 @@ public class OrderJobMapper {
 
     public OrderJob convertToEntity(OrderJobDTO dto) {
         if(dto == null) {return null;}
+        Order or = orderDAO.findByWoNumber(dto.getWoNumber());
+        Job j = jobDAO.findByCode(dto.getJobCode());
         return OrderJob.builder()
-                .order(orderDAO.findByOrderNumber(dto.getWoNumber()))
-                .job(jobDAO.findByCode(dto.getJobCode()))
+                .order(or)
+                .job(j)
                 .activeStatus(dto.getActiveStatus())
                 .quantity(dto.getQuantity())
                 .appliedRule(dto.getAppliedRule())

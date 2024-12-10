@@ -88,7 +88,7 @@ public class OrderJobServiceImplTest {
     @DisplayName("Test that a proper entity will be saved from a DTO")
     public void saveTest() {
         // Arrange
-        when(woDAOMock.findByOrderNumber(dto1.getWoNumber())).thenReturn(wo1);
+        when(woDAOMock.findByWoNumber(dto1.getWoNumber())).thenReturn(wo1);
         when(woJobMapperMock.convertToEntity(dto1)).thenReturn(woJob1);
         // Act
         service.save(dto1);

@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 @Entity
 @SequenceGenerator(name = "default_generator", sequenceName = "order_seq", allocationSize = 1)
-@Table(name = "ORDER")
+@Table(name = "WO_ORDER")
 public class Order extends BaseEntity {
     @NotNull
     @Column(unique=true)
@@ -26,7 +26,7 @@ public class Order extends BaseEntity {
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "ORDER_ID")
     private List<OrderJob> jobs;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "JOBTYPE_ID")
     private JobType jobType;
     private String address;

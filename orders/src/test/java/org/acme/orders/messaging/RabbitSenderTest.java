@@ -73,7 +73,7 @@ class RabbitSenderTest extends BaseRabbitTest {
         Order mockOrder = Order.builder().woNumber("ABC123").build();
         mockOrder.setJobs(new ArrayList<>());
         Mockito.when(woMapperMock.convertToEntity(DTOs.dto2)).thenReturn(mockOrder);
-        Mockito.when(woDAOMock.existsByOrderNumber("ABC123")).thenReturn(false);
+        Mockito.when(woDAOMock.existsByWoNumber("ABC123")).thenReturn(false);
         Mockito.when(woDAOMock.save(mockOrder)).thenReturn(mockOrder);
         // Act
         woService.save(DTOs.dto2);
@@ -88,6 +88,7 @@ class RabbitSenderTest extends BaseRabbitTest {
     @Mock
     private Logger log;
 
+
     @Test
     @DisplayName("Test that saving a Work Order succeeds even when RabbitMQ fails")
     void sendMessageAfterSaveWorkOrderTest_rabbitFailure() {
@@ -97,7 +98,7 @@ class RabbitSenderTest extends BaseRabbitTest {
         Order mockOrder = Order.builder().woNumber("ABC123").build();
         mockOrder.setJobs(new ArrayList<>());
         Mockito.when(woMapperMock.convertToEntity(DTOs.dto2)).thenReturn(mockOrder);
-        Mockito.when(woDAOMock.existsByOrderNumber(anyString())).thenReturn(false);
+        Mockito.when(woDAOMock.findByWoNumber(anyString())).thenReturn(mockOrder);
         Mockito.when(woDAOMock.save(mockOrder)).thenReturn(mockOrder);
         Mockito.doThrow(new RuntimeException("RabbitMQ not reachable")).when(msgMock)
                                                 .sendWorkOrder(anyString(), anyString());

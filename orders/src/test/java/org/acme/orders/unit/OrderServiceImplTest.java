@@ -96,7 +96,7 @@ public class OrderServiceImplTest {
     @DisplayName("Test that a proper OrderDTO will be returned when searching by WO number")
     public void findByWoNumberTest(){
         // Arrange
-        when(woDAOMock.findByOrderNumber("ABC123")).thenReturn(wo);
+        when(woDAOMock.findByWoNumber("ABC123")).thenReturn(wo);
         when(woMapperMock.convertToDTO(wo)).thenReturn(dto);
         // Act
         OrderDTO result = service.findByWoNumber("ABC123");

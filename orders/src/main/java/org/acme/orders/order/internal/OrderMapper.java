@@ -56,6 +56,7 @@ public class OrderMapper {
 
     public Order convertToEntity(OrderDTO dto) {
         if(dto == null) {return null;}
+        if(dto.getJobTypeCode() == null) dto.setJobTypeCode("703TV2");
         JobType jobType = jobTypeDAO.findByCode(dto.getJobTypeCode());
         if(jobType == null) {return null;}
         List<OrderJob> woJobList = new ArrayList<>();

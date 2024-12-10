@@ -8,14 +8,12 @@ import org.acme.orders.api.JobController;
 import org.acme.orders.common.LocalDateTimeTypeAdapter;
 import org.acme.orders.order.OrderDTO;
 import org.acme.orders.order.OrderService;
-import org.acme.orders.rabbitmq.RabbitMessageSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;

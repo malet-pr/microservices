@@ -3,6 +3,7 @@ package org.acme.orders.order.internal;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.acme.orders.common.LocalDateTimeTypeAdapter;
+import org.acme.orders.jobtype.internal.JobType;
 import org.acme.orders.order.OrderDTO;
 import org.acme.orders.order.OrderService;
 import org.acme.orders.orderjob.UpdatesService;
@@ -37,16 +38,16 @@ public class OrderServiceImpl implements OrderService {
         boolean result = Boolean.FALSE;
         Order entity = woMapper.convertToEntity(dto);
         if(entity == null) {return false;}
-        if(Boolean.TRUE.equals(woDAO.existsByOrderNumber(entity.getWoNumber()))) {
+        if(Boolean.TRUE.equals(woDAO.findByWoNumber(entity.getWoNumber()))) {
             log.error("A work order with number {} already exists", entity.getWoNumber());
             return result;
         }
         try {
             entity.getJobs().forEach(j -> j.setOrder(entity));
-            woDAO.save(entity);
+            Order order = woDAO.save(entity);
             String json = gson.toJson(dto);
             msgSender.sendWorkOrder("work-order-queue",json);
-            log.info("Successfully saved work order {}", entity);
+            log.info("Successfully saved work order {}", order);
             result = Boolean.TRUE;
         }catch (Exception e) {
             log.error(e.getMessage());
@@ -58,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
     public Boolean updateAfterRules(OrderDTO dto) {
         boolean result = Boolean.FALSE;
         try{
-            Order wo = woDAO.findByOrderNumber(dto.getWoNumber());
+            Order wo = woDAO.findByWoNumber(dto.getWoNumber());
             if(wo == null) {
                 log.info("Cannot updated WO {} because it doesn't exist", dto.getWoNumber());
                 return result;
@@ -79,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO findByWoNumber(String woNumber) {
-        return woMapper.convertToDTO(woDAO.findByOrderNumber(woNumber));
+        return woMapper.convertToDTO(woDAO.findByWoNumber(woNumber));
     }
 
 }

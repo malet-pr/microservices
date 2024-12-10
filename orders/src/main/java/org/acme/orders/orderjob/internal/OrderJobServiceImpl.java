@@ -28,7 +28,7 @@ public class OrderJobServiceImpl implements OrderJobService {
 
     @Override
     public boolean save(OrderJobDTO wo) {
-        Order woEntity = woDAO.findByOrderNumber(wo.getWoNumber());
+        Order woEntity = woDAO.findByWoNumber(wo.getWoNumber());
         if (woEntity == null) {
             System.out.println("Cannot save the order job because the order does not exist");
             return false;

@@ -56,7 +56,7 @@ public class OrderJobControllerTest extends BaseApiTest {
                 .andExpect(status().isCreated())
                 .andReturn();
         boolean saved = Boolean.parseBoolean(result.getResponse().getContentAsString());
-        List<OrderJob> woJobs = woJobDAO.findByWorkOrderNumber("ZZZ999");
+        List<OrderJob> woJobs = woJobDAO.findByOrderNumber("ZZZ999");
         List<OrderJob> target = woJobs.stream().filter(w -> w.getOrder().getWoNumber().equals("ZZZ999")).toList();
         // Assert
         Assertions.assertTrue(saved, "The entity should have been saved successfully.");

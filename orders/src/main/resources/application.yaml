@@ -15,6 +15,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         ddl-auto: none
+        #format_sql: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: "${DB_URL:jdbc:postgresql://localhost:5432/drools?currentSchema=wo}"
@@ -35,8 +36,10 @@ spring:
     password: test
 logging:
   level:
-    org.springframework=: INFO
+    org.springframework: INFO
     org.apache.kafka: INFO
+    sql: INFO
+    #org.hibernate.orm.jdbc.bind: trace
 management:
   endpoints:
     web:

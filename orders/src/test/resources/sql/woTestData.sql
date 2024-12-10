@@ -1,4 +1,4 @@
-truncate table wo.order, wo.wo_job, wo.job, wo.job_type cascade;
+truncate table wo.wo_order, wo.wo_job, wo.job, wo.job_type cascade;
 
 ALTER SEQUENCE wo.order_job_seq RESTART WITH 1;
 ALTER SEQUENCE wo.job_seq RESTART WITH 1;
@@ -18,7 +18,7 @@ values
     (2,NOW(),'Y','corporate','type2','job type name 2'),
     (3,NOW(),'N','corporate','type3','job type name 3');
 
-insert into wo.order
+insert into wo.wo_order
 (id,creation_date,jobtype_id,wo_completion_date,wo_creation_date,address,city,state,client_id,wo_number)
 values
     (1,NOW(),1,CURRENT_DATE-1,CURRENT_DATE-3,'addres1','city1','state1','client1','ABC123'),

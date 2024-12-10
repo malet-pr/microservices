@@ -51,7 +51,7 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest {
                 .build();
         // Act
         boolean saved = service.save(woDTO);
-        Order entity = woDAO.findByOrderNumber("testNumber");
+        Order entity = woDAO.findByWoNumber("testNumber");
         // Assert
         Assertions.assertTrue(saved, "The entity should have been saved successfully.");
         Assertions.assertNotNull(entity, "Entity should not be null after saving.");

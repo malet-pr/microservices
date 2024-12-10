@@ -3,7 +3,7 @@ spring:
     name: orders
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/test
+    url: jdbc:postgresql://localhost:5432/test?currentSchema=wo
     username: test
     password: test
   jpa:
@@ -36,6 +36,7 @@ management:
     enabled: false
     sampling:
       probability: 0.0
+
 
 
 

@@ -11,11 +11,11 @@ tasks:
       - task: test
   test:
     cmds:
-      - "mvn clean verify"
+      - "mvn clean verify -DforkCount=1 -DreuseForks=false"
 
   build:
     cmds:
-      - "mvn -pl work-order spring-boot:build-image -DskipTests"
+      - "mvn -pl order spring-boot:build-image -DskipTests"
       - "mvn -pl simulator spring-boot:build-image -DskipTests"
 
   start_monitoring:

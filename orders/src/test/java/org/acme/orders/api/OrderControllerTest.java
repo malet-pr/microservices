@@ -84,7 +84,7 @@ public class OrderControllerTest extends BaseApiTest{
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isCreated());
-        Order wo = woDAO.findByOrderNumber("testNumber");
+        Order wo = woDAO.findByWoNumber("testNumber");
         // Assert
         Assertions.assertNotNull(wo, "WO should not be null");
         Assertions.assertNotNull(wo.getId(), "WO id should not be null");

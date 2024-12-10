@@ -79,7 +79,7 @@ public class KafkaConsumerTest extends BaseKafkaTest{
         Awaitility.await()
             .atMost(10, TimeUnit.SECONDS)
             .until(() -> msgConsumer.getSavedCount().get() > 0);
-        Order wo = woDAO.findByOrderNumber("testNumber");
+        Order wo = woDAO.findByWoNumber("testNumber");
         // Assert
         Assertions.assertNotNull(wo,"There should be a WO");
         Assertions.assertEquals("testNumber",wo.getWoNumber(),"The WO number does not match");

@@ -102,7 +102,7 @@ public class OrderJobMapperTest {
     @DisplayName("Test the conversion from dto to entity")
     public void convertToEntityTest(){
         // Arrange
-        when(woDAO.findByOrderNumber("ABC123")).thenReturn(wo1);
+        when(woDAO.findByWoNumber("ABC123")).thenReturn(wo1);
         when(jobDAO.findByCode("22er")).thenReturn(job1);
         // Act
         OrderJob woJob = woJobMapper.convertToEntity(dto1);
@@ -144,9 +144,9 @@ public class OrderJobMapperTest {
     @DisplayName("Test the conversion from a list of dtos to a list of entities")
     public void convertListToEntitiesTest() {
         // Arrange
-        when(woDAO.findByOrderNumber("ABC123")).thenReturn(wo1);
+        when(woDAO.findByWoNumber("ABC123")).thenReturn(wo1);
         when(jobDAO.findByCode("22er")).thenReturn(job1);
-        when(woDAO.findByOrderNumber("ABC456")).thenReturn(wo2);
+        when(woDAO.findByWoNumber("ABC456")).thenReturn(wo2);
         when(jobDAO.findByCode("99er")).thenReturn(job2);
         // Act
         List<OrderJob> testJobs = woJobMapper.convertListToEntity(dtos);

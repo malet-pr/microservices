@@ -38,7 +38,7 @@ public class OrderJobServiceIntegrationTest extends BaseIntegrationTest {
                 .build();
         // Act
         boolean saved = service.save(woJobDTO);
-        List<OrderJob> list = woJobDAO.findByWorkOrderNumber("ZZZ999");
+        List<OrderJob> list = woJobDAO.findByOrderNumber("ZZZ999");
         Optional<OrderJob> entity = woJobDAO.findById(10L);
         // Assert
         Assertions.assertTrue(saved, "The entity should have been saved successfully.");

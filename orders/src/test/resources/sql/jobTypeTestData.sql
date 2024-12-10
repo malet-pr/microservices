@@ -1,4 +1,4 @@
-truncate table wo.order, wo.wo_job, wo.job, wo.job_type cascade;
+truncate table wo.wo_order, wo.wo_job, wo.job, wo.job_type cascade;
 
 ALTER SEQUENCE wo.job_type_seq RESTART WITH 1;
 
