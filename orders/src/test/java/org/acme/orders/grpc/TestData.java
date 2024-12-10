@@ -48,7 +48,7 @@ public class TestData {
             .activeStatus('Y').appliedRule("").build();
 
     static OrderDTO dto1 = OrderDTO.builder()
-            .woNumber("ABC123").jobTypeCode("jobTypeCode").address("address").city("city").state("state")
+            .woNumber("ABC123").jobType("jobTypeCode").address("address").city("city").state("state")
             .woCreationDate(instant1.atZone(ZoneId.systemDefault()).toLocalDateTime())
             .woCompletionDate(instant2.atZone(ZoneId.systemDefault()).toLocalDateTime())
             .clientId("clientId").hasRules(Boolean.TRUE).woJobDTOs(List.of(WOJob1,WOJob2)).build();

@@ -42,7 +42,7 @@ public class OrderMapper {
         });
         return OrderDTO.builder()
                 .woNumber(wo.getWoNumber())
-                .jobTypeCode(wo.getJobType().getCode())
+                .jobType(wo.getJobType().getCode())
                 .woJobDTOs(jobs)
                 .address(wo.getAddress())
                 .city(wo.getCity())
@@ -54,10 +54,11 @@ public class OrderMapper {
                 .build();
     }
 
+    // Ver por que llega vacìo le JobType
     public Order convertToEntity(OrderDTO dto) {
         if(dto == null) {return null;}
-        if(dto.getJobTypeCode() == null) dto.setJobTypeCode("703TV2");
-        JobType jobType = jobTypeDAO.findByCode(dto.getJobTypeCode());
+        if(dto.getJobType() == null) return null;
+        JobType jobType = jobTypeDAO.findByCode(dto.getJobType());
         if(jobType == null) {return null;}
         List<OrderJob> woJobList = new ArrayList<>();
         try{

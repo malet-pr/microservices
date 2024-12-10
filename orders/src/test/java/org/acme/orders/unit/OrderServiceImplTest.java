@@ -43,7 +43,7 @@ public class OrderServiceImplTest {
         OrderJobDTO woJobDTO2 = OrderJobDTO.builder().jobCode("code2").build();
         dto = OrderDTO.builder().woNumber("ABC123")
                 .woJobDTOs(Arrays.asList(woJobDTO1, woJobDTO2))
-                .jobTypeCode("type1")
+                .jobType("type1")
                 .address("address").city("city").state("state")
                 .woCreationDate(date1)
                 .woCompletionDate(date2)

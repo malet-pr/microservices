@@ -68,7 +68,7 @@ public class OrderControllerTest extends BaseApiTest{
         // Arrange
         OrderDTO woDTO = OrderDTO.builder()
                 .woNumber("testNumber")
-                .jobTypeCode("type1")
+                .jobType("type1")
                 .woJobDTOs(Arrays.asList(woJobDTO1, woJobDTO2))
                 .woCreationDate(LocalDateTime.now().minusDays(3))
                 .woCompletionDate(LocalDateTime.now().minusHours(4))
@@ -97,7 +97,7 @@ public class OrderControllerTest extends BaseApiTest{
     void createJobTest_failure_noNumber() throws Exception {
         // Arrange
         OrderDTO woDTO = OrderDTO.builder()
-                .jobTypeCode("type1")
+                .jobType("type1")
                 .woJobDTOs(Arrays.asList(woJobDTO1, woJobDTO2))
                 .woCreationDate(LocalDateTime.now().minusDays(3))
                 .woCompletionDate(LocalDateTime.now().minusHours(4))
