@@ -14,7 +14,7 @@ import java.util.List;
 public class WorkOrder {
     private String woNumber;
     private List<WorkOrderJob> woJobDTOs;
-    private String jobTypeCode;
+    private String jobType;
     private String address;
     private String city;
     private String state;

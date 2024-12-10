@@ -94,7 +94,7 @@ public class AsyncServiceImpl implements AsyncService {
         log.info(" - {} - {}", wo.getWoNumber(), LocalDateTime.now());
 		boolean sent = false;
 		try {
-			consumer.callWorkOrder(dto);
+			//consumer.callWorkOrder(dto);
 			sent = true;
 		} catch (Exception e) {
             log.error("Error sending WO: {}", e.getMessage());

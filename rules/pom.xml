@@ -297,12 +297,10 @@
 							<outputTargets>
 								<outputTarget>
 									<type>java</type>
-									<outputDirectory>src/main/java/generated</outputDirectory>
 								</outputTarget>
 								<outputTarget>
 									<type>grpc-java</type>
 									<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.62.2</pluginArtifact>
-									<outputDirectory>src/main/java/generated</outputDirectory>
 								</outputTarget>
 							</outputTargets>
 						</configuration>

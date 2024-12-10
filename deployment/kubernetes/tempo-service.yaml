@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f monitoring.yaml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tempo
+  name: tempo
+spec:
+  ports:
+  - name: "3200"
+    port: 3200
+    targetPort: 3200
+  - name: "9411"
+    port: 9411
+    targetPort: 9411
+  selector:
+    io.kompose.service: tempo
+status:
+  loadBalancer: {}

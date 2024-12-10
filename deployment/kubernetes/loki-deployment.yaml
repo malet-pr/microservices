@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f monitoring.yaml
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: loki
+  name: loki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: loki
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert -f monitoring.yaml
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/grafana: "true"
+        io.kompose.service: loki
+    spec:
+      containers:
+      - args:
+        - -config.file=/etc/loki/local-config.yaml
+        image: grafana/loki:3.0.0
+        imagePullPolicy: ""
+        name: loki
+        ports:
+        - containerPort: 3100
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

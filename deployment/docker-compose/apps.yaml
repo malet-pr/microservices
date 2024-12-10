@@ -49,12 +49,12 @@ services:
     networks:
       - grafana
 
-  wo-service:
+  orders:
     #image: maletq/micro1-work-order:latest
     build:
-      context: ../../work-order
+      context: ../../orders
       dockerfile: Dockerfile
-    container_name: micro1-work-order
+    container_name: micro1-orders
     ports:
       - "8081:8081"
       - "8090:8090"

@@ -28,4 +28,10 @@ public class KafkaController {
         messageProducer.sendMessage(topic, message);
     }
 
+    @PostMapping("/test")
+    public void test(@RequestParam("topic") String topic) {
+        log.info("Sending a message to {}", topic);
+        messageProducer.sendMessage(topic, "Hello World");
+    }
+
 }

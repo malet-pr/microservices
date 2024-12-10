@@ -11,9 +11,9 @@
 	<description>Demo project for a microservices with monorepo</description>
 
 	<modules>
-		<module>work-order</module>
         <module>simulator</module>
 		<module>rules</module>
+		<module>orders</module>
     </modules>
 
 	<properties>
