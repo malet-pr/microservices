@@ -57,7 +57,7 @@ public class OrderMapper {
     // Ver por que llega vacìo le JobType
     public Order convertToEntity(OrderDTO dto) {
         if(dto == null) {return null;}
-        if(dto.getJobType() == null) return null;
+        if(dto.getJobType() == null) {return null;}
         JobType jobType = jobTypeDAO.findByCode(dto.getJobType());
         if(jobType == null) {return null;}
         List<OrderJob> woJobList = new ArrayList<>();
