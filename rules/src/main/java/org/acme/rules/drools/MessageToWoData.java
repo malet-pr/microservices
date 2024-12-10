@@ -9,7 +9,6 @@ import org.acme.rules.common.LocalDateTimeTypeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -24,6 +23,7 @@ public class MessageToWoData {
     Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter())
             .create();
+    Type listType = new TypeToken<List<WorkOrderData>>(){}.getType();
 
     public WorkOrderData readRabbitMessage(JsonElement msg) {
         try{
