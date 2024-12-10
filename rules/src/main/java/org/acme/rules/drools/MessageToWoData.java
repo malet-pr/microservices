@@ -3,6 +3,10 @@ package org.acme.rules.drools;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+<<<<<<< HEAD
+=======
+import com.google.gson.JsonElement;
+>>>>>>> develop
 import com.google.gson.reflect.TypeToken;
 import org.acme.rules.common.LocalDateTimeTypeAdapter;
 import org.slf4j.Logger;
@@ -25,10 +29,16 @@ public class MessageToWoData {
             .create();
     Type listType = new TypeToken<List<WorkOrderData>>(){}.getType();
 
+<<<<<<< HEAD
     public List<WorkOrderData> readRabbitMessage(JsonArray msg) {
         try{
             List<WorkOrderData> woDataStrings = gson.fromJson(String.valueOf(msg), listType);
             return woDataStrings;
+=======
+    public WorkOrderData readRabbitMessage(JsonElement msg) {
+        try{
+            return gson.fromJson(String.valueOf(msg), WorkOrderData.class);
+>>>>>>> develop
         } catch (Exception e){
             log.error(e.getMessage());
             return null;
