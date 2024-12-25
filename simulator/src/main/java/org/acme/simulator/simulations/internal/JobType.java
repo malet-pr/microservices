@@ -1,7 +1,5 @@
 package org.acme.simulator.simulations.internal;
 
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
