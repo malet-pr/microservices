@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import ComponentePrueba from './components/ComponentePrueba.vue';
+import SimulateOrders from "~/components/SimulateOrders.vue";
 
 </script>
 
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <ComponentePrueba />
+    <SimulateOrders />
   </div>
 </template>
