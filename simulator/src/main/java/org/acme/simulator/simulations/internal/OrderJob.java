@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class WorkOrderJob {
+public class OrderJob {
     private String woNumber;
     private String jobCode;
     private Integer quantity;

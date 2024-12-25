@@ -14,29 +14,29 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class WorkOrderSimulator {
+public class OrderSimulator {
 
-    private static final Logger log = LoggerFactory.getLogger(KafkaController.class);
+    private static final Logger log = LoggerFactory.getLogger(OrderSimulator.class);
 
     Faker faker = new Faker(Locale.ENGLISH);
     Random random = new Random();
     List<String> types = List.of("259HT4","055BE1","599HL8","703TV2","337PA8","659RP5","037NJ6");
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
 
-    public List<WorkOrderJob> simulateWOJ(String woNumber, int n){
-        List<WorkOrderJob> wjList = new ArrayList<>();
+    public List<OrderJob> simulateWOJ(String woNumber, int n){
+        List<OrderJob> wjList = new ArrayList<>();
         while(n > 0){
             String jc = String.valueOf(JobCode.values()[new Random().nextInt(JobCode.values().length)]);
             int q = random.nextInt(1,11);
-            wjList.add(new WorkOrderJob(woNumber,jc,q,'Y',null));
+            wjList.add(new OrderJob(woNumber,jc,q,'Y',null));
             n--;
         }
         return wjList;
     }
 
-    public WorkOrder simulate() {
+    public Order simulate() {
         String woNum = faker.expression("#{bothify '??##########','true'}");
-        List<WorkOrderJob> wjList = simulateWOJ(woNum, random.nextInt(1,5));
+        List<OrderJob> wjList = simulateWOJ(woNum, random.nextInt(1,5));
         String jobTypeCode = faker.options().nextElement(types);
         String address = faker.address().streetAddress();
         String city = faker.address().city();
@@ -45,7 +45,7 @@ public class WorkOrderSimulator {
         LocalDateTime woCreationDate = LocalDateTime.parse(strDate, formatter);
         LocalDateTime woCompletionDate = woCreationDate.plusDays(random.nextLong(1,4));
         String clientId = faker.expression("#{numerify '########'}");
-        return new WorkOrder(woNum,wjList,jobTypeCode,address,city,state,woCreationDate,woCompletionDate,clientId,false);
+        return new Order(woNum,wjList,jobTypeCode,address,city,state,woCreationDate,woCompletionDate,clientId,false);
     }
 
 }
