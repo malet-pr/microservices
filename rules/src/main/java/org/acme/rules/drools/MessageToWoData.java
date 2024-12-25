@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
