@@ -30,7 +30,7 @@ public class Simulations {
         List<Order> woList = new ArrayList<>();
         log.info("Simulating {} work orders ... ", quantity);
         while(quantity > 0){
-            woList.add(simu.simulate());
+            woList.add(simu.simulate("S1"));  // change this
             quantity--;
         }
         return woList;
