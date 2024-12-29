@@ -53,7 +53,7 @@ public class Simulations {
     private String getOrderNumber(String source){
         String lastOrders = redisTemplate.opsForValue().get(source);
         if(lastOrders == null){
-            initLastOrdersBySource(source);
+            throw new RuntimeException("Could not read data from Redis");
         }
         long num = Long.parseLong(lastOrders.split("-")[1]);
         String newOrder = lastOrders.split("-")[0]
@@ -61,17 +61,6 @@ public class Simulations {
                 .concat(String.format("%010d", num + 1));
         redisTemplate.opsForValue().set(source, newOrder);
         return newOrder;
-    }
-
-    private void initLastOrdersBySource(String source){
-        String initialOrder;
-        switch (source) {
-            case "S1" -> initialOrder = "J-0000000000";
-            case "S2" -> initialOrder = "L-0000000000";
-            case "S3" -> initialOrder = "W-0000000000";
-            default -> throw new IllegalStateException("Unexpected value: " + source);
-        }
-        redisTemplate.opsForValue().set(source, initialOrder);
     }
 
     public String convertToJsonArray(List<Order> orders) {
