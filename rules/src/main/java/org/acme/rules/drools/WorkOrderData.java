@@ -2,7 +2,6 @@ package org.acme.rules.drools;
 
 import lombok.*;
 import org.acme.rules.grpc.woserviceconnect.WoJob;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
