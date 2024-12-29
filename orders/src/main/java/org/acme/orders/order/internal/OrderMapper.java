@@ -1,6 +1,5 @@
 package org.acme.orders.order.internal;
 
-
 import org.acme.orders.job.internal.Job;
 import org.acme.orders.job.internal.JobDAO;
 import org.acme.orders.jobtype.internal.JobType;
@@ -10,7 +9,6 @@ import org.acme.orders.orderjob.OrderJobDTO;
 import org.acme.orders.orderjob.internal.OrderJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

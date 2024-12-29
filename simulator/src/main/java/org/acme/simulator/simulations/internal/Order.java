@@ -11,9 +11,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
-public class WorkOrder {
+public class Order {
     private String woNumber;
-    private List<WorkOrderJob> woJobDTOs;
+    private List<OrderJob> woJobDTOs;
     private String jobType;
     private String address;
     private String city;

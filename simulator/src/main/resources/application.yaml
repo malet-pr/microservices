@@ -6,6 +6,16 @@ spring:
         name: simulator
     kafka:
         bootstrap-servers: http://localhost:9092
+    data:
+        redis:
+            host: localhost
+            port: 6380      # Redis port for microservices instance
+            password: redis-pass
+            lettuce:
+                pool:
+                    max-active: 8
+                    max-idle: 8
+                    min-idle: 0
 management:
     endpoints:
         web:
