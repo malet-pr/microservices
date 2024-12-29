@@ -1,6 +1,7 @@
 name: Orders Service
 run-name: ${{ github.actor }}
 on:
+  workflow_dispatch:
   push:
     paths:
       - orders/**
