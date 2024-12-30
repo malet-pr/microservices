@@ -7,6 +7,7 @@ import org.acme.simulator.simulations.internal.Order;
 import org.acme.simulator.simulations.internal.OrderSimulator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -50,11 +51,20 @@ public class Simulations {
         return woList;
     }
 
-    private String getOrderNumber(String source){
-        String lastOrders = redisTemplate.opsForValue().get(source);
-        if(lastOrders == null){
-            log.error("Could not read data from Redis");
-            throw new RuntimeException("Could not read data from Redis");
+    public String getOrderNumber(String source){
+        String lastOrders;
+        try {
+            lastOrders = redisTemplate.opsForValue().get(source);
+        } catch (RedisConnectionFailureException e) {
+            log.error("Redis is unavailable", e);
+            throw new RuntimeException("Redis is unavailable", e);
+        } catch (Exception e) {
+            log.error("Unexpected error while accessing Redis", e);
+            throw new RuntimeException("Unexpected error while accessing Redis", e);
+        }
+        if (lastOrders == null) {
+            log.warn("Key '{}' does not exist in Redis", source);
+            throw new RuntimeException("Key does not exist in Redis");
         }
         long num = Long.parseLong(lastOrders.split("-")[1]);
         String newOrder = lastOrders.split("-")[0]
@@ -64,13 +74,9 @@ public class Simulations {
         return newOrder;
     }
 
-    public String convertToJsonArray(List<Order> orders) {
-        return gson.toJson(orders);
-    }
-
     public String prepareKafkaMessages(int quantity) {
         List<Order> list = simulateWorkOrders(quantity);
-        return convertToJsonArray(list);
+        return gson.toJson(list);
     }
 
 }
