@@ -53,6 +53,7 @@ public class Simulations {
     private String getOrderNumber(String source){
         String lastOrders = redisTemplate.opsForValue().get(source);
         if(lastOrders == null){
+            log.error("Could not read data from Redis");
             throw new RuntimeException("Could not read data from Redis");
         }
         long num = Long.parseLong(lastOrders.split("-")[1]);
