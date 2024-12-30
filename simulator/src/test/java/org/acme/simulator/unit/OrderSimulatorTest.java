@@ -1,6 +1,5 @@
 package org.acme.simulator.unit;
 
-import net.datafaker.Faker;
 import org.acme.simulator.simulations.internal.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,11 +10,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,7 +31,7 @@ public class OrderSimulatorTest {
     @DisplayName("Test creation of List<OrderJob> for an order")
     void simulateWOJTest(){
         // Arrange
-        when(mockedRandom.nextInt(3)).thenReturn(0).thenReturn(1).thenReturn(2);
+        when(mockedRandom.nextInt(7)).thenReturn(0).thenReturn(1).thenReturn(2);
         when(mockedRandom.nextInt(1, 11)).thenReturn(5).thenReturn(8).thenReturn(2);
         // Act
         List<OrderJob> orderJobs = simulator.simulateWOJ("Test-1",JobType.A259HT4.name(),3);
