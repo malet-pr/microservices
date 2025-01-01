@@ -18,8 +18,9 @@ import java.util.List;
 public class Simulations {
 
     private static final Logger log = LoggerFactory.getLogger(Simulations.class);
-    private final OrderSimulator simu;
-    private final RedisTemplate<String, String> redisTemplate;
+
+    private OrderSimulator simu;
+    private RedisTemplate<String, String> redisTemplate;
 
     public Simulations(OrderSimulator simu, RedisTemplate<String, String> redisTemplate) {
         this.simu = simu;
@@ -33,7 +34,7 @@ public class Simulations {
     public List<Order> simulateWorkOrders(int quantity){
         List<Order> woList = new ArrayList<>();
         log.info("Simulating {} work orders ... ", quantity);
-        int q1 = (int) Math.floor(quantity*0.55);
+        int q1 = (int) Math.ceil(quantity*0.50);
         int q2 = (int) Math.floor(quantity*0.35);
         int q3 = quantity-q1-q2;
         while(q1 > 0){
