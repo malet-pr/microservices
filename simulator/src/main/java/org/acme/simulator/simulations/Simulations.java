@@ -51,7 +51,7 @@ public class Simulations {
         return woList;
     }
 
-    public String getOrderNumber(String source){
+    public String getOrderNumber(String source) {
         String lastOrders;
         try {
             lastOrders = redisTemplate.opsForValue().get(source);
@@ -72,6 +72,7 @@ public class Simulations {
                 .concat(String.format("%010d", num + 1));
         redisTemplate.opsForValue().set(source, newOrder);
         return newOrder;
+    }
 
     public String prepareKafkaMessages(int quantity) {
         List<Order> list = simulateWorkOrders(quantity);
