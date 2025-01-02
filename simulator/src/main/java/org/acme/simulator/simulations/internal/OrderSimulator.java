@@ -3,13 +3,13 @@ package org.acme.simulator.simulations.internal;
 import net.datafaker.Faker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-@Component
+@Service
 public class OrderSimulator {
 
     private static final Logger log = LoggerFactory.getLogger(OrderSimulator.class);

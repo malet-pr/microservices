@@ -7,6 +7,7 @@ import org.acme.simulator.simulations.internal.Order;
 import org.acme.simulator.simulations.internal.OrderSimulator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class Simulations {
     public List<Order> simulateWorkOrders(int quantity){
         List<Order> woList = new ArrayList<>();
         log.info("Simulating {} work orders ... ", quantity);
-        int q1 = (int) Math.floor(quantity*0.55);
+        int q1 = (int) Math.ceil(quantity*0.50);
         int q2 = (int) Math.floor(quantity*0.35);
         int q3 = quantity-q1-q2;
         while(q1 > 0){
@@ -50,10 +51,20 @@ public class Simulations {
         return woList;
     }
 
-    private String getOrderNumber(String source){
-        String lastOrders = redisTemplate.opsForValue().get(source);
-        if(lastOrders == null){
-            throw new RuntimeException("Could not read data from Redis");
+    public String getOrderNumber(String source){
+        String lastOrders;
+        try {
+            lastOrders = redisTemplate.opsForValue().get(source);
+        } catch (RedisConnectionFailureException e) {
+            log.error("Redis is unavailable", e);
+            throw new RuntimeException("Redis is unavailable", e);
+        } catch (Exception e) {
+            log.error("Unexpected error while accessing Redis", e);
+            throw new RuntimeException("Unexpected error while accessing Redis", e);
+        }
+        if (lastOrders == null) {
+            log.warn("Key '{}' does not exist in Redis", source);
+            throw new RuntimeException("Key does not exist in Redis");
         }
         long num = Long.parseLong(lastOrders.split("-")[1]);
         String newOrder = lastOrders.split("-")[0]
@@ -61,15 +72,10 @@ public class Simulations {
                 .concat(String.format("%010d", num + 1));
         redisTemplate.opsForValue().set(source, newOrder);
         return newOrder;
-    }
-
-    public String convertToJsonArray(List<Order> orders) {
-        return gson.toJson(orders);
-    }
 
     public String prepareKafkaMessages(int quantity) {
         List<Order> list = simulateWorkOrders(quantity);
-        return convertToJsonArray(list);
+        return gson.toJson(list);
     }
 
 }
