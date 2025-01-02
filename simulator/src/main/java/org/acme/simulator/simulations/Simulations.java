@@ -18,9 +18,8 @@ import java.util.List;
 public class Simulations {
 
     private static final Logger log = LoggerFactory.getLogger(Simulations.class);
-
-    private OrderSimulator simu;
-    private RedisTemplate<String, String> redisTemplate;
+    private final OrderSimulator simu;
+    private final RedisTemplate<String, String> redisTemplate;
 
     public Simulations(OrderSimulator simu, RedisTemplate<String, String> redisTemplate) {
         this.simu = simu;
@@ -73,7 +72,6 @@ public class Simulations {
                 .concat(String.format("%010d", num + 1));
         redisTemplate.opsForValue().set(source, newOrder);
         return newOrder;
-    }
 
     public String prepareKafkaMessages(int quantity) {
         List<Order> list = simulateWorkOrders(quantity);
