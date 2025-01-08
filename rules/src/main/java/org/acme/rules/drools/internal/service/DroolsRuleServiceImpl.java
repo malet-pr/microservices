@@ -4,7 +4,6 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
-import org.acme.rules.drools.WorkOrderData;
 import org.acme.rules.grpc.WorkOrderConsumer;
 import org.acme.rules.drools.internal.util.RuleAdapter;
 import org.acme.rules.drools.internal.util.RuleTypeAdapter;
@@ -13,7 +12,7 @@ import org.acme.rules.drools.internal.model.RuleType;
 import org.acme.rules.drools.internal.repository.RuleDAO;
 import org.acme.rules.drools.internal.repository.RuleTypeDAO;
 import org.acme.rules.drools.internal.util.AdapterBuilder;
-import org.acme.rules.drools.internal.util.Constants;
+import org.acme.rules.grpc.woserviceconnect.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.kie.api.KieServices;
@@ -208,22 +207,22 @@ public class DroolsRuleServiceImpl implements DroolsRuleService{
     }
 
     @Override
-    public boolean addWoToRun(WorkOrderData wo, String grouping) {
-        List<WorkOrderData> woList = new ArrayList<>();
-        woList.add(wo);
+    public boolean addWoToRun(Order order, String grouping) {
+        List<Order> woList = new ArrayList<>();
+        woList.add(order);
         return runRules(grouping, woList);
     }
 
     @Override
-    public boolean runRules(String grouping, List<WorkOrderData> woList) {
+    public boolean runRules(String grouping, List<Order> woList) {
         woList = woList.stream()
                 .filter(wo -> wo != null && !wo.getWoJobs().isEmpty())
                 .toList();
         HashMap<RuleType, RuleAdapter> rules = this.getRulesByType(grouping);
         List<RuleType> ruleTypes = new ArrayList<RuleType>(rules.keySet())
                 .stream().sorted(Comparator.comparing(RuleType::getPriority)).toList();
-        for (WorkOrderData wo : woList) {
-            WorkOrderData woInProcess = wo;
+        for (Order wo : woList) {
+            Order woInProcess = wo;
             System.out.println(" \r\n ### Processing WO: " + wo.getWoNumber());
             for (RuleType rt  : ruleTypes) {
                 RuleTypeAdapter facts = AdapterBuilder.ruleTypeAdapterBuilder(rt, woInProcess);
@@ -231,13 +230,13 @@ public class DroolsRuleServiceImpl implements DroolsRuleService{
                 this.fireAllRules(rule, facts);
                 woInProcess = droolsActionsService.impactRules(facts);
             }
-            //consumer.callWorkOrder(woInProcess);
+            consumer.callWorkOrder(woInProcess);
         }
         return true;
     }
 
     @Override
-    public boolean recover(RuntimeException e, String grouping, List<WorkOrderData> woList) {
+    public boolean recover(RuntimeException e, String grouping, List<Order> woList) {
         woList.forEach(wo -> {
             errorOtsService.add(wo.getWoNumber(), grouping, e);
         });
@@ -245,7 +244,7 @@ public class DroolsRuleServiceImpl implements DroolsRuleService{
     }
 
     @Override
-    public boolean recover(RuntimeException e, WorkOrderData wo) {
+    public boolean recover(RuntimeException e, Order wo) {
         errorOtsService.add(wo.getWoNumber(), e);
         return false;
     }

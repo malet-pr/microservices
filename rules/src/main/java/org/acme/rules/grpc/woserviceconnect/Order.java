@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Wo {
+public class Order {
     private String woNumber;
     private List<WoJob> woJobs;
     private String jobTypeCode;

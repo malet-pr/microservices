@@ -1,8 +1,7 @@
 package org.acme.rules.drools.internal.util;
 
 import lombok.*;
-import org.acme.rules.drools.WorkOrderData;
-
+import org.acme.rules.grpc.woserviceconnect.Order;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class ActionAdapter {
 	
 	private String action;
-	private List<WorkOrderData> woData;
+	private List<Order> woData;
 	private String newJob;
 	private String oldJob;
 	private int amount;

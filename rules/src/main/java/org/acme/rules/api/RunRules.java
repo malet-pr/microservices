@@ -1,7 +1,7 @@
 package org.acme.rules.api;
 
 import org.acme.rules.drools.AsyncService;
-import org.acme.rules.drools.WorkOrderData;
+import org.acme.rules.grpc.woserviceconnect.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +14,13 @@ public class RunRules {
     private AsyncService asyncService;
 
     @PostMapping("/one")
-    public Boolean runRule(@RequestBody WorkOrderData wo, @RequestParam("group") String group) {
-        return asyncService.runRule(wo,group);
+    public Boolean runRule(@RequestBody Order order, @RequestParam("group") String group) {
+        return asyncService.runRule(order,group);
     }
 
     @PostMapping()
-    public Boolean runRule(@RequestBody WorkOrderData wo) {
-        return asyncService.runRule(wo);
+    public Boolean runRule(@RequestBody Order order) {
+        return asyncService.runRule(order);
     }
 
 }

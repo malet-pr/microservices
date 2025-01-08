@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkOrderData {
+public class WoData {
     private String woNumber;
     private List<WoJob> woJobs;
     private LocalDateTime woCreationDate;

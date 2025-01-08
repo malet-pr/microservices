@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import lombok.Data;
-import org.acme.rules.drools.WorkOrderData;
 import org.acme.rules.drools.internal.model.RuleType;
+import org.acme.rules.grpc.woserviceconnect.Order;
 
 @Data
 public class RuleTypeAdapter {
 
     private RuleType ruleType;
-    private WorkOrderData woInProcess;
+    private Order woInProcess;
     private List<ActionAdapter> actions;
     
     public void addJob(String job, String ruleName) {

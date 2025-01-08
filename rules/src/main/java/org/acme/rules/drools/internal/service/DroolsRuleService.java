@@ -1,10 +1,10 @@
 package org.acme.rules.drools.internal.service;
 
-import org.acme.rules.drools.WorkOrderData;
 import org.acme.rules.drools.internal.util.RuleAdapter;
 import org.acme.rules.drools.internal.util.RuleTypeAdapter;
 import org.acme.rules.drools.internal.model.Rule;
 import org.acme.rules.drools.internal.model.RuleType;
+import org.acme.rules.grpc.woserviceconnect.Order;
 import org.kie.api.builder.KieBuilder;
 import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieContainer;
@@ -29,9 +29,9 @@ public interface DroolsRuleService {
     RuleAdapter getRuleAdapter(RuleType type);
     void fireAllRules(RuleAdapter adapter, RuleTypeAdapter facts);
     void fireAllRules(RuleAdapter adapter, KieSession kieSession);
-    boolean addWoToRun(WorkOrderData wo, String grouping);
-    boolean runRules(String grouping, List<WorkOrderData> woList);
-    boolean recover(RuntimeException e, String grouping, List<WorkOrderData> woList);
-    boolean recover(RuntimeException e, WorkOrderData woList);
+    boolean addWoToRun(Order order, String grouping);
+    boolean runRules(String grouping, List<Order> orderList);
+    boolean recover(RuntimeException e, String grouping, List<Order> orderList);
+    boolean recover(RuntimeException e, Order order);
     RuleAdapter getRuleAdapter(RuleType type, String threadName);
 }

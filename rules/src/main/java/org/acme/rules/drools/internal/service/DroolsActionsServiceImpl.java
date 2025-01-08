@@ -3,7 +3,6 @@ package org.acme.rules.drools.internal.service;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-import org.acme.rules.drools.WorkOrderData;
 import org.acme.rules.drools.internal.util.ActionAdapter;
 import org.acme.rules.drools.internal.util.RuleTypeAdapter;
 import org.acme.rules.drools.internal.dto.WoRuleAdapter;
@@ -11,6 +10,7 @@ import org.acme.rules.drools.internal.model.Rule;
 import org.acme.rules.drools.internal.model.RuleLog;
 import org.acme.rules.drools.internal.util.Constants;
 import org.acme.rules.drools.internal.util.WorkOrderUtils;
+import org.acme.rules.grpc.woserviceconnect.Order;
 import org.acme.rules.grpc.woserviceconnect.WoJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,26 +35,26 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
         //adapter.setJobCodeList(workOrderUtils.getCodeWoJobs(jobService.findByCodes(codes)));
     }
 
-    private WoJob buildNewJob(WorkOrderData wo, Rule rule, String code) {
+    private WoJob buildNewJob(Order order, Rule rule, String code) {
         return WoJob.builder()
                 .jobCode(code)
                 .activeStatus(Constants.YES)
-                .woNumber(wo.getWoNumber())
+                .woNumber(order.getWoNumber())
                 .appliedRule(rule.getName())
                 .build();
     }
 
     @Override
-    public WorkOrderData recoverImpactRules(RuntimeException e, RuleTypeAdapter facts) {
-        return WorkOrderData.builder().build();
+    public Order recoverImpactRules(RuntimeException e, RuleTypeAdapter facts) {
+        return Order.builder().build();
     }
 
 
     // ARREGLAR
     @Override
-    public WorkOrderData impactRules(RuleTypeAdapter facts) {
+    public Order impactRules(RuleTypeAdapter facts) {
         String uuid = UUID.randomUUID().toString();
-        WorkOrderData wo = facts.getWoInProcess();
+        Order wo = facts.getWoInProcess();
         List<ActionAdapter> actions = facts.getActions().stream()
                 .sorted(Comparator.comparing(ActionAdapter::getCreationDate))
                 .toList();
@@ -72,7 +72,7 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
     }
 
     @Override
-    public void addJob(ActionAdapter action, WorkOrderData wo) {
+    public void addJob(ActionAdapter action, Order wo) {
         Rule rule = droolsService.getRule(action.getRule());
         WoJob activateJob = buildNewJob(wo, rule, action.getNewJob());
         activateJob.setAppliedRule(rule.getName());
@@ -82,7 +82,7 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
     }
 
     @Override
-    public void removeJobs(ActionAdapter action, WorkOrderData wo){
+    public void removeJobs(ActionAdapter action, Order wo){
         List<String> codes = wo.getWoJobs().stream().map(WoJob::getJobCode).toList();
         Rule rule = droolsService.getRule(action.getRule());
         wo.getWoJobs().stream()
@@ -96,7 +96,7 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
     }
 
     @Override
-    public void removeAllJobs(ActionAdapter action, WorkOrderData wo) {
+    public void removeAllJobs(ActionAdapter action, Order wo) {
         Rule rule = droolsService.getRule(action.getRule());
         wo.getWoJobs().stream()
             .filter(a -> a.getActiveStatus().equals(Constants.ACTIVE_Y) && (a.getAppliedRule() ==  null))
@@ -108,7 +108,7 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
     }
 
     @Override
-    public void updateJob(ActionAdapter action, WorkOrderData wo) {
+    public void updateJob(ActionAdapter action, Order wo) {
         String newJob = action.getNewJob();
         String oldJob = action.getOldJob();
         String ruleName = action.getRule();
@@ -132,7 +132,7 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
     }
 
     @Override
-    public WorkOrderData recover(RuntimeException e, RuleTypeAdapter facts) {
+    public Order recover(RuntimeException e, RuleTypeAdapter facts) {
         woErrorService.add(facts.getWoInProcess().getWoNumber(), "", e);
         return facts.getWoInProcess();
     }
@@ -147,7 +147,7 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
                 .build();
     }
 
-    private List<RuleLog> getLogFinal(List<RuleLog> logs,List<WorkOrderData> woList) {
+    private List<RuleLog> getLogFinal(List<RuleLog> logs,List<Order> woList) {
         for (RuleLog log : logs) {
             log.setEndDate(LocalDateTime.now());
             log.setFinalActiveJob(getJobs(woList, log.getWoNumber(), Constants.YES));
@@ -158,7 +158,7 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
 
     private List<RuleLog> getLogInicial(ActionAdapter action, String uuid) {
         List<RuleLog> logs = new ArrayList<RuleLog>();
-        for (WorkOrderData adapter : action.getWoData()) {
+        for (Order adapter : action.getWoData()) {
             RuleLog log = new RuleLog();
             log.setRunId(uuid);
             log.setRuleName(action.getRule() + " - " + action.getAction());
@@ -171,14 +171,14 @@ public class DroolsActionsServiceImpl implements DroolsActionsService {
         return logs;
     }
 
-    private String getJobs(List<WorkOrderData> woList, String woNumber, Character active) {
-        Optional<WorkOrderData> wo = woList.stream()
+    private String getJobs(List<Order> woList, String woNumber, Character active) {
+        Optional<Order> wo = woList.stream()
                                         .filter(x -> x.getWoNumber().equalsIgnoreCase(woNumber))
                                         .findFirst();
         return wo.map(woRuleAdapter -> getJob(wo.get(), active)).orElse(null);
     }
 
-    private String getJob(WorkOrderData wo, Character active) {
+    private String getJob(Order wo, Character active) {
         List<String> codes = wo.getWoJobs().stream()
                 .filter(j -> j.getActiveStatus().equals(active))
                 .map(WoJob::getJobCode)
