@@ -10,12 +10,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rules")
-public class RulesCRUDE {
-
+public class RulesCRUD {
+   /*
     @Autowired
     private RuleCRUD ruleCRUD;
 
-    /*
+
 
     @GetMapping("/rule")
     public void getRuleByName(@RequestParam String name) {

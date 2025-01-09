@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-modulith.version>1.2.1</spring-modulith.version>
-		<version.org.drools>9.44.0.Final</version.org.drools>
+		<drools.version>10.0.0</drools.version>
 		<io.grpc.version>1.68.0</io.grpc.version>
 		<com.google.protobuf.version>3.25.5</com.google.protobuf.version>
 <!--		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>-->
@@ -44,25 +44,21 @@
 	<!-- 				start DROOLS						-->
 		<dependency>
 			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>${version.org.drools}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${version.org.drools}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-mvel</artifactId>
-			<version>${version.org.drools}</version>
+			<artifactId>drools-rules-spring-boot-starter</artifactId>
+			<version>${drools.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-persistence-jpa</artifactId>
-			<version>${version.org.drools}</version>
+			<version>${drools.version}</version>
 		</dependency>
-	<!-- 				end DROOLS							-->
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-drools-yaml-archetype</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+
+		<!-- 				end DROOLS							-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
@@ -102,14 +98,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-starter-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-starter-jpa</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>2.18.0</version>
@@ -143,16 +131,6 @@
 			<artifactId>opentelemetry-exporter-zipkin</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-actuator</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-observability</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
@@ -166,28 +144,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-wiring-dynamic</artifactId>
+			<version>10.0.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>5.12.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -211,18 +178,13 @@
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.github.hakky54</groupId>
+			<artifactId>logcaptor</artifactId>
+			<version>2.10.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.modulith</groupId>
-				<artifactId>spring-modulith-bom</artifactId>
-				<version>${spring-modulith.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>

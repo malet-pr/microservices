@@ -30,10 +30,13 @@ public class AdapterBuilder {
     }
 
     public static List<String> getListOfCodes(Order order){
+        /*
         return order.getWoJobs().stream()
                 .filter(j -> j.getActiveStatus().equals('Y'))
                 .map(WoJob::getJobCode)
                 .toList();
+         */
+        return List.of("YY171T");
     }
 
     public static WoRuleAdapter buildOTReglaAdapter(Order dto) {

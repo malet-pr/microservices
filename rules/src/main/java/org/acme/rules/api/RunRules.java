@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/run")
 public class RunRules {
 
-
+/*
     @Autowired
     private AsyncService asyncService;
 
@@ -18,10 +18,13 @@ public class RunRules {
         return asyncService.runRule(order,group);
     }
 
-    @PostMapping()
+    @PostMapping("/two")
     public Boolean runRule(@RequestBody Order order) {
-        return asyncService.runRule(order);
+        boolean result = asyncService.runRule(order);
+        return result;
     }
+
+ */
 
 }
 

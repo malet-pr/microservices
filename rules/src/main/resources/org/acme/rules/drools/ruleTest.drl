@@ -1,0 +1,26 @@
+package org.acme.rules.drools;
+
+unit WoDataUnit;
+
+rule "will execute for each order without number"
+when
+    /woDataList[ woNumber == null, $jobTypeVal : jobTypeCode]
+then
+    controlSet.add($jobTypeVal);
+end
+
+query FindJobType
+    $m: /woDataList[ woNumber == null ]
+end
+
+
+rule "will execute for each order with number"
+when
+    /woDataList[ woNumber != null, $woNumberVal : woNumber]
+then
+    controlSet.add($woNumberVal);
+end
+
+query ListOrderNumber
+    $m: /woDataList[ woNumber != null ]
+end
