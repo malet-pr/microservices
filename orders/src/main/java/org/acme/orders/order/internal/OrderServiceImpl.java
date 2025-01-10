@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             entity.getJobs().forEach(j -> j.setOrder(entity));
             Order order = woDAO.save(entity);
-            String json = gson.toJson(dto);
+            String json = gson.toJson(dto); //TODO: revisit data sent to rules service
             msgSender.sendWorkOrder("work-order-queue",json);
             log.info("Successfully saved work order {}", order);
             result = Boolean.TRUE;

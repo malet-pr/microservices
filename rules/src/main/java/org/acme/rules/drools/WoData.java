@@ -15,11 +15,9 @@ public class WoData {
     private LocalDateTime woCreationDate;
     private LocalDateTime woCompletionDate;
     private String jobTypeCode;
-    private String jobTypeName;
-    private String address;
-    private String city;
     private String state;
     private String clientId;
+    private String clientType;
 
     public boolean containsJobCode(String jobCode){
         return this.getWoJobs().stream().anyMatch(j -> j.getJobCode().equals(jobCode));
@@ -35,3 +33,9 @@ public class WoData {
     }
 
 }
+
+// contains a list of jobCodes
+// does not contain single jobCode
+// does not contain a list of jobCodes
+// add Job
+//
