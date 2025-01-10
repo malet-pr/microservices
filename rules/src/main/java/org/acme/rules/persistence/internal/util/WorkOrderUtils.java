@@ -1,4 +1,4 @@
-package org.acme.rules.drools.internal.util;
+package org.acme.rules.persistence.internal.util;
 
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;

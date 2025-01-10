@@ -8,62 +8,69 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 public class RuleTest {
 
     static final Logger log = LoggerFactory.getLogger(RuleTest.class);
 
     @Test
-    @DisplayName("Tests the rule for Orders without order number")
-    public void noOrderNumberTest() {
+    @DisplayName("Tests the rule for disabling a job - applies")
+    public void disableJobTest_yes() {
         log.info("Creating RuleUnit");
         WoDataUnit woDataUnit = new WoDataUnit();
         RuleUnitInstance<WoDataUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(woDataUnit);
+        log.info("Preparing data");
+        WoJob wj1 = WoJob.builder().jobCode("job1").activeStatus("Y").build();
+        WoJob wj2 = WoJob.builder().jobCode("job2").activeStatus("Y").build();
+        WoData order1 = WoData.builder().woNumber("order1").jobTypeCode("code1").woJobs(List.of(wj1, wj2)).build();
         try {
             log.info("Insert data");
-            woDataUnit.getWoDataList().add(WoData.builder().woNumber("order1").jobTypeCode("code1").build());
-            woDataUnit.getWoDataList().add(WoData.builder().woNumber("order2").jobTypeCode("code2").build());
-            woDataUnit.getWoDataList().add(WoData.builder().jobTypeCode("codeNull").build());
-
-            log.info("Run query. Rules are also fired");
-            List<WoData> queryResult = instance.executeQuery("FindJobType").toList("$m");
-
-            queryResult.stream().map(WoData::getJobTypeCode).forEach(System.out::println);
-
-            assertEquals(1, queryResult.size());
-            assertTrue(woDataUnit.getControlSet().contains("codeNull"), "contains codeNull");
-
+            woDataUnit.getOrders().add(order1);
+            log.info("Fire rules");
+            instance.fire();
+            log.info("Check results");
+            String job1Active = order1.getWoJobs().stream()
+                    .filter(wj -> wj.getJobCode().equals("job1"))
+                    .findFirst().get().getActiveStatus();
+            String job2Active = order1.getWoJobs().stream()
+                    .filter(wj -> wj.getJobCode().equals("job2"))
+                    .findFirst().get().getActiveStatus();
+            assertEquals("N", job1Active);
+            assertEquals("Y", job2Active);
         } finally {
             instance.close();
         }
     }
 
     @Test
-    @DisplayName("Tests the rule for Orders with order number")
-    public void orderNumberTest() {
+    @DisplayName("Tests the rule for disabling jobs - doesn't apply")
+    public void disableJobsTest_not() {
         log.info("Creating RuleUnit");
         WoDataUnit woDataUnit = new WoDataUnit();
         RuleUnitInstance<WoDataUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(woDataUnit);
+        log.info("Preparing data");
+        WoJob wj1 = WoJob.builder().jobCode("job1").activeStatus("Y").build();
+        WoJob wj2 = WoJob.builder().jobCode("job2").activeStatus("Y").build();
+        WoData order2 = WoData.builder().woNumber("order2").jobTypeCode("code2").woJobs(List.of(wj1, wj2)).build();
         try {
             log.info("Insert data");
-            woDataUnit.getWoDataList().add(WoData.builder().woNumber("order1").jobTypeCode("code1").build());
-            woDataUnit.getWoDataList().add(WoData.builder().woNumber("order2").jobTypeCode("code2").build());
-            woDataUnit.getWoDataList().add(WoData.builder().jobTypeCode("codeNull").build());
-
-            log.info("Run query. Rules are also fired");
-            List<WoData> queryResult = instance.executeQuery("ListOrderNumber").toList("$m");
-
-            queryResult.stream().map(WoData::getWoNumber).forEach(System.out::println);
-
-            assertEquals(2, queryResult.size());
-            assertTrue(woDataUnit.getControlSet().contains("order1"), "contains order1");
-            assertTrue(woDataUnit.getControlSet().contains("order2"), "contains order2");
-
+            woDataUnit.getOrders().add(order2);
+            log.info("Fire rules");
+            instance.fire();
+            log.info("Check results");
+            String job1Active = order2.getWoJobs().stream()
+                    .filter(wj -> wj.getJobCode().equals("job1"))
+                    .findFirst().get().getActiveStatus();
+            String job2Active = order2.getWoJobs().stream()
+                    .filter(wj -> wj.getJobCode().equals("job2"))
+                    .findFirst().get().getActiveStatus();
+            assertEquals("Y", job1Active);
+            assertEquals("Y", job2Active);
         } finally {
             instance.close();
         }
     }
 
 }
+
+

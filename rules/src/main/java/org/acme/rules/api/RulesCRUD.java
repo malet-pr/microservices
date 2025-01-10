@@ -1,12 +1,7 @@
 package org.acme.rules.api;
 
 
-import org.acme.rules.drools.RuleCRUD;
-import org.acme.rules.drools.internal.dto.RuleDTO;
-import org.acme.rules.drools.internal.dto.UpdateRuleDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/rules")

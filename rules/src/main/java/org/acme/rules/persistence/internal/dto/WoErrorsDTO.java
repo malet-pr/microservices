@@ -1,4 +1,4 @@
-package org.acme.rules.drools.internal.dto;
+package org.acme.rules.persistence.internal.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

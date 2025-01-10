@@ -1,4 +1,4 @@
-package org.acme.rules.drools.internal.dto;
+package org.acme.rules.persistence.internal.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.acme.rules.drools.internal.util;
+package org.acme.rules.persistence.internal.util;
 
 public class Constants {
 

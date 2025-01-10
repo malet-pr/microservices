@@ -1,20 +1,20 @@
-package org.acme.rules.drools.internal.dto;
+package org.acme.rules.persistence.internal.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RuleDTO {
+public class RuleTypeDTO {
 	private String name;
-	private String description;
+	private String code;
+	private String header;
+	private Character visible;
 	private String grouping;
-	private String drl;
-	private Character activeStatus;
-
+	private Long priority;
+	private String headerDefault;
 }

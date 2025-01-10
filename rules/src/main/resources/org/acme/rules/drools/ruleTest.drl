@@ -2,25 +2,20 @@ package org.acme.rules.drools;
 
 unit WoDataUnit;
 
-rule "will execute for each order without number"
+import java.util.List
+import java.util.Set
+import java.util.stream.Collectors
+import org.acme.rules.drools.WoData;
+import org.acme.rules.drools.WoJob;
+
+
+rule "disable job for jobtype"
+dialect "java"
 when
-    /woDataList[ woNumber == null, $jobTypeVal : jobTypeCode]
+     $order: /orders[ getJobTypeCode() == "code1" ]
+     $job: /orders[ $order.containsJobCode("job1") ]
 then
-    controlSet.add($jobTypeVal);
+     System.out.println($order.getWoNumber() + " - applied rule: disable job1 for code1");
+     $order.disableJob("job1","disable job for jobtype");
 end
 
-query FindJobType
-    $m: /woDataList[ woNumber == null ]
-end
-
-
-rule "will execute for each order with number"
-when
-    /woDataList[ woNumber != null, $woNumberVal : woNumber]
-then
-    controlSet.add($woNumberVal);
-end
-
-query ListOrderNumber
-    $m: /woDataList[ woNumber != null ]
-end

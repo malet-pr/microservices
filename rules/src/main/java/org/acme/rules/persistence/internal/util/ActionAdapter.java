@@ -1,4 +1,4 @@
-package org.acme.rules.drools.internal.util;
+package org.acme.rules.persistence.internal.util;
 
 import lombok.*;
 import org.acme.rules.grpc.woserviceconnect.Order;

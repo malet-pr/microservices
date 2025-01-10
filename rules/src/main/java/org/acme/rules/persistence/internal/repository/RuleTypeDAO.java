@@ -1,6 +1,6 @@
-package org.acme.rules.drools.internal.repository;
+package org.acme.rules.persistence.internal.repository;
 
-import org.acme.rules.drools.internal.model.RuleType;
+import org.acme.rules.persistence.internal.model.RuleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

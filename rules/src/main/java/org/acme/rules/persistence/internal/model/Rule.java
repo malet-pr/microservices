@@ -1,4 +1,4 @@
-package org.acme.rules.drools.internal.model;
+package org.acme.rules.persistence.internal.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

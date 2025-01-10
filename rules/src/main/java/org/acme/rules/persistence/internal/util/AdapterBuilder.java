@@ -1,9 +1,8 @@
-package org.acme.rules.drools.internal.util;
+package org.acme.rules.persistence.internal.util;
 
 import org.acme.rules.grpc.woserviceconnect.Order;
-import org.acme.rules.grpc.woserviceconnect.WoJob;
-import org.acme.rules.drools.internal.dto.WoRuleAdapter;
-import org.acme.rules.drools.internal.model.RuleType;
+import org.acme.rules.persistence.internal.dto.WoRuleAdapter;
+import org.acme.rules.persistence.internal.model.RuleType;
 import org.acme.rules.grpc.woserviceconnect.WORuleDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

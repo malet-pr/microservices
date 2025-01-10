@@ -1,11 +1,11 @@
-package org.acme.rules.drools.internal.util;
+package org.acme.rules.persistence.internal.util;
 
 import java.util.List;
 
 import lombok.Builder;
 import lombok.Data;
-import org.acme.rules.drools.internal.model.Rule;
-import org.acme.rules.drools.internal.model.RuleType;
+import org.acme.rules.persistence.internal.model.Rule;
+import org.acme.rules.persistence.internal.model.RuleType;
 import org.kie.api.runtime.KieContainer;
 
 @Data

@@ -1,10 +1,10 @@
-package org.acme.rules.drools.internal.util;
+package org.acme.rules.persistence.internal.util;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import lombok.Data;
-import org.acme.rules.drools.internal.model.RuleType;
+import org.acme.rules.persistence.internal.model.RuleType;
 import org.acme.rules.grpc.woserviceconnect.Order;
 
 @Data

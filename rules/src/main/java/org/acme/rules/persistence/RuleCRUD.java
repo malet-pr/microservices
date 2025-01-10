@@ -1,4 +1,4 @@
-package org.acme.rules.drools;
+package org.acme.rules.persistence;
 
 
 public interface RuleCRUD {

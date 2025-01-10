@@ -47,16 +47,16 @@
 			<artifactId>drools-rules-spring-boot-starter</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-persistence-jpa</artifactId>
+<!--		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-drools-yaml-archetype</artifactId>
 			<version>${drools.version}</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- 				end DROOLS							-->
 		<dependency>
