@@ -47,6 +47,11 @@
 			<artifactId>drools-rules-spring-boot-starter</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-wiring-dynamic</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
 <!--		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-api</artifactId>
@@ -146,12 +151,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-wiring-dynamic</artifactId>
 			<version>10.0.0</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit-test</artifactId>

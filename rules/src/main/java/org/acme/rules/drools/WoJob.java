@@ -13,5 +13,4 @@ public class WoJob {
     private int quantity;
     private String activeStatus;
     private String appliedRule;
-    
 }
