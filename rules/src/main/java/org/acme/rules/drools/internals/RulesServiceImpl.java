@@ -15,7 +15,7 @@ public class RulesServiceImpl implements RulesService {
     Logger log = LoggerFactory.getLogger(RulesServiceImpl.class);
 
     @Override
-    public WoData runRule(WoData woData) {
+    public WoData runRuleTest(WoData woData) {
         WoDataUnit woDataUnit = new WoDataUnit();
         try (RuleUnitInstance<WoDataUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(woDataUnit)) {
             woDataUnit.getOrders().add(woData);
