@@ -3,10 +3,10 @@ package org.acme.orders.order.internal;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.acme.orders.common.LocalDateTimeTypeAdapter;
-import org.acme.orders.jobtype.internal.JobType;
 import org.acme.orders.order.OrderDTO;
 import org.acme.orders.order.OrderService;
 import org.acme.orders.orderjob.UpdatesService;
+import org.acme.orders.orderjob.internal.OrderJob;
 import org.acme.orders.rabbitmq.RabbitMessageSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -45,9 +47,11 @@ public class OrderServiceImpl implements OrderService {
         try {
             entity.getJobs().forEach(j -> j.setOrder(entity));
             Order order = woDAO.save(entity);
-            String json = gson.toJson(dto); //TODO: revisit data sent to rules service
-            msgSender.sendWorkOrder("work-order-queue",json);
-            log.info("Successfully saved work order {}", order);
+            log.info("Successfully saved work order {}", order.getWoNumber());
+            if(order != null) {
+                msgSender.sendWorkOrder("work-order-queue",createMessage(entity));
+                log.info("Sent order {} to rules service", order.getWoNumber());
+            }
             result = Boolean.TRUE;
         }catch (Exception e) {
             log.error(e.getMessage());
@@ -81,6 +85,24 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDTO findByWoNumber(String woNumber) {
         return woMapper.convertToDTO(woDAO.findByWoNumber(woNumber));
+    }
+
+    @Override
+    public String createMessage(Order order){
+        List<OrderJob> jobs = order.getJobs();
+        List<WoJob> woJobs = new ArrayList<>();
+        jobs.forEach(j -> {
+            woJobs.add(WoJob.builder().woNumber(order.getWoNumber())
+                    .jobCode(j.getJob().getCode()).quantity(j.getQuantity())
+                    .activeStatus(j.getActiveStatus().toString()).build());
+        });
+        WoData data = WoData.builder()
+                .woNumber(order.getWoNumber()).woJobs(woJobs)
+                .woCreationDate(order.getWoCreationDate()).woCompletionDate(order.getWoCompletionDate())
+                .jobTypeCode(order.getJobType().getCode()).state(order.getState())
+                .clientId(order.getClientId()).clientType("").hasRules(order.getHasRules())
+                .build();
+        return gson.toJson(data);
     }
 
 }
