@@ -3,7 +3,7 @@ package org.acme.rules.rabbitmq;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.acme.rules.drools.MessageToWoData;
-import org.acme.rules.drools.WorkOrderData;
+import org.acme.rules.grpc.woserviceconnect.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -25,10 +25,10 @@ public class MessageReceiver {
 
     // VOLVER A MODIFICAR PARA QUE RECIBA DE A UN MENSAJE
     @RabbitListener(queues = "work-order-queue")
-    public void receiveWorkOrder(String message) {
+    public void receiveOrder(String message) {
         log.info("Received: {}", message);
         JsonElement data = JsonParser.parseString(message);
-        WorkOrderData result = msgToData.readRabbitMessage(data);
+        Order result = msgToData.readRabbitMessage(data);
         log.info("Result: {}", result.getWoNumber());
     }
 

@@ -1,8 +1,8 @@
 package org.acme.rules.api;
 
-//import org.acme.rules.grpc.TestBack;
+import org.acme.rules.grpc.TestBack;
 import org.acme.rules.grpc.TestConnectionConsumer;
-//import org.acme.rules.grpc.TestGo;
+import org.acme.rules.grpc.TestGo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +19,9 @@ public class TestCommunications {
 
     @GetMapping("/grpc")
     public ResponseEntity<String> testGrpc(@RequestParam String message) {
-    //    TestGo go = TestGo.newBuilder().setMsgOut(message).build();
-    //    TestBack back = testConsumer.testConnection(go);
-    //    return ResponseEntity.ok(back.getMsgIn());
-        return null;
+        TestGo go = TestGo.newBuilder().setMsgOut(message).build();
+        TestBack back = testConsumer.testConnection(go);
+        return ResponseEntity.ok(back.getMsgIn());
     }
 
 }
