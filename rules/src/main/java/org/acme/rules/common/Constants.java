@@ -1,4 +1,4 @@
-package org.acme.rules.persistence.internal.util;
+package org.acme.rules.common;
 
 public class Constants {
 

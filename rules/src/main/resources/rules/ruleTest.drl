@@ -5,7 +5,8 @@ import java.util.Set
 import java.util.stream.Collectors
 import org.acme.rules.drools.WoData;
 import org.acme.rules.drools.WoJob;
-import org.acme.rules.drools.internals.RulesServiceImpl;
+import org.acme.rules.drools.internal.RulesServiceImpl
+import org.acme.rules.drools.internal.service.RulesServiceImpl;
 
 dialect "mvel"
 

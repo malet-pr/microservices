@@ -1,14 +1,10 @@
-package org.acme.rules.persistence.internal.model;
+package org.acme.rules.drools.internal;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @SequenceGenerator(name = "default_generator", sequenceName = "rule_seq", allocationSize = 1)
 @Table(name = "RULE")

@@ -1,8 +1,8 @@
-package org.acme.rules.drools.internals;
+package org.acme.rules.drools.internal;
 
-import org.acme.rules.DroolsConfig;
 import org.acme.rules.drools.RulesService;
-import org.acme.rules.drools.WoData;
+import org.kie.api.KieServices;
+import org.kie.api.builder.*;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
@@ -10,14 +10,41 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RulesServiceImpl implements RulesService {
 
-    Logger log = LoggerFactory.getLogger(RulesServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(RulesServiceImpl.class);
+    KieServices kieServices = KieServices.Factory.get();
+    KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
+    KieRepository kieRepository = kieServices.getRepository();
+
+    @Autowired
+    RuleDAO ruleDAO;
+
+    public KieSession getKieSession() {
+        List<Rule> activeRules = ruleDAO.findByActiveStatus('Y');
+        for (Rule rule : activeRules) {
+            String resourcePath = "src/main/resources/rules/" + rule.getName() + ".drl";
+            kieFileSystem.write(resourcePath, rule.getDrl());
+        }
+        KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
+        kieBuilder.buildAll();
+        if (kieBuilder.getResults().hasMessages(Message.Level.ERROR)) {
+            log.error("Error building KieSession: {}", kieBuilder.getResults());
+        }
+        KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
+        return kieContainer.newKieSession();
+    }
+
+    private void getKieRepository() {
+        kieRepository.addKieModule(kieRepository::getDefaultReleaseId);
+    }
 
     @Override
     public WoData runRuleTest(WoData woData) {
-        KieSession kieSession = new DroolsConfig().getKieSession();
+        KieSession kieSession = this.getKieSession();
         try{
             kieSession.insert(woData);
             kieSession.fireAllRules();

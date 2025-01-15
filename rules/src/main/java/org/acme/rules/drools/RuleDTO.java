@@ -1,4 +1,4 @@
-package org.acme.rules.persistence;
+package org.acme.rules.drools;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
