@@ -1,0 +1,19 @@
+package rules;
+
+import java.util.List
+import java.util.Set
+import java.util.stream.Collectors
+import org.acme.rules.drools.WoData;
+import org.acme.rules.drools.WoJob;
+import org.acme.rules.drools.internals.RulesServiceImpl;
+
+dialect "mvel"
+
+rule "disable job for jobtype"
+    when
+         $order: WoData(jobTypeCode == 'code1')
+         WoJob(jobCode == "job1") from $order.woJobs
+    then
+         RulesServiceImpl.disableJob($order,"job1","disable job for jobtype");
+         System.out.println($order.woNumber + " - applied rule: disable job1 for code1");
+end

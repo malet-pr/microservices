@@ -26,30 +26,4 @@ public class WoData{
     private String clientType;
     private boolean hasRules;
 
-    public boolean containsJobCode(String jobCode){
-        return this.getWoJobs().stream().anyMatch(j -> j.getJobCode().equals(jobCode));
-    }
-    public void disableJob(String jobCode, String ruleName){
-        this.getWoJobs().forEach(wj -> {
-            if (wj.getJobCode().equals(jobCode)) {
-                wj.setActiveStatus("N");
-                wj.setAppliedRule(ruleName);
-            }
-        });
-    }
-
 }
-
-// CONDITIONS
-// contains a list of jobCodes
-// does not contain single jobCode
-// does not contain a list of jobCodes
-// contains repeated jobCodes
-// check quantity
-
-// ACTIONS
-// add Job
-// remove list of jobs
-// add list of jobs
-// deal with repeated jobCodes --> keep one with added quantities
-// change quantity
