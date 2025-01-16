@@ -17,8 +17,8 @@ public class RunRules {
     private RulesService service;
 
     @PostMapping("/test")
-    public WoData runRule(@RequestBody WoData woData) {
-        return service.runRuleTest(woData);
+    public WoData runRule(@RequestBody WoData woData,@RequestParam String grouping) {
+        return service.runRuleTest(woData, grouping);
     }
 
 }

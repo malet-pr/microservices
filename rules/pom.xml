@@ -62,6 +62,12 @@
 			<artifactId>drools-mvel</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-xml-support</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+
 		<!-- 				end DROOLS							-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

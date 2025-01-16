@@ -3,6 +3,7 @@ package org.acme.rules.drools.internal;
 import org.acme.rules.drools.RulesService;
 import org.kie.api.KieServices;
 import org.kie.api.builder.*;
+import org.kie.api.logger.KieRuntimeLogger;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,11 +26,18 @@ public class RulesServiceImpl implements RulesService {
     @Autowired
     RuleDAO ruleDAO;
 
-    public KieSession getKieSession() {
+    @Autowired
+    RuleTypeDAO ruleTypeDAO;
+
+    public KieSession getKieSession(String grouping) {
         List<Rule> activeRules = ruleDAO.findByActiveStatus('Y');
+        RuleType ruleType = ruleTypeDAO.findByGrouping(grouping);
+        String imports = ruleType.getHeader();
         for (Rule rule : activeRules) {
-            String resourcePath = "src/main/resources/rules/" + rule.getName() + ".drl";
-            kieFileSystem.write(resourcePath, rule.getDrl());
+            StringBuilder sb1 = new StringBuilder("src/main/resources/rules/")
+                    .append(rule.getName()).append(".drl");
+            StringBuilder sb2 = new StringBuilder(imports).append("\n").append(rule.getDrl());
+            kieFileSystem.write(sb1.toString(), sb2.toString());
         }
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
         kieBuilder.buildAll();
@@ -43,19 +53,28 @@ public class RulesServiceImpl implements RulesService {
     }
 
     @Override
-    public WoData runRuleTest(WoData woData) {
-        KieSession kieSession = this.getKieSession();
+    public WoData runRuleTest(WoData woData, String grouping) {
+        KieSession kieSession = this.getKieSession(grouping);
+        KieRuntimeLogger logger = KieServices.Factory.get().getLoggers()
+                .newFileLogger(kieSession, "rules/logs/"+getLogFileName());
         try{
             kieSession.insert(woData);
             kieSession.fireAllRules();
+            logger.close();
             woData.setHasRules(true);
-            log.info("Rule executed");
+            log.info("All rules type {} have been fired", grouping);
         } catch(Exception e) {
             log.error(e.getMessage());
         } finally {
             kieSession.dispose();
         }
         return woData;
+    }
+
+    private String getLogFileName(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String timestamp = dateFormat.format(new Date());
+        return "logfile_" + timestamp;
     }
 
     public boolean containsJobCode(WoData woData, String jobCode){
