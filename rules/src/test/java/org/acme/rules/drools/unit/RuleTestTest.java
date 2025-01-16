@@ -1,31 +1,31 @@
-package org.acme.rules.drools;
+package org.acme.rules.drools.unit;
 
-import org.acme.rules.drools.internal.WoData;
-import org.acme.rules.drools.internal.WoJob;
-import org.acme.rules.drools.internal.RulesServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
+import org.acme.rules.drools.TestData;
+import org.acme.rules.drools.internal.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class RuleTestTest {
 
     static final Logger log = LoggerFactory.getLogger(RuleTestTest.class);
-    private RulesServiceImpl service;
+    @Mock
+    RuleDAO ruleDaoMock;
+    @Mock
+    RuleTypeDAO ruleTypeDaoMock;
+    @InjectMocks
+    RulesServiceImpl service;
 
-    @BeforeEach
-    public void setup() {
-        service = new RulesServiceImpl();
-    }
-
-    /*
     @Test
     @DisplayName("Tests the rule for disabling a job - applies")
     void disableJobTest_yes() {
@@ -33,8 +33,15 @@ public class RuleTestTest {
         WoJob wj1 = WoJob.builder().jobCode("job1").activeStatus("Y").build();
         WoJob wj2 = WoJob.builder().jobCode("job2").activeStatus("Y").build();
         WoData order1 = WoData.builder().woNumber("order1").jobTypeCode("code1").woJobs(List.of(wj1, wj2)).build();
+        Rule rule = new Rule();
+        rule.setName("disable-job-for-jobtype");
+        rule.setDrl(TestData.rule);
+        RuleType ruleType = new RuleType();
+        ruleType.setHeader(TestData.imports);
+        Mockito.when(ruleDaoMock.findByActiveStatus('Y')).thenReturn(List.of(rule));
+        Mockito.when(ruleTypeDaoMock.findByGrouping("A")).thenReturn(ruleType);
         // Act
-        service.runRuleTest(order1);
+        service.runRuleTest(order1,"A");
         // Assert
         String job1Active = order1.getWoJobs().stream()
                 .filter(wj -> wj.getJobCode().equals("job1"))
@@ -57,8 +64,15 @@ public class RuleTestTest {
         WoJob wj1 = WoJob.builder().jobCode("job1").activeStatus("Y").build();
         WoJob wj2 = WoJob.builder().jobCode("job2").activeStatus("Y").build();
         WoData order2 = WoData.builder().woNumber("order2").jobTypeCode("code2").woJobs(List.of(wj1, wj2)).build();
+        Rule rule = new Rule();
+        rule.setName("disable-job-for-jobtype");
+        rule.setDrl(TestData.rule);
+        RuleType ruleType = new RuleType();
+        ruleType.setHeader(TestData.imports);
+        Mockito.when(ruleDaoMock.findByActiveStatus('Y')).thenReturn(List.of(rule));
+        Mockito.when(ruleTypeDaoMock.findByGrouping("A")).thenReturn(ruleType);
         // Act
-        service.runRuleTest(order2);
+        service.runRuleTest(order2,"A");
         // Assert
         String job1Active = order2.getWoJobs().stream()
                 .filter(wj -> wj.getJobCode().equals("job1"))
@@ -71,7 +85,6 @@ public class RuleTestTest {
         assertEquals("Y", job2Active);
     }
 
-     */
 
 }
 
