@@ -1,4 +1,4 @@
-package org.acme.rules.persistence.internal.model;
+package org.acme.rules.drools.internal;
 
 import jakarta.persistence.*;
 import lombok.Data;

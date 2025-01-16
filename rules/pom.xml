@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.4</version>
+		<version>3.4.1</version>
 		<relativePath/>
 	</parent>
 	<groupId>org.acme</groupId>
@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-modulith.version>1.2.1</spring-modulith.version>
-		<drools.version>10.0.0</drools.version>
+		<drools.version>9.44.0.Final</drools.version>
 		<io.grpc.version>1.68.0</io.grpc.version>
 		<com.google.protobuf.version>3.25.5</com.google.protobuf.version>
 <!--		<dockerImageName>maletq/micro1-${project.artifactId}</dockerImageName>-->
@@ -43,25 +43,30 @@
 		</dependency>-->
 	<!-- 				start DROOLS						-->
 		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-rules-spring-boot-starter</artifactId>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-ci</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
-			<artifactId>drools-wiring-dynamic</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-<!--		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-api</artifactId>
+			<artifactId>drools-core</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.kie</groupId>
-			<artifactId>kie-drools-yaml-archetype</artifactId>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
 			<version>${drools.version}</version>
-		</dependency>-->
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-mvel</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-xml-support</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
 
 		<!-- 				end DROOLS							-->
 		<dependency>
@@ -151,12 +156,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!--		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-wiring-dynamic</artifactId>
-			<version>10.0.0</version>
-			<scope>test</scope>
-		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit-test</artifactId>

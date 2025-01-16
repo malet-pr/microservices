@@ -1,7 +1,7 @@
 package org.acme.rules.api;
 
 import org.acme.rules.drools.RulesService;
-import org.acme.rules.drools.WoData;
+import org.acme.rules.drools.internal.WoData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,8 @@ public class RunRules {
     private RulesService service;
 
     @PostMapping("/test")
-    public WoData runRule(@RequestBody WoData woData) {
-        return service.runRuleTest(woData);
+    public WoData runRule(@RequestBody WoData woData,@RequestParam String grouping) {
+        return service.runRuleTest(woData, grouping);
     }
 
 }
