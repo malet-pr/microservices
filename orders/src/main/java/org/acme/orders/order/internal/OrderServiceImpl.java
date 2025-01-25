@@ -100,7 +100,7 @@ public class OrderServiceImpl implements OrderService {
                 .woNumber(order.getWoNumber()).woJobs(woJobs)
                 .woCreationDate(order.getWoCreationDate()).woCompletionDate(order.getWoCompletionDate())
                 .jobTypeCode(order.getJobType().getCode()).state(order.getState())
-                .clientId(order.getClientId()).clientType("").hasRules(order.getHasRules())
+                .clientId(order.getClientId()).clientType("")
                 .build();
         return gson.toJson(data);
     }

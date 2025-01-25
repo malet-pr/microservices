@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/workorderjobs")
-public class WorkOrderJobController {
+public class OrderJobController {
 
     @Autowired
     private OrderJobService woJobService;
