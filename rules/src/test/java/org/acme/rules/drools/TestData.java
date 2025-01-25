@@ -10,7 +10,8 @@ public class TestData {
             import org.acme.rules.drools.internal.WoData;
             import org.acme.rules.drools.internal.WoJob;
             import org.acme.rules.drools.internal.RulesServiceImpl
-            import org.acme.rules.drools.internal.RulesServiceImpl;
+            import org.acme.rules.drools.internal.Condition;
+            import org.acme.rules.drools.internal.Action;
               
             dialect "mvel"      
             """;
@@ -22,7 +23,7 @@ public class TestData {
                      $order: WoData(jobTypeCode == 'code1')
                      WoJob(jobCode == "job1") from $order.woJobs
                 then
-                     RulesServiceImpl.disableJob($order,"job1","disable job for jobtype");
+                     Action.disableJob($order,"job1","disable job for jobtype");
                      System.out.println($order.woNumber + " - applied rule: disable job1 for code1");
             end
             """;
