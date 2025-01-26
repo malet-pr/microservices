@@ -8,5 +8,4 @@ public interface OrderService {
     OrderDTO findById(Long id);
     OrderDTO findByWoNumber(String woNumber);
 
-    String createMessage(Order order);
 }

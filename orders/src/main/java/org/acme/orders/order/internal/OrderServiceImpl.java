@@ -7,6 +7,7 @@ import org.acme.orders.order.OrderDTO;
 import org.acme.orders.order.OrderService;
 import org.acme.orders.orderjob.UpdatesService;
 import org.acme.orders.orderjob.internal.OrderJob;
+import org.acme.orders.rabbitmq.RabbitMessage;
 import org.acme.orders.rabbitmq.RabbitMessageSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper woMapper;
     @Autowired
     private OrderDAO woDAO;
+    @Autowired
+    private RabbitMessage rabbitMessage;
     @Autowired
     private UpdatesService updService;
     @Autowired
@@ -49,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
             Order order = woDAO.save(entity);
             log.info("Successfully saved work order {}", order.getWoNumber());
             if(order != null) {
-                msgSender.sendWorkOrder("work-order-queue",createMessage(entity));
+                msgSender.sendWorkOrder("work-order-queue",rabbitMessage.createMessage(entity));
                 log.info("Sent order {} to rules service", order.getWoNumber());
             }
             result = Boolean.TRUE;
@@ -85,24 +88,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDTO findByWoNumber(String woNumber) {
         return woMapper.convertToDTO(woDAO.findByWoNumber(woNumber));
-    }
-
-    @Override
-    public String createMessage(Order order){
-        List<OrderJob> jobs = order.getJobs();
-        List<WoJob> woJobs = new ArrayList<>();
-        jobs.forEach(j -> {
-            woJobs.add(WoJob.builder().woNumber(order.getWoNumber())
-                    .jobCode(j.getJob().getCode()).quantity(j.getQuantity())
-                    .activeStatus(j.getActiveStatus().toString()).build());
-        });
-        WoData data = WoData.builder()
-                .woNumber(order.getWoNumber()).woJobs(woJobs)
-                .woCreationDate(order.getWoCreationDate()).woCompletionDate(order.getWoCompletionDate())
-                .jobTypeCode(order.getJobType().getCode()).state(order.getState())
-                .clientId(order.getClientId()).clientType("")
-                .build();
-        return gson.toJson(data);
     }
 
 }

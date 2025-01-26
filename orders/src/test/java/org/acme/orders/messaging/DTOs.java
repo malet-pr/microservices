@@ -27,7 +27,7 @@ public class DTOs {
 
     public static OrderDTO dto2 = OrderDTO.builder()
             .woNumber("ABC123")
-            .jobType("type2")
+            .jobType("type1")
             .woJobDTOs(Collections.singletonList(woJobDTO1))
             .woCreationDate(LocalDateTime.now().minusDays(3))
             .woCompletionDate(LocalDateTime.now().minusHours(4))

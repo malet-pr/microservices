@@ -5,9 +5,15 @@ import org.acme.orders.order.internal.Order;
 import org.acme.orders.order.internal.OrderDAO;
 import org.acme.orders.order.internal.OrderServiceImpl;
 import org.acme.orders.orderjob.OrderJobDTO;
+import org.acme.orders.rabbitmq.RabbitMessage;
+import org.acme.orders.rabbitmq.RabbitMessageSender;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.transaction.Transactional;
@@ -16,6 +22,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.jdbc.Sql;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.doNothing;
 
 @SpringBootTest
 @Transactional
@@ -28,16 +38,12 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest {
     @Autowired
     private OrderDAO woDAO;
 
-    @MockBean
-    private RabbitTemplate rabbitTemplate;
-
-
     @Test
     @DisplayName("Test if an entity is saved in the database")
     void saveTest() {
         // Arrange
-        OrderJobDTO woJobDTO1 = OrderJobDTO.builder().quantity(1).jobCode("JobCode1").build();
-        OrderJobDTO woJobDTO2 = OrderJobDTO.builder().quantity(1).jobCode("JobCode2").build();
+        OrderJobDTO woJobDTO1 = OrderJobDTO.builder().quantity(1).activeStatus('N').jobCode("JobCode1").build();
+        OrderJobDTO woJobDTO2 = OrderJobDTO.builder().quantity(1).activeStatus('Y').jobCode("JobCode2").build();
         OrderDTO woDTO = OrderDTO.builder()
                 .woNumber("testNumber")
                 .jobType("type1")

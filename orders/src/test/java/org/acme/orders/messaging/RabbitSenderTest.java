@@ -6,23 +6,23 @@ import org.acme.orders.common.LocalDateTimeTypeAdapter;
 import org.acme.orders.order.internal.Order;
 import org.acme.orders.order.internal.OrderDAO;
 import org.acme.orders.order.internal.OrderServiceImpl;
+import org.acme.orders.rabbitmq.RabbitMessage;
 import org.acme.orders.rabbitmq.RabbitMessageSender;
 import org.acme.orders.order.internal.OrderMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
+
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
@@ -30,9 +30,6 @@ class RabbitSenderTest extends BaseRabbitTest {
 
     @Autowired
     private RabbitTemplate template;
-
-    @Autowired
-    private RabbitMessageSender msgSender;
 
     @Mock
     private RabbitMessageSender msgMock;
@@ -42,6 +39,9 @@ class RabbitSenderTest extends BaseRabbitTest {
 
     @Mock
     private OrderDAO woDAOMock;
+
+    @Mock
+    private RabbitMessage rabbitMessageMock;
 
     @InjectMocks
     private OrderServiceImpl woService;
@@ -75,6 +75,7 @@ class RabbitSenderTest extends BaseRabbitTest {
         Mockito.when(woMapperMock.convertToEntity(DTOs.dto2)).thenReturn(mockOrder);
         Mockito.when(woDAOMock.existsByWoNumber("ABC123")).thenReturn(false);
         Mockito.when(woDAOMock.save(mockOrder)).thenReturn(mockOrder);
+        Mockito.when(rabbitMessageMock.createMessage(any())).thenReturn(json);
         // Act
         woService.save(DTOs.dto2);
         // Assert
@@ -100,6 +101,7 @@ class RabbitSenderTest extends BaseRabbitTest {
         Mockito.when(woMapperMock.convertToEntity(DTOs.dto2)).thenReturn(mockOrder);
         Mockito.when(woDAOMock.findByWoNumber(anyString())).thenReturn(mockOrder);
         Mockito.when(woDAOMock.save(mockOrder)).thenReturn(mockOrder);
+        Mockito.when(rabbitMessageMock.createMessage(any())).thenReturn(json);
         Mockito.doThrow(new RuntimeException("RabbitMQ not reachable")).when(msgMock)
                                                 .sendWorkOrder(anyString(), anyString());
         // Act

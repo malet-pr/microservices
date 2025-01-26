@@ -21,18 +21,6 @@ public class WoData {
     private boolean hasRules;
 }
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-class WoJob {
-    private String woNumber;
-    private String jobCode;
-    private int quantity;
-    private String activeStatus;
-    private String appliedRule;
-}
 
 
 
