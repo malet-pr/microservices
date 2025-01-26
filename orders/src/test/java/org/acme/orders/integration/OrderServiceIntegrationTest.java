@@ -42,8 +42,8 @@ public class OrderServiceIntegrationTest extends BaseIntegrationTest {
     @DisplayName("Test if an entity is saved in the database")
     void saveTest() {
         // Arrange
-        OrderJobDTO woJobDTO1 = OrderJobDTO.builder().quantity(1).activeStatus('N').jobCode("JobCode1").build();
-        OrderJobDTO woJobDTO2 = OrderJobDTO.builder().quantity(1).activeStatus('Y').jobCode("JobCode2").build();
+        OrderJobDTO woJobDTO1 = OrderJobDTO.builder().quantity(1).activeStatus('N').jobCode("JobCode1").appliedRule("").build();
+        OrderJobDTO woJobDTO2 = OrderJobDTO.builder().quantity(1).activeStatus('Y').jobCode("JobCode2").appliedRule("").build();
         OrderDTO woDTO = OrderDTO.builder()
                 .woNumber("testNumber")
                 .jobType("type1")
