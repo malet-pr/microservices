@@ -16,7 +16,7 @@ public class TestData {
             dialect "mvel"      
             """;
 
-    public static String rule =
+    public static String rule1 =
             """
             rule "disable job for jobtype"
                 when
@@ -28,6 +28,15 @@ public class TestData {
             end
             """;
 
-
+    public static String rule2 =
+            """
+            rule "add job for jobtype"
+                when
+                     $order: WoData(jobTypeCode == 'code1b')
+                then
+                     Action.addJob($order,"job2",5,"add job for jobtype");
+                     System.out.println($order.woNumber + " - applied rule: add job2 for code1b");
+            end
+            """;
 
 }

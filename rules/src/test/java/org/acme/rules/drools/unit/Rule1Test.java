@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-public class RuleTestTest {
+public class Rule1Test {
 
-    static final Logger log = LoggerFactory.getLogger(RuleTestTest.class);
+    static final Logger log = LoggerFactory.getLogger(Rule1Test.class);
     @Mock
     RuleDAO ruleDaoMock;
     @Mock
@@ -35,7 +35,7 @@ public class RuleTestTest {
         WoData order1 = WoData.builder().woNumber("order1").jobTypeCode("code1").woJobs(List.of(wj1, wj2)).build();
         Rule rule = new Rule();
         rule.setName("disable-job-for-jobtype");
-        rule.setDrl(TestData.rule);
+        rule.setDrl(TestData.rule1);
         RuleType ruleType = new RuleType();
         ruleType.setHeader(TestData.imports);
         Mockito.when(ruleDaoMock.findByActiveStatus('Y')).thenReturn(List.of(rule));
@@ -66,7 +66,7 @@ public class RuleTestTest {
         WoData order2 = WoData.builder().woNumber("order2").jobTypeCode("code2").woJobs(List.of(wj1, wj2)).build();
         Rule rule = new Rule();
         rule.setName("disable-job-for-jobtype");
-        rule.setDrl(TestData.rule);
+        rule.setDrl(TestData.rule1);
         RuleType ruleType = new RuleType();
         ruleType.setHeader(TestData.imports);
         Mockito.when(ruleDaoMock.findByActiveStatus('Y')).thenReturn(List.of(rule));
