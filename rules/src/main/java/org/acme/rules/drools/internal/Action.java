@@ -33,16 +33,7 @@ public class Action {
     }
 
     public static void addJobs(WoData woData, Map<String,Integer> newJobs, String ruleName){
-        newJobs.forEach((key, value) -> {
-            WoJob job = WoJob.builder()
-                    .woNumber(woData.getWoNumber())
-                    .jobCode(key)
-                    .quantity(value)
-                    .activeStatus("Y")
-                    .appliedRule(ruleName)
-                    .build();
-            woData.getWoJobs().add(job);
-        });
+        newJobs.forEach((key, value) -> addJob(woData, key, value, ruleName));
     }
 
     public static void combineJobs(WoData woData, String jobCode, String ruleName){
